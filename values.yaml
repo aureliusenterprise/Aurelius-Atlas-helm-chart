@@ -17,8 +17,8 @@ env:
   KEYCLOAK_USER: "admin"
   KEYCLOAK_PASSWORD: "admin"
   #KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
-  PROXY_ADDRESS_FORWARDING: "true"
-  KEYCLOAK_IMPORT: "/tmp/realm.json"
+#  PROXY_ADDRESS_FORWARDING: "true"
+#  KEYCLOAK_IMPORT: "realm.json"
   # KEYCLOAK_DEFAULT_THEME
   # KEYCLOAK_WELCOME_THEME
 #  ES_URL: "https://nxtgen-dev.es.westeurope.azure.elastic-cloud.com:9243/"
