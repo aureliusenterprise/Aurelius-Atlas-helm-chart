@@ -4,19 +4,18 @@
 # container image
 # https://github.com/keycloak/keycloak-containers/blob/16.1.1/server/README.md
 replicaCount: 1
-repository: quay.io/keycloak/keycloak
+repository: wombach/docker-reverse-proxy
 pullPolicy: IfNotPresent
-tag: "16.1.0"
+tag: "1"
 service:
-  name: keycloak
+  name: reverse-proxy
   type: ClusterIP
-  externalPort: 8080
-  internalPort: 8180
-cmd: "echo test successfull"
-env:
-  KEYCLOAK_USER: "admin"
-  KEYCLOAK_PASSWORD: "admin"
-  #KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
+  externalPort: 80
+  internalPort: 8080
+#env:
+#  KEYCLOAK_USER: "admin"
+#  KEYCLOAK_PASSWORD: "admin"
+#KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
 #  PROXY_ADDRESS_FORWARDING: "true"
 #  KEYCLOAK_IMPORT: "realm.json"
 # KEYCLOAK_DEFAULT_THEME

@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-name: keycloak
-description: A Helm chart for deploying keycloak
+name: governance
+description: A Helm chart for deploying governance
 
 # A chart can be either an 'application' or a 'library' chart.
 #
