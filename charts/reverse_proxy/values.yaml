@@ -16,7 +16,7 @@ cmd: "echo test successfull"
 env:
   KEYCLOAK_USER: "admin"
   KEYCLOAK_PASSWORD: "admin"
-#KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
+  #KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
 #  PROXY_ADDRESS_FORWARDING: "true"
 #  KEYCLOAK_IMPORT: "realm.json"
 # KEYCLOAK_DEFAULT_THEME
