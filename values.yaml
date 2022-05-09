@@ -7,4 +7,4 @@ keycloak:
   tag: "16.1.0"
   env:
     KEYCLOAK_USER: "admin"
-    KEYCLOAK_PASSWORD: "test"
+    KEYCLOAK_PASSWORD: "admin"

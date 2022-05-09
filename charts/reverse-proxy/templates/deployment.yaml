@@ -18,6 +18,8 @@ spec:
       labels:
         {{- include "reverse-proxy.selectorLabels" . | nindent 8 }}
     spec:
+      hostname: reverse-proxy
+      subdomain: atlas
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
