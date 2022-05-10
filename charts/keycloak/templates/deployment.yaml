@@ -18,6 +18,8 @@ spec:
       labels:
         {{- include "keycloak.selectorLabels" . | nindent 8 }}
     spec:
+      hostname: keycloak
+      subdomain: atlas
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -34,10 +36,14 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", {{.Values.cmd}}]
+                command: ["/bin/bash", "-c", "echo test successfull" ]
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
-              value: {{ $value }}
+              value: {{ $value | quote }}
             {{- end }}
+            - name: RELEASE_NAMESPACE
+              value:  {{ .Release.Namespace }}
+            - name: RELEASE_NAME
+              value: {{ .Release.Name }}
           {{- end }}
