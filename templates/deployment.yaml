@@ -34,10 +34,18 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "echo test successfull" ]
+                command: ["/bin/sh", "-c", {{.Values.cmd}}]
+          volumeMounts:
+            - name: realm-single-file-volume
+              mountPath: /tmp/realm.json
+              subPath: realm.json
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
+      volumes:
+        - name: realm-single-file-volume
+          configMap:
+            name: realm-single-file
