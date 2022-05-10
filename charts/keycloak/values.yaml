@@ -11,7 +11,7 @@ service:
   name: keycloak
   type: ClusterIP
   externalPort: 8080
-  internalPort: 8180
+  internalPort: 8080
 cmd: "echo test successfull"
 env:
   KEYCLOAK_USER: "admin"

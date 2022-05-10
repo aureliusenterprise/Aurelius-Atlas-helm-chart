@@ -6,7 +6,7 @@
 replicaCount: 1
 repository: wombach/docker-reverse-proxy
 pullPolicy: IfNotPresent
-tag: "1"
+tag: "1.0.2"
 service:
   name: reverse-proxy
   type: ClusterIP
