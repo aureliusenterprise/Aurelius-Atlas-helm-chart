@@ -13,3 +13,10 @@ https://nws.netways.de/tutorials/kubernetes-nginx-ingress-controller-this-is-how
 
 post precessing after pod is running
 https://stackoverflow.com/questions/44140593/how-to-run-command-after-initialization
+
+Additions May 10th:
+- moved reverse-proxy and keycloak as sub charts
+- configured the reverse-proxy with a connection to keycloak
+- testing is possible with port_forawing to reverse-proxy
+kubectl port-forward -n anwo service/reverse-proxy 8080:8080
+

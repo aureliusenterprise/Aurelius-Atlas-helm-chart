@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "keycloak.fullname" . }}
+  name: {{ include "reverse-proxy.fullname" . }}
   labels:
-    {{- include "keycloak.labels" . | nindent 4 }}
+    {{- include "reverse-proxy.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "keycloak.selectorLabels" . | nindent 6 }}
+      {{- include "reverse-proxy.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,12 +16,18 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "keycloak.selectorLabels" . | nindent 8 }}
+        {{- include "reverse-proxy.selectorLabels" . | nindent 8 }}
     spec:
+      hostname: reverse-proxy
+      subdomain: atlas
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - configMap:
+          name: auth-conf
+        name: auth-conf
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.repository }}:{{ .Values.tag }}"
@@ -30,22 +36,18 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          {{- if .Values.env }}
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", {{.Values.cmd}}]
-          volumeMounts:
-            - name: realm-single-file-volume
-              mountPath: /tmp/realm.json
-              subPath: realm.json
+                command: ["/bin/sh", "-c", "echo test successfull" ]
+          {{- if .Values.env }}
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
-      volumes:
-        - name: realm-single-file-volume
-          configMap:
-            name: realm-single-file
+          volumeMounts:
+          - name: auth-conf
+            mountPath: /usr/local/apache2/conf.d/
+            readOnly: true
