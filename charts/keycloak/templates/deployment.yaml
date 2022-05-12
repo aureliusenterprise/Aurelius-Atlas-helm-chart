@@ -47,3 +47,10 @@ spec:
             - name: RELEASE_NAME
               value: {{ .Release.Name }}
           {{- end }}
+          volumeMounts:
+            - name: key-cloak-storage
+              mountPath: /opt/jboss/keycloak/standalone/data
+      volumes:
+        - name: key-cloak-storage
+          persistentVolumeClaim:
+            claimName: key-cloak-pv-claim
