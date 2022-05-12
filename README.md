@@ -4,6 +4,12 @@ Additions May 10th:
 - configured the reverse-proxy with a connection to keycloak
 - testing is possible with port_forawing to reverse-proxy
 kubectl port-forward -n anwo service/reverse-proxy 8080:8080
+  
+  
+Realm:
+- add realm files to ``charts/keycloak/realms``  
+- update the value ``realm_file_name`` to the desired realm
+kubectl port-forward -n gaby service/keycloak 8080:8080
 
 Resources found for elastic
 ===========================

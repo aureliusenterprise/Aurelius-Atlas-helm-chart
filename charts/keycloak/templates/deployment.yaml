@@ -36,7 +36,11 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/bash", "-c", "echo test successfull" ]
+                command: ["/bin/bash", "-c", {{.Values.cmd}}]
+          volumeMounts:
+            - name: realm-single-file-volume
+              mountPath: /tmp/realm.json
+              subPath: realm.json
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
@@ -47,3 +51,7 @@ spec:
             - name: RELEASE_NAME
               value: {{ .Release.Name }}
           {{- end }}
+      volumes:
+        - name: realm-single-file-volume
+          configMap:
+            name: realm-single-file
