@@ -26,3 +26,7 @@ env:
 
 # ingress object
 #host: equipment2.nxtgen-dev.vanoord.com
+
+
+# Persistent Volume
+node_name: aks-agentpool-23468525-vmss000000
