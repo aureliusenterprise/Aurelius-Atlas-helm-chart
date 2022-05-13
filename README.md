@@ -25,3 +25,13 @@ Realm:
 - add realm files to ``charts/keycloak/realms``  
 - update the value ``realm_file_name`` to the desired realm
 kubectl port-forward -n gaby service/keycloak 8080:8080
+
+Flink resources
+===============
+- https://googlecloudplatform.github.io/flink-on-k8s-operator/
+- https://github.com/nlecoy/flink-chart
+- https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/
+- https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/#common-cluster-resource-definitions
+- https://artifacthub.io/packages/helm/riskfocus/flink
+- https://github.com/ververica/ververica-platform-playground
+- https://www.ververica.com/getting-started
