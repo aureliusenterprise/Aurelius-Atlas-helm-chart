@@ -41,7 +41,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/bash", "-c", "echo test successfull" ]
+                command: ["/bin/bash", "-c", {{.Values.cmd}}]
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
@@ -55,7 +55,13 @@ spec:
           volumeMounts:
             - name: key-cloak-storage
               mountPath: /opt/jboss/keycloak/standalone/data
+            - name: realm-single-file-volume
+              mountPath: /tmp/realm.json
+              subPath: realm.json
       volumes:
         - name: key-cloak-storage
           persistentVolumeClaim:
             claimName: key-cloak-pv-claim
+        - name: realm-single-file-volume
+          configMap:
+            name: realm-single-file
