@@ -25,3 +25,6 @@ Realm:
 - add realm files to ``charts/keycloak/realms``  
 - update the value ``realm_file_name`` to the desired realm
 kubectl port-forward -n gaby service/keycloak 8080:8080
+  
+Persistent Volume:
+- type Local  -- bound to the node in node_name
