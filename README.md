@@ -11,11 +11,19 @@ Realm:
 - update the value ``realm_file_name`` to the desired realm
 kubectl port-forward -n gaby service/keycloak 8080:8080
 
+Create subcharts
+ cd mychart/charts
+ helm create mysubchart
+
 Resources found for elastic
 ===========================
 - https://www.elastic.co/guide/en/app-search/current/installation.html#installation-docker
 - https://www.docker.elastic.co/r/enterprise-search
 - https://www.elastic.co/guide/en/enterprise-search/8.2/docker.html
+
+- https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-deploy-elasticsearch.html
+kubectl -n anwo port-forward service/elasticsearch-master 9200
+http://127.0.0.1:9200/
 
 some pointers for installing ingress
 =====================================
