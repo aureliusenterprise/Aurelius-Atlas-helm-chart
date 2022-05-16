@@ -9,4 +9,8 @@ keycloak:
     KEYCLOAK_USER: "admin"
     KEYCLOAK_PASSWORD: "admin"
   realm_file_name: "realm.json"
-  node_name: aks-agentpool-23468525-vmss000000
+  persistence:
+    enabled: true
+    # storageClass: "-"
+    accessMode: ReadWriteOnce
+    size: 1Gi
