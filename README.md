@@ -27,7 +27,8 @@ Realm:
 kubectl port-forward -n gaby service/keycloak 8080:8080
   
 Persistent Volume:
-- type Local  -- bound to the node in node_name
+- update the value ``persistence`` to the desired properties wanted for the persistent volume.
+- deleting the PVC removes the PV deleting the data
 
 Flink resources
 ===============
