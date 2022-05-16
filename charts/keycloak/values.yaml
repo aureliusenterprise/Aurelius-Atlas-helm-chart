@@ -32,8 +32,6 @@ realm_file_name: "realm.json"
 
 
 # Persistent Volume
-node_name: aks-agentpool-23468525-vmss000000
-
 persistence:
   enabled: true
   # storageClass: "-"
