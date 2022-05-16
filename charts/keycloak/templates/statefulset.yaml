@@ -53,7 +53,7 @@ spec:
               value: {{ .Release.Name }}
           {{- end }}
           volumeMounts:
-            {{- if not .Values.persistence.enabled }}
+            {{- if .Values.persistence.enabled }}
             - name: data
               mountPath: /opt/jboss/keycloak/standalone/data
               subPath: data
