@@ -34,3 +34,11 @@ spec:
               "-c",
               "/opt/apache-atlas-2.2.0/bin/startup.sh"
           ]
+          volumeMounts:
+            - name: atlas-prop
+              mountPath: /opt/apache-atlas-2.2.0/conf/atlas-application.properties
+              subPath: atlas-application.properties
+      volumes:
+        - name: atlas-prop
+          configMap:
+            name: atlas-configs
