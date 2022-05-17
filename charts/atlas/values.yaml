@@ -1,0 +1,10 @@
+---
+replicaCount: 1
+repository: wombach/docker-apache-atlas
+pullPolicy: IfNotPresent
+tag: "2.2.0.1"
+service:
+  name: atlas
+  type: ClusterIP
+  externalPort: 21000
+  internalPort: 21000
