@@ -43,9 +43,7 @@ data:
     atlas.notification.consumer.retry.interval=500
     atlas.notification.hook.retry.interval=1000
 
-
     atlas.enableTLS=false
-
 
     atlas.authentication.method.kerberos=false
     atlas.authentication.method.file=true

@@ -8,3 +8,8 @@ service:
   type: ClusterIP
   externalPort: 21000
   internalPort: 21000
+persistence:
+  enabled: true
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 1Gi
