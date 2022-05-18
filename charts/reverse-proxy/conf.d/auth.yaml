@@ -1,0 +1,4 @@
+<Location /auth>
+    ProxyPass "http://keycloak.{{ .Release.Namespace }}.svc.cluster.local:8080/auth"
+    ProxyPassReverse "http://keycloak.{{ .Release.Namespace }}.svc.cluster.local:8080/auth"
+</Location>
