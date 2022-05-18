@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "keycloak.fullname" . }}
+  labels:
+    {{- include "atlas.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "atlas.fullname" . }}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "atlas.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "atlas.selectorLabels" . | nindent 8 }}
+    spec:
+      hostname: atlas
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.repository }}:{{ .Values.tag }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - containerPort: 21000
+          command: [
+              "/bin/bash",
+              "-c",
+              "/opt/apache-atlas-2.2.0/bin/startup.sh"
+          ]
+          volumeMounts:
+            - name: atlas-prop
+              mountPath: /opt/apache-atlas-2.2.0/conf/atlas-application.properties
+              subPath: atlas-application.properties
+            {{- if .Values.persistence.enabled }}
+            - name: data
+              mountPath: /opt/apache-atlas-2.2.0/data
+              subPath: data
+            {{- end }}
+      volumes:
+        - name: atlas-prop
+          configMap:
+            name: atlas-configs
+{{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - {{ .Values.persistence.accessMode | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size | quote }}
+      {{- if .Values.persistence.storageClass }}
+        {{- if (eq "-" .Values.persistence.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: "{{ .Values.persistence.storageClass }}"
+        {{- end }}
+      {{- end }}
+{{- end }}

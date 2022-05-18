@@ -20,8 +20,7 @@ Additions May 10th:
 - testing is possible with port_forawing to reverse-proxy
 kubectl port-forward -n anwo service/reverse-proxy 8080:8080
   
-  
-Realm:
+keycloak Realm:
 - add realm files to ``charts/keycloak/realms``  
 - update the value ``realm_file_name`` to the desired realm
 kubectl port-forward -n gaby service/keycloak 8080:8080
@@ -30,6 +29,11 @@ Persistent Volume:
 - update the value ``persistence`` to the desired properties wanted for the persistent volume.
 - deleting the PVC removes the PV deleting the data
 - When pod is deleted the data persists.
+
+atlas Configuration:
+- update ``charts/atlas/templates/configmap.yaml`` to change the configurations
+- single pv for data folder including h2-base, solr, and zookeeper
+kubectl port-forward -n gaby service/atlas 8080:21000
 
 Flink resources
 ===============

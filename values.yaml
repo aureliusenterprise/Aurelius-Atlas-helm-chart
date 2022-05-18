@@ -14,3 +14,12 @@ keycloak:
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
+
+atlas:
+  tag: "2.2.0.1"
+  persistence:
+    enabled: true
+    # storageClass: "-"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
