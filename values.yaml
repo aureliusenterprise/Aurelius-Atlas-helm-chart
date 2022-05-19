@@ -8,7 +8,7 @@ keycloak:
   env:
     KEYCLOAK_USER: "admin"
     KEYCLOAK_PASSWORD: "admin"
-  realm_file_name: "realm.json"
+  realm_file_name: "realm_m4i.json"
   persistence:
     enabled: true
     # storageClass: "-"

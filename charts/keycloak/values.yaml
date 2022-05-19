@@ -28,7 +28,7 @@ env:
 #host: equipment2.nxtgen-dev.vanoord.com
 
 ## Realm
-realm_file_name: "realm.json"
+realm_file_name: "realm_m4i.json"
 
 
 # Persistent Volume
