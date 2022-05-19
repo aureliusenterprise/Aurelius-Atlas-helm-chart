@@ -23,7 +23,7 @@ env:
 #  ES_URL: "https://nxtgen-dev.es.westeurope.azure.elastic-cloud.com:9243/"
 #  ES_INDEX: "eis--public--equipment--flattened"
 
-keycloakFrontendURL: "http://51.105.169.241/"
+keycloakFrontendURL: "https://51.105.169.241/"
 
 # ingress object
 #host: equipment2.nxtgen-dev.vanoord.com
