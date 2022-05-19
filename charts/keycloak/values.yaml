@@ -29,7 +29,7 @@ keycloakFrontendURL: "https://51.105.169.241/"
 #host: equipment2.nxtgen-dev.vanoord.com
 
 ## Realm
-realm_file_name: "realm_m4i.json"
+realm_file_name: "realm_m4i_aw.json"
 
 # Persistent Volume
 persistence:

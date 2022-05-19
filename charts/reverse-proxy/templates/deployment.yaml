@@ -32,6 +32,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.repository }}:{{ .Values.tag }}"
           imagePullPolicy: {{ .Values.pullPolicy }}
+          # command:
+          #   - "/usr/local/apache2/init/init_index_html.sh"
+          # cpu: 1000
           ports:
             - name: http
               containerPort: 8080
@@ -39,14 +42,16 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "echo test successfull" ]
-          {{- if .Values.env }}
+                command: ["/usr/local/apache2/init/init_index_html.sh" ]
           env:
+            - name: NAMESPACE
+              value: "{{ .Release.Namespace }}"
+            {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-          {{- end }}
+            {{- end }}
           volumeMounts:
           - name: auth-conf
             mountPath: /usr/local/apache2/conf.d/

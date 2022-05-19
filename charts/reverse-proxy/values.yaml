@@ -6,22 +6,9 @@
 replicaCount: 1
 repository: wombach/docker-reverse-proxy
 pullPolicy: IfNotPresent
-tag: "1.0.4"
+tag: "1.0.8"
 service:
   name: reverse-proxy
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
-#env:
-#  KEYCLOAK_USER: "admin"
-#  KEYCLOAK_PASSWORD: "admin"
-#KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
-#  PROXY_ADDRESS_FORWARDING: "true"
-#  KEYCLOAK_IMPORT: "realm.json"
-# KEYCLOAK_DEFAULT_THEME
-# KEYCLOAK_WELCOME_THEME
-#  ES_URL: "https://nxtgen-dev.es.westeurope.azure.elastic-cloud.com:9243/"
-#  ES_INDEX: "eis--public--equipment--flattened"
-
-# ingress object
-#host: equipment2.nxtgen-dev.vanoord.com
