@@ -1,99 +1,57 @@
 <Location /atlas/atlas>
-        ProxyPass "http://10.0.2.4:21000/api/atlas"
-        ProxyPassReverse "http://10.0.2.4:21000/api/atlas"
+        ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+        ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
 </Location>
 
-<Location /atlas/repository>
-        ProxyPass "http://127.0.0.1:8888/RestApi2"
-        ProxyPassReverse "http://127.0.0.1:8888/RestApi2"
-</Location>
+## models4insight backend
+#<Location /atlas/repository>
+#        ProxyPass "http://127.0.0.1:8888/RestApi2"
+#        ProxyPassReverse "http://127.0.0.1:8888/RestApi2"
+#</Location>
+#
+## lineage graph backend
+#<Location /atlas/lineage_model>
+#        ProxyPass "http://127.0.0.1:5000/lineage_model"
+#        ProxyPassReverse "http://127.0.0.1:5000/lineage_model"
+#</Location>
+#
+## python script
+#<Location /atlas/api/data_governance_dashboard>
+#        ProxyPass "http://127.0.0.1:8000/dashboard"
+#        ProxyPassReverse "http://127.0.0.1:8000/dashboard"
+#        Header add Access-Control-Allow-Origin "*"
+#</Location>
 
-<Location /atlas/lineage_model>
-        ProxyPass "http://127.0.0.1:5000/lineage_model"
-        ProxyPassReverse "http://127.0.0.1:5000/lineage_model"
-</Location>
 
-<Location /atlas/api/data_governance_dashboard>
-        ProxyPass "http://127.0.0.1:8000/dashboard"
-        ProxyPassReverse "http://127.0.0.1:8000/dashboard"
-        Header add Access-Control-Allow-Origin "*"
-</Location>
+#
+##Alias "http://atlas-dev/search" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
+#
+##<Location /elastic>
+##       ProxyPass "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
+##       ProxyPassReverse "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
+##</Location>
+#
+#Redirect 307 "/atlas/elastic" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
+#
+#Redirect 307 "/atlas/data_quality" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev-quality/search.json"
+#
+#Redirect 307 "/atlas/gov_quality" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev-gov-quality/search.json"
 
-OIDCProviderMetadataURL http://127.0.0.1:9100/auth/realms/m4i/.well-known/openid-configuration
-OIDCClientID m4i_atlas_user
-OIDCClientSecret c119a853-c69d-4281-9c3d-1998a6949b75
-
-# OIDCRedirectURI is a vanity URL that must point to a path protected by this module but must NOT point to any content
-OIDCRedirectURI http://127.0.0.1:9100/atlas/test/redirect_uri
-OIDCCryptoPassphrase AsklIUEWLoiw0823jas
-
-<Location /atlas/test2>
-        ProxyPass "http://127.0.0.1:9100/atlas/api/data_governance_dashboard>"
-        ProxyPassReverse "http://127.0.0.1:9100/atlas/api/data_governance_dashboard>"
-        #Header add Access-Control-Allow-Origin "*"
-        AuthType openid-connect
-        Require valid-user
-</Location>
-
-Alias "/atlas/test" "/var/www/test/"
-<Directory "/var/www/test">
-      #  RewriteEngine On
-      #  RewriteBase /data2model/
-      #  RewriteRule ^index\.html$ - [L]
-      #  RewriteCond %{REQUEST_FILENAME} !-f
-      #  RewriteCond %{REQUEST_FILENAME} !-d
-      #  RewriteRule . /data2model/index.html [L]
-
-##    AuthType Basic
-##  AuthName "Authentication Required"
-##  AuthUserFile "/etc/htpasswd/.htpasswd"
-##  Require valid-user
+#Alias "/atlas" "/var/www/atlas"
+#<Directory "/var/www/atlas">
+#        RewriteEngine On
+#        RewriteBase /atlas/
+#        RewriteRule ^index\.html$ - [L]
+#        RewriteCond %{REQUEST_FILENAME} !-f
+#        RewriteCond %{REQUEST_FILENAME} !-d
+#        RewriteRule . /atlas/index.html [L]
+#
+###    AuthType Basic
+###  AuthName "Authentication Required"
+###  AuthUserFile "/etc/htpasswd/.htpasswd"
+###  Require valid-user
 #Options Indexes FollowSymLinks
 #    AllowOverride all
 #    Order allow,deny
 #    Allow from all
-    Options Indexes MultiViews
-    AllowOverride None
-    AuthType openid-connect
-    Require valid-user
-</Directory>
-
-<Location /atlas/dashboard2>
-        ProxyPass "http://127.0.0.1:8000/dashboard"
-        ProxyPassReverse "http://127.0.0.1:8000/dashboard"
-        Header add Access-Control-Allow-Origin "*"
-        #AuthType openid-connect
-        #Require valid-user
-</Location>
-
-#Alias "http://atlas-dev/search" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
-
-#<Location /elastic>
-#       ProxyPass "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
-#       ProxyPassReverse "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
-#</Location>
-
-Redirect 307 "/atlas/elastic" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev/search.json"
-
-Redirect 307 "/atlas/data_quality" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev-quality/search.json"
-
-Redirect 307 "/atlas/gov_quality" "https://atlas-search.ent.westeurope.azure.elastic-cloud.com/api/as/v1/engines/atlas-dev-gov-quality/search.json"
-
-Alias "/atlas" "/var/www/atlas"
-<Directory "/var/www/atlas">
-        RewriteEngine On
-        RewriteBase /atlas/
-        RewriteRule ^index\.html$ - [L]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule . /atlas/index.html [L]
-
-##    AuthType Basic
-##  AuthName "Authentication Required"
-##  AuthUserFile "/etc/htpasswd/.htpasswd"
-##  Require valid-user
-Options Indexes FollowSymLinks
-    AllowOverride all
-    Order allow,deny
-    Allow from all
-</Directory>
+#</Directory>

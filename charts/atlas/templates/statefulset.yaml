@@ -37,8 +37,7 @@ spec:
           ]
           volumeMounts:
             - name: atlas-prop
-              mountPath: /opt/apache-atlas-2.2.0/conf/atlas-application.properties
-              subPath: atlas-application.properties
+              mountPath: /opt/apache-atlas-2.2.0/conf/
             {{- if .Values.persistence.enabled }}
             - name: data
               mountPath: /opt/apache-atlas-2.2.0/data

@@ -14,6 +14,7 @@ keycloak:
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
+  external_ip: 51.105.169.241
 
 atlas:
   tag: "2.2.0.1"
@@ -23,3 +24,4 @@ atlas:
     accessMode: ReadWriteOnce
     size: 1Gi
 
+host_ip: 51.105.169.241

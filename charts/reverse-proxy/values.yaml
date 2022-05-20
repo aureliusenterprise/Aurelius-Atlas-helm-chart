@@ -5,7 +5,7 @@
 # https://github.com/keycloak/keycloak-containers/blob/16.1.1/server/README.md
 replicaCount: 1
 repository: wombach/docker-reverse-proxy
-pullPolicy: IfNotPresent
+pullPolicy: Always
 tag: "1.0.8"
 service:
   name: reverse-proxy

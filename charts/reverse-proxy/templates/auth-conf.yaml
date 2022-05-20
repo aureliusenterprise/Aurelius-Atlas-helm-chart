@@ -6,3 +6,6 @@ metadata:
 data:
   auth.conf: |-
 {{ tpl ( .Files.Get "conf.d/auth.yaml" ) . | indent 4}}
+
+  atlas.conf: |-
+{{ tpl ( .Files.Get "conf.d/atlas.yaml" ) . | indent 4}}
