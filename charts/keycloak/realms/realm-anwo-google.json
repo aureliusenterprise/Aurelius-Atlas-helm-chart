@@ -4001,7 +4001,18 @@
       }
     }
   ],
-  "identityProviderMappers": [],
+  "identityProviderMappers": [
+    {
+      "id": "293d0f94-bf94-4a74-b97e-f2d2ba5dfa5c",
+      "name": "default role",
+      "identityProviderAlias": "google",
+      "identityProviderMapper": "oidc-hardcoded-role-idp-mapper",
+      "config": {
+        "syncMode": "INHERIT",
+        "role": "ROLE_ADMIN"
+      }
+    }
+  ],
   "components": {
     "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy": [
       {
