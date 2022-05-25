@@ -1,9 +1,9 @@
 apiVersion: enterprisesearch.k8s.elastic.co/v1
 kind: EnterpriseSearch
 metadata:
-  name: enterprise-search-quickstart
+  name: enterprise-search
 spec:
   version: 8.2.0
   count: 1
   elasticsearchRef:
-    name: quickstart
+    name: elastic-search
