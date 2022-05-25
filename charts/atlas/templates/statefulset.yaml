@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "keycloak.fullname" . }}
+  name: {{ include "atlas.fullname" . }}
   labels:
     {{- include "atlas.labels" . | nindent 4 }}
 spec:
@@ -36,17 +36,36 @@ spec:
               "/opt/apache-atlas-2.2.0/bin/startup.sh"
           ]
           volumeMounts:
-            - name: atlas-prop
-              mountPath: /opt/apache-atlas-2.2.0/conf/
+            - name: atlas-application-properties--volume
+              mountPath: /opt/apache-atlas-2.2.0/conf/atlas-application.properties
+              subPath: atlas-application.properties
+            - name: users-credentials-properties--volume
+              mountPath: /opt/apache-atlas-2.2.0/conf/users-credentials.properties
+              subPath: users-credentials.properties
+            - name: atlas-simple-authz-policy--volume
+              mountPath: /opt/apache-atlas-2.2.0/conf/atlas-simple-authz-policy.json
+              subPath: atlas-simple-authz-policy.json
+            - name: keycloak-conf--volume
+              mountPath: /opt/apache-atlas-2.2.0/conf/keycloak-conf.json
+              subPath: keycloak-conf.json
             {{- if .Values.persistence.enabled }}
             - name: data
               mountPath: /opt/apache-atlas-2.2.0/data
               subPath: data
             {{- end }}
       volumes:
-        - name: atlas-prop
+        - name: atlas-application-properties--volume
           configMap:
-            name: atlas-configs
+            name: atlas-application-properties-configmap
+        - name: users-credentials-properties--volume
+          configMap:
+            name: users-credentials-properties-configmap
+        - name: atlas-simple-authz-policy--volume
+          configMap:
+            name: atlas-simple-authz-policy-configmap
+        - name: keycloak-conf--volume
+          configMap:
+            name: keycloak-conf-configmap
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
