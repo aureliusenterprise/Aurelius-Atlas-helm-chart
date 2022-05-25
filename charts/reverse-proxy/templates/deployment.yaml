@@ -51,12 +51,14 @@ spec:
           volumeMounts:
           - name: v-reverse-proxy-configs-auth-conf
             mountPath: /usr/local/apache2/conf.d/auth.conf
-          - name: v-reverse-proxy-configs-atlas2-conf
-            mountPath: /usr/local/apache2/conf.d/atlas2.conf
+            subPath: auth.conf
+          - name: v-reverse-proxy-configs-atlas-conf
+            mountPath: /usr/local/apache2/conf.d/atlas.conf
+            subPath: atlas.conf
       volumes:
         - name: v-reverse-proxy-configs-auth-conf
           configMap:
             name: cm-reverse-proxy-configs-auth-conf
-        - name: v-reverse-proxy-configs-atlas2-conf
+        - name: v-reverse-proxy-configs-atlas-conf
           configMap:
-            name: cm-reverse-proxy-configs-atlas2-conf
+            name: cm-reverse-proxy-configs-atlas-conf

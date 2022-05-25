@@ -2,6 +2,20 @@
 ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
 ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
 </Location>
+
+Alias "/atlas" "/usr/local/apache2/atlas"
+<Directory "/usr/local/apache2/atlas">
+RewriteEngine On
+RewriteBase /atlas/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /atlas/index.html [L]
+Order allow,deny
+AllowOverride All
+Allow from all
+Require all granted
+</Directory>
 ## models4insight backend
 #<Location /atlas/repository>
 #        ProxyPass "http://127.0.0.1:8888/RestApi2"
