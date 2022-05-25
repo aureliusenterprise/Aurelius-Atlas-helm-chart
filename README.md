@@ -44,3 +44,11 @@ Flink resources
 - https://artifacthub.io/packages/helm/riskfocus/flink
 - https://github.com/ververica/ververica-platform-playground
 - https://www.ververica.com/getting-started
+
+Keycloak client id mappings:
+Realm: m4i
+- Apache Atlas Frontend: m4i_thijs
+- Apache Atlas standard: m4i_atlas
+
+Default users: 
+atlas: is an admin user with pwd aurelius
