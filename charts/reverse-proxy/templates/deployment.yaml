@@ -55,6 +55,9 @@ spec:
           - name: v-reverse-proxy-configs-atlas-conf
             mountPath: /usr/local/apache2/conf.d/atlas.conf
             subPath: atlas.conf
+          - name: v-reverse-proxy-configs-atlas2-conf
+            mountPath: /usr/local/apache2/conf.d/atlas2.conf
+            subPath: atlas2.conf
       volumes:
         - name: v-reverse-proxy-configs-auth-conf
           configMap:
@@ -62,3 +65,6 @@ spec:
         - name: v-reverse-proxy-configs-atlas-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas-conf
+        - name: v-reverse-proxy-configs-atlas2-conf
+          configMap:
+            name: cm-reverse-proxy-configs-atlas2-conf

@@ -35,6 +35,10 @@ atlas Configuration:
 - single pv for data folder including h2-base, solr, and zookeeper
 kubectl port-forward -n gaby service/atlas 8080:21000
 
+Atlas is now accessible via reverse proxy at
+https://aureliusdev.westeurope.cloudapp.azure.com/anwo/atlas2/login.jsp
+
+
 Flink resources
 ===============
 - https://googlecloudplatform.github.io/flink-on-k8s-operator/
