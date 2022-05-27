@@ -9,12 +9,14 @@ keycloak:
     KEYCLOAK_USER: "admin"
     KEYCLOAK_PASSWORD: "admin"
   realm_file_name: "realm_m4i.json"
+  #realm_file_name: "realm-anwo-google.json"
   persistence:
     enabled: true
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
   external_ip: 51.105.169.241
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 atlas:
   tag: "2.2.0.1"
@@ -25,3 +27,4 @@ atlas:
     size: 1Gi
 
 host_ip: 51.105.169.241
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"

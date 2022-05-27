@@ -47,8 +47,15 @@ Flink resources
 
 Keycloak client id mappings:
 Realm: m4i
-- Apache Atlas Frontend: m4i_thijs
+- Apache Atlas Frontend: m4i_thijs - m4i_atlas_frontend
 - Apache Atlas standard: m4i_atlas
 
 Default users: 
-atlas: is an admin user with pwd aurelius
+There are no default users. 
+There is a possibility to import default users using an import script https://github.com/UKHomeOffice/keycloak-utils
+which I did not check out yet.
+
+Configure keycloak to use gmail as a Idendity provider
+https://keycloakthemes.com/blog/how-to-setup-sign-in-with-google-using-keycloak
+
+redirect URL https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/broker/google/endpoint

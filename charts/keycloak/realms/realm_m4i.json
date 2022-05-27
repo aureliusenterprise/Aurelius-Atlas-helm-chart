@@ -1062,15 +1062,15 @@
       "id": "c3e97388-9983-48e4-a44f-66e3f6b6d9ea",
       "clientId": "m4i_atlas",
       "name": "Models4Insight Data Management",
-      "rootUrl": "https://{{ .Values.external_ip }}/{{ .Release.Namespace }}/atlas/",
-      "adminUrl": "https://{{ .Values.external_ip }}/{{ .Release.Namespace }}/auth_admin/",
+      "rootUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/",
+      "adminUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth_admin/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "http://127.0.0.1:9100/atlas/api/*",
-        "https://{{ .Values.external_ip }}/*"
+        "https://{{ .Values.external_hostname }}/*"
       ],
       "webOrigins": [
         "*"
@@ -2717,6 +2717,7 @@
         "https://localhost:9100/*",
         "http://localhost:4200/*",
         "http://localhost:9100/*",
+        "https://{{ .Values.external_hostname }}/*",
         "http://127.0.0.1:4200/*",
         "https://localhost:4200/*"
       ],
