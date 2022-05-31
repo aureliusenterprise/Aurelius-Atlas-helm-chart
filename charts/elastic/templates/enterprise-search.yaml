@@ -1,9 +1,9 @@
 apiVersion: enterprisesearch.k8s.elastic.co/v1
 kind: EnterpriseSearch
 metadata:
-  name: enterprise-search
+  name: {{ .Values.enterprise_search.name }}
 spec:
-  version: 8.2.0
-  count: 1
+  version: {{ .Values.enterprise_search.version }}
+  count: {{ .Values.enterprise_search.replicaCount }}
   elasticsearchRef:
-    name: elastic-search
+    name: {{ .Values.elastic_search.name }}
