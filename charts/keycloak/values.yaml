@@ -29,3 +29,11 @@ env:
 
 ## Realm
 realm_file_name: "realm.json"
+
+
+# Persistent Volume
+persistence:
+  enabled: true
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 1Gi

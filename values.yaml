@@ -9,34 +9,17 @@ keycloak:
     KEYCLOAK_USER: "admin"
     KEYCLOAK_PASSWORD: "admin"
   realm_file_name: "realm.json"
-
-elasticsearch:
-  global:
+  persistence:
     enabled: true
-    projectName: "es"
-  # clusterName: ""
-  replicas: 1
-  antiAffinity: "soft"
-  # secret.password: "admin"
-  # extraEnvs:
-  #   - name: ELASTIC_PASSWORD
-  #     valueFrom:
-  #       secretKeyRef:
-  #         name: elastic-config-credentials
-  #         key: password
-  # This is just a dummy file to make sure that
-  # the keystore can be mounted at the same time
-  # as a custom elasticsearch.yml
-  # esConfig:
-  #   elasticsearch.yml: |
-  #     xpack.security.enabled: true
-  #     path.data: /usr/share/elasticsearch/data
-  # keystore:
-  #   - secretName: elastic-config-secret
-  #   - secretName: elastic-config-slack
-  #   - secretName: elastic-config-custom-path
-  #     items:
-  #       - key: slack_url
-  #         path: xpack.notification.slack.account.otheraccount.secure_url
-  # secret:
-  #   enabled: false
+    # storageClass: "-"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+atlas:
+  tag: "2.2.0.1"
+  persistence:
+    enabled: true
+    # storageClass: "-"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
