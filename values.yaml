@@ -14,7 +14,6 @@ keycloak:
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
-  external_ip: 51.105.169.241
 
 atlas:
   tag: "2.2.0.1"
@@ -24,4 +23,19 @@ atlas:
     accessMode: ReadWriteOnce
     size: 1Gi
 
-host_ip: 51.105.169.241
+elastic:
+  elastic_search:
+    replicaCount: 1
+    version: 8.2.2
+    persistence:
+      enabled: true
+      # storageClass: "-"
+      accessMode: ReadWriteOnce
+      size: 4Gi
+  kibana:
+    replicaCount: 1
+    version: 8.2.2
+  enterprise_search:
+    replicaCount: 1
+    version: 8.2.2
+

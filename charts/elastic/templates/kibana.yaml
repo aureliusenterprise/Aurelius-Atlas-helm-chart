@@ -1,0 +1,11 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: {{ .Values.kibana.name }}
+spec:
+  version: {{ .Values.kibana.version }}
+  count: {{ .Values.kibana.replicaCount }}
+  elasticsearchRef:
+    name: {{ .Values.elastic_search.name }}
+  enterpriseSearchRef:
+    name: {{ .Values.enterprise_search.name }}
