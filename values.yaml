@@ -23,3 +23,19 @@ atlas:
     accessMode: ReadWriteOnce
     size: 1Gi
 
+elastic:
+  elastic_search:
+    replicaCount: 1
+    version: 8.2.2
+    persistence:
+      enabled: true
+      # storageClass: "-"
+      accessMode: ReadWriteOnce
+      size: 4Gi
+  kibana:
+    replicaCount: 1
+    version: 8.2.2
+  enterprise_search:
+    replicaCount: 1
+    version: 8.2.2
+

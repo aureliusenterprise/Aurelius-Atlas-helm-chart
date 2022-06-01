@@ -1,20 +1,6 @@
-some pointers for installing ingress
-
-https://www.patrickriedl.at/secure-azure-kubernetes-with-lets-encrypt-certificates/
-https://github.com/fbeltrao/aks-letsencrypt/blob/master/install-nginx-ingress.md
-https://medium.com/@GeoffreyDV/how-to-set-up-ssl-certificates-for-free-on-azure-kubernetes-service-with-lets-encrypt-c7daca4e9385
-https://stacksimplify.com/azure-aks/ingress-ssl-with-lets-encrypt/
-https://stacksimplify.com/azure-aks/ingress-ssl-with-lets-encrypt/
-https://docs.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-https://docs.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
-https://github.com/kubernetes/ingress-nginx
-https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
-https://nws.netways.de/tutorials/kubernetes-nginx-ingress-controller-this-is-how-you-make-a-simple-start/
-
-post precessing after pod is running
-https://stackoverflow.com/questions/44140593/how-to-run-command-after-initialization
 
 Additions May 10th:
+===================
 - moved reverse-proxy and keycloak as sub charts
 - configured the reverse-proxy with a connection to keycloak
 - testing is possible with port_forawing to reverse-proxy
@@ -34,6 +20,39 @@ atlas Configuration:
 - update ``charts/atlas/templates/configmap.yaml`` to change the configurations
 - single pv for data folder including h2-base, solr, and zookeeper
 kubectl port-forward -n gaby service/atlas 8080:21000
+
+
+Elastic:
+===================
+- In order to deploy elastic, ``Elastic Cluster on Kubernetes (ECK)`` must be installed on the cluster. To install ECK on the cluster, please follow the instructions provided on https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-deploy-eck.html
+- For more details about this elastic helm chart look at [elastic readme](./charts/elastic/README.md)
+
+
+
+
+
+Create subcharts
+ cd mychart/charts
+ helm create mysubchart
+
+
+some pointers for installing ingress
+=====================================
+- https://www.patrickriedl.at/secure-azure-kubernetes-with-lets-encrypt-certificates/
+- https://github.com/fbeltrao/aks-letsencrypt/blob/master/install-nginx-ingress.md
+- https://medium.com/@GeoffreyDV/how-to-set-up-ssl-certificates-for-free-on-azure-kubernetes-service-with-lets-encrypt-c7daca4e9385
+- https://stacksimplify.com/azure-aks/ingress-ssl-with-lets-encrypt/
+- https://stacksimplify.com/azure-aks/ingress-ssl-with-lets-encrypt/
+- https://docs.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
+- https://docs.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli
+- https://github.com/kubernetes/ingress-nginx
+- https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
+- https://nws.netways.de/tutorials/kubernetes-nginx-ingress-controller-this-is-how-you-make-a-simple-start/
+
+post precessing after pod is running
+====================================
+- https://stackoverflow.com/questions/44140593/how-to-run-command-after-initialization
+
 
 Flink resources
 ===============
