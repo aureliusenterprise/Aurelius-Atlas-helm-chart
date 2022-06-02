@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: taskmanager
-        image: apache/flink:latest
+        image: "{{ .Values.repository }}:{{ .Values.tag }}"
         args: ["taskmanager"]
         ports:
         - containerPort: 6122

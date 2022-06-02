@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jobmanager
-        image: apache/flink:latest
+        image: "{{ .Values.repository }}:{{ .Values.tag }}"
         args: ["jobmanager"]
         ports:
         - containerPort: 6123
