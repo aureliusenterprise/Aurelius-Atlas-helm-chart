@@ -20,6 +20,11 @@ kubectl port-forward service/kibana-kb-http 5601 -n namespace
 ```
 Open the browser to https://localhost:5601
 
+#### to get the password to user elastic:
+```commandline
+kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n namespace | base64 --decode; echo
+```
+
 What still needs to be done:
 ===========================
 - creation of additional users
