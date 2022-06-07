@@ -14,6 +14,6 @@ ProxyPassReverse "https://elastic-search-es-http.{{ .Release.Namespace }}.svc.cl
 </Location>
 
 <Location /kibana>
-ProxyPass "https://kibana-kb-http.{{ .Release.Namespace }}.svc.cluster.local:5601/kibana"
-ProxyPassReverse "https://kibana-kb-http.{{ .Release.Namespace }}.svc.cluster.local:5601/kibana"
+ProxyPass "https://kibana-kb-http.{{ .Release.Namespace }}.svc.cluster.local:5601"
+ProxyPassReverse "https://kibana-kb-http.{{ .Release.Namespace }}.svc.cluster.local:5601"
 </Location>
