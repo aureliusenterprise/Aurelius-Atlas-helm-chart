@@ -1,6 +1,6 @@
 {
   "realm": "m4i",
-  "auth-server-url": "http://keycloak.{{ .Release.Namespace }}.svc.cluster.local:9100/auth/",
+  "auth-server-url": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/",
   "ssl-required": "none",
   "resource": "m4i_public",
   "public-client": true,
