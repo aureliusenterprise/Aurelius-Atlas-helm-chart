@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  reverse-proxy-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: aureliusdev.westeurope.cloudapp.azure.com
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: reverse-proxy
+                port:
+                  number: 80
+            path: /{{ .Release.Namespace }}(/|$)(.*)
+  # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+    - hosts:
+      - aureliusdev.westeurope.cloudapp.azure.com
+      secretName: letsencrypt-prod2

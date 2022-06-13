@@ -8,21 +8,28 @@ keycloak:
   env:
     KEYCLOAK_USER: "admin"
     KEYCLOAK_PASSWORD: "admin"
-  realm_file_name: "realm.json"
+  realm_file_name: "realm_m4i.json"
   persistence:
     enabled: true
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
+  external_ip: 51.105.169.241
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 atlas:
-  tag: "2.2.0.1"
+  tag: "2.2.0.3"
   persistence:
     enabled: true
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
 
+reverse-proxy:
+  tag: "1.0.8"
+
+host_ip: 51.105.169.241
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 elastic:
   elastic_search:
     replicaCount: 1

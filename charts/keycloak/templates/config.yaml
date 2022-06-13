@@ -5,4 +5,4 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   realm.json: |-
-{{ .Files.Get (printf "realms/%s" .Values.realm_file_name)| indent 4}}
+{{ tpl (.Files.Get (printf "realms/%s" .Values.realm_file_name)) . | indent 4}}

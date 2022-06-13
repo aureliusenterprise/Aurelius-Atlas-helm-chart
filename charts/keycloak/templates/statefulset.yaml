@@ -47,6 +47,9 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
+            - name: KEYCLOAK_FRONTEND_URL
+            #  value:  /{{ .Release.Namespace }}/auth 
+              value:  {{ .Values.keycloakFrontendURL }}{{ .Release.Namespace }}/auth
             - name: RELEASE_NAMESPACE
               value:  {{ .Release.Namespace }}
             - name: RELEASE_NAME

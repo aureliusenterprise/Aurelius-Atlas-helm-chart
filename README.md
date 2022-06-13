@@ -54,6 +54,10 @@ post precessing after pod is running
 - https://stackoverflow.com/questions/44140593/how-to-run-command-after-initialization
 
 
+Atlas is now accessible via reverse proxy at
+https://aureliusdev.westeurope.cloudapp.azure.com/anwo/atlas2/login.jsp
+
+
 Flink resources
 ===============
 - https://googlecloudplatform.github.io/flink-on-k8s-operator/
@@ -63,3 +67,18 @@ Flink resources
 - https://artifacthub.io/packages/helm/riskfocus/flink
 - https://github.com/ververica/ververica-platform-playground
 - https://www.ververica.com/getting-started
+
+Keycloak client id mappings:
+Realm: m4i
+- Apache Atlas Frontend: m4i_thijs - m4i_atlas_frontend
+- Apache Atlas standard: m4i_atlas
+
+Default users: 
+There are no default users. 
+There is a possibility to import default users using an import script https://github.com/UKHomeOffice/keycloak-utils
+which I did not check out yet.
+
+Configure keycloak to use gmail as a Idendity provider
+https://keycloakthemes.com/blog/how-to-setup-sign-in-with-google-using-keycloak
+
+redirect URL https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/broker/google/endpoint
