@@ -27,6 +27,10 @@ Elastic:
 - In order to deploy elastic, ``Elastic Cluster on Kubernetes (ECK)`` must be installed on the cluster. To install ECK on the cluster, please follow the instructions provided on https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-deploy-eck.html
 - For more details about this elastic helm chart look at [elastic readme](./charts/elastic/README.md)
 
+Flink:
+===================
+- For more details about this flink helm chart look at [flink readme](./charts/flink/README.md)
+
 
 
 
