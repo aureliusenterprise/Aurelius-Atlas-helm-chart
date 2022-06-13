@@ -27,6 +27,10 @@ Elastic:
 - In order to deploy elastic, ``Elastic Cluster on Kubernetes (ECK)`` must be installed on the cluster. To install ECK on the cluster, please follow the instructions provided on https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-deploy-eck.html
 - For more details about this elastic helm chart look at [elastic readme](./charts/elastic/README.md)
 
+Flink:
+===================
+- For more details about this flink helm chart look at [flink readme](./charts/flink/README.md)
+
 
 
 
@@ -57,16 +61,6 @@ post precessing after pod is running
 Atlas is now accessible via reverse proxy at
 https://aureliusdev.westeurope.cloudapp.azure.com/anwo/atlas2/login.jsp
 
-
-Flink resources
-===============
-- https://googlecloudplatform.github.io/flink-on-k8s-operator/
-- https://github.com/nlecoy/flink-chart
-- https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/
-- https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/kubernetes/#common-cluster-resource-definitions
-- https://artifacthub.io/packages/helm/riskfocus/flink
-- https://github.com/ververica/ververica-platform-playground
-- https://www.ververica.com/getting-started
 
 Keycloak client id mappings:
 Realm: m4i

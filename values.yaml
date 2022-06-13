@@ -46,3 +46,6 @@ elastic:
     replicaCount: 1
     version: 8.2.2
 
+flink:
+  repository: apache/flink
+  tag: latest
