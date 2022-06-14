@@ -22,4 +22,4 @@ spec:
   tls:
     - hosts:
       - aureliusdev.westeurope.cloudapp.azure.com
-      secretName: letsencrypt-prod2
+      secretName: letsencrypt-secret-devaurelius
