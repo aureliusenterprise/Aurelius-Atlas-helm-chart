@@ -1,4 +1,7 @@
 <Location /atlas2>
+RewriteEngine on
+ProxyPreserveHost On
+RequestHeader set X-ProxyContextPath "/anwo/"
 ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000"
 ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000"
 </Location>

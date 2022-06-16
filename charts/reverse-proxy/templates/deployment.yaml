@@ -58,6 +58,9 @@ spec:
           - name: v-reverse-proxy-configs-atlas2-conf
             mountPath: /usr/local/apache2/conf.d/atlas2.conf
             subPath: atlas2.conf
+          - name: v-reverse-proxy-configs-flink-conf
+            mountPath: /usr/local/apache2/conf.d/flink.conf
+            subPath: flink.conf
           - name: v-reverse-proxy-configs-elastic-conf
             mountPath: /usr/local/apache2/conf.d/elastic.conf
             subPath: elastic.conf
@@ -71,6 +74,9 @@ spec:
         - name: v-reverse-proxy-configs-atlas2-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas2-conf
+        - name: v-reverse-proxy-configs-flink-conf
+          configMap:
+            name: cm-reverse-proxy-configs-flink-conf
         - name: v-reverse-proxy-configs-elastic-conf
           configMap:
             name: cm-reverse-proxy-configs-elastic-conf
