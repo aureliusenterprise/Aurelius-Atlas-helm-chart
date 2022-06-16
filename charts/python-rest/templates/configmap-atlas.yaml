@@ -5,6 +5,6 @@ metadata:
 data:
   m4i_atlas_config.py: |
     config = {
-        "atlas.server.url": "127.0.0.1:9100/atlas/atlas",
-        "data2model.server.url": "http://localhost:5000/data2model"
+        "atlas.server.url": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/atlas",
+        "data2model.server.url": "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/data2model"
     }

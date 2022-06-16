@@ -7,3 +7,4 @@ service:
   type: ClusterIP
   externalPort: 5000
   internalPort: 5000
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
