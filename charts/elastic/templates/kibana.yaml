@@ -12,3 +12,4 @@ spec:
   config:
      server.publicBaseUrl: https://aureliusdev.westeurope.cloudapp.azure.com/{{ .Release.Namespace }}/kibana
      server.basePath: /{{ .Release.Namespace }}/kibana
+     
