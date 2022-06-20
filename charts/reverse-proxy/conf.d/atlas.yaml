@@ -5,12 +5,12 @@ ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/
 
 Alias "/atlas" "/usr/local/apache2/atlas"
 <Directory "/usr/local/apache2/atlas">
-RewriteEngine On
-RewriteBase /atlas/
-RewriteRule ^index\.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /atlas/index.html [L]
+#RewriteEngine On
+#RewriteBase /atlas/
+#RewriteRule ^index\.html$ - [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule . /atlas/index.html [L]
 Order allow,deny
 AllowOverride All
 Allow from all
