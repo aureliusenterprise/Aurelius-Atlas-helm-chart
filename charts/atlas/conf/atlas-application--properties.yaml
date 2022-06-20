@@ -7,7 +7,7 @@ atlas.EntityAuditRepository.impl=org.apache.atlas.repository.audit.HBaseBasedAud
 
 atlas.graph.index.search.backend=solr
 atlas.graph.index.search.solr.mode=cloud
-atlas.graph.index.search.solr.zookeeper-url=localhost:2181
+atlas.graph.index.search.solr.zookeeper-url=0.0.0.0:2181
 atlas.graph.index.search.solr.zookeeper-connect-timeout=60000
 atlas.graph.index.search.solr.zookeeper-session-timeout=60000
 atlas.graph.index.search.solr.wait-searcher=true
@@ -16,8 +16,8 @@ atlas.graph.index.search.max-result-set-size=150
 
 atlas.notification.embedded=true
 atlas.kafka.data=${sys:atlas.home}/data/kafka
-atlas.kafka.zookeeper.connect=localhost:9026
-atlas.kafka.bootstrap.servers=localhost:9027
+atlas.kafka.zookeeper.connect=0.0.0.0:9026
+atlas.kafka.bootstrap.servers=0.0.0.0:9027
 atlas.kafka.zookeeper.session.timeout.ms=400
 atlas.kafka.zookeeper.connection.timeout.ms=200
 atlas.kafka.zookeeper.sync.time.ms=20

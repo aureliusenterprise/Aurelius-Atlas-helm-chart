@@ -1,10 +1,10 @@
-<Location /atlas/atlas>
-ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
-ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+<Location /atlas/atlas/>
+ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas/"
+ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas/"
 </Location>
 
-Alias "/atlas" "/usr/local/apache2/atlas"
-<Directory "/usr/local/apache2/atlas">
+Alias "/atlas/" "/usr/local/apache2/atlas/"
+<Directory "/usr/local/apache2/atlas/">
 #RewriteEngine On
 #RewriteBase /atlas/
 #RewriteRule ^index\.html$ - [L]
