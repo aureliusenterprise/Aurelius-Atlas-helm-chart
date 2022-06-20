@@ -1960,18 +1960,17 @@
     {
       "id": "0587e7aa-a325-4873-87de-004ea70a88a3",
       "clientId": "m4i_public",
-      "rootUrl": "https://www.models4insight.com/",
+      "rootUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:8080/*",
-        "http://www.models4insight.com/*",
-        "https://www.models4insight.com/*",
-        "http://localhost:9100/*",
-        "http://127.0.0.1:21000/*",
-        "http://127.0.0.1:9100/*"
+
+        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/*",
+        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/*",
+        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/*",
+        "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/*"
       ],
       "webOrigins": [
         "*"
