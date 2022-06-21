@@ -49,3 +49,4 @@ elastic:
 flink:
   repository: apache/flink
   tag: latest
+  taskmanager_numberOfTaskSlots: 10
