@@ -11,4 +11,8 @@ spec:
       targetPort: {{ .Values.service.externalPort }}
       protocol: TCP
       name: {{ .Values.service.name }}
+    - port: {{ .Values.service.internalPort_kafka }}
+      targetPort: {{ .Values.service.internalPort_kafka }}
+      protocol: TCP
+      name: {{ .Values.service.name }}-kafkatopic
   selector: {{ include "atlas.selectorLabels" . | nindent 4 }}
