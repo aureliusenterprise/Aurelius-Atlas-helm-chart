@@ -8,6 +8,7 @@ service:
   type: ClusterIP
   externalPort: 21000
   internalPort: 21000
+  internalPort_kafka: 9027
 persistence:
   enabled: true
   # storageClass: "-"

@@ -12,3 +12,5 @@ service:
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+ATLAS_APP_SEARCH_TOKEN: "to_be_filled"

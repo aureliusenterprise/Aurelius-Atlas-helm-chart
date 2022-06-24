@@ -42,6 +42,8 @@ spec:
           env:
             - name: NAMESPACE
               value: "{{ .Release.Namespace }}"
+            - name: ATLAS_APP_SEARCH_TOKEN
+              value: "{{ .Values.ATLAS_APP_SEARCH_TOKEN }}"
             {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
