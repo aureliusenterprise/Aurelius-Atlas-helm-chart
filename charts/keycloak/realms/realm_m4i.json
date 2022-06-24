@@ -112,6 +112,24 @@
         "attributes": {}
       },
       {
+        "id": "17465103-a497-40b3-b920-9c65f94a61e7",
+        "name": "DATA_STEWARD",
+        "description": "Apache Atlas data steward role role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "m4i",
+        "attributes": {}
+      },
+      {
+        "id": "17465103-a497-40b3-b920-9c65f94a61e6",
+        "name": "DATA_SCIENTIST",
+        "description": "Apache Atlas data scientist role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "m4i",
+        "attributes": {}
+      },
+      {
         "id": "a840d484-144c-414a-9fc0-f7f7e27d265a",
         "name": "uma_authorization",
         "description": "${role_uma_authorization}",
@@ -1966,7 +1984,6 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-
         "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/*",
         "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/*",
         "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/*",
