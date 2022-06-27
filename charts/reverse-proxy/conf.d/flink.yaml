@@ -1,4 +1,4 @@
-<Location /flink>
-ProxyPass "http://flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081"
-ProxyPassReverse "http://flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081"
+<Location /flink/>
+ProxyPass "http://flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081/"
+ProxyPassReverse "http://flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081/"
 </Location>

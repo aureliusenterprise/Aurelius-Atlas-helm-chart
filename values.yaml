@@ -26,7 +26,8 @@ atlas:
     size: 1Gi
 
 reverse-proxy:
-  tag: "1.0.8"
+  tag: "1.0.9"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 host_ip: 51.105.169.241
 external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
@@ -49,3 +50,4 @@ elastic:
 flink:
   repository: apache/flink
   tag: latest
+  taskmanager_numberOfTaskSlots: 10

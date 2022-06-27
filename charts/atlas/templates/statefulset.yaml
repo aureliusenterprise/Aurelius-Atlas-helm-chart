@@ -29,7 +29,10 @@ spec:
           image: "{{ .Values.repository }}:{{ .Values.tag }}"
           imagePullPolicy: {{ .Values.pullPolicy }}
           ports:
-            - containerPort: 21000
+            - containerPort: {{ .Values.service.internalPort }}
+              name: atlas
+            - containerPort: {{ .Values.service.internalPort_kafka }}
+              name: kafkatopic
           command: [
               "/bin/bash",
               "-c",

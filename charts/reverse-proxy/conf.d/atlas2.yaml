@@ -1,4 +1,4 @@
-<Location /atlas2>
+<Location /atlas2/>
 ProxyPreserveHost On
 RewriteEngine On
 RewriteBase /{{ .Release.Namespace }}/atlas2/
@@ -7,6 +7,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule "/atlas2/(.*)$" "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/$1" [P,L]
 #RequestHeader set X-ProxyContextPath "/{{ .Release.Namespace }}/"
-ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000"
-ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000"
+ProxyPass "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/"
+ProxyPassReverse "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/"
 </Location>
