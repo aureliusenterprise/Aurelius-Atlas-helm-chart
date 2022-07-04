@@ -33,6 +33,11 @@ spec:
               containerPort: 5000
               protocol: TCP
           env:
+            - name: elastic_password
+              valueFrom:
+                secretKeyRef:
+                  name: elastic-search-es-elastic-user
+                  key: elastic
             {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
@@ -49,6 +54,8 @@ spec:
           - name: v-python-rest-configs-m4i-platform-config
             mountPath: /rest-services/m4i_platform_config.py
             subPath: m4i_platform_config.py
+          - name: v-elastic-certs
+            mountPath: /secret_certs
       volumes:
         - name: v-python-rest-configs-m4i-atlas-config
           configMap:
@@ -59,3 +66,6 @@ spec:
         - name: v-python-rest-configs-m4i-platform-config
           configMap:
             name: python-rest-configs-m4i-platform-config
+        - name: v-elastic-certs
+          secret:
+            secretName: elastic-search-es-http-certs-public
