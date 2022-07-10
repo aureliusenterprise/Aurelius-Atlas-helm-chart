@@ -1,4 +1,12 @@
 
+Installation
+============
+
+```bash
+kubectl create namespace anwo
+helm install --generate-name -n anwo  -f helm-governance/values.yaml helm-governance
+```
+
 Additions May 10th:
 ===================
 - moved reverse-proxy and keycloak as sub charts
