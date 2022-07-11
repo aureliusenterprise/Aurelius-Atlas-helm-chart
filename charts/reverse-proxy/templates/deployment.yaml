@@ -42,12 +42,17 @@ spec:
           env:
             - name: NAMESPACE
               value: "{{ .Release.Namespace }}"
-            - name: ATLAS_APP_SEARCH_TOKEN
-              value: "{{ .Values.ATLAS_APP_SEARCH_TOKEN }}"
+            - name: enterpirse_search_internal_url
+              value: {{ tpl .Values.enterpirse_search_internal_url . }}
+            - name: elastic_password
+              valueFrom:
+                secretKeyRef:
+                  name: elastic-search-es-elastic-user
+                  key: elastic
             {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
-              value: {{ $value | quote }}
+              value: {{  $value  | quote }}
             {{- end }}
             {{- end }}
           volumeMounts:
