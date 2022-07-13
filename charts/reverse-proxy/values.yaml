@@ -6,11 +6,13 @@
 replicaCount: 1
 repository: wombach/docker-reverse-proxy
 pullPolicy: Always
-tag: "1.0.9"
+tag: "1.0.9.2"
 service:
   name: reverse-proxy
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
 external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
-ATLAS_APP_SEARCH_TOKEN: "to_be_filled"
+enterpirse_search_internal_url: https://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002/
+env:
+  elastic_username: elastic

@@ -1,3 +1,27 @@
+How to install:
+This installation assumes that you have a kubernetes cluster running.
+
+1. Install Certificate manager:
+```commandline
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install  --name cert-manager   --namespace cert-manager   --version v1.1.0   jetstack/cert-manager
+```
+2. Install Ingress Nginx Controller
+```commandline
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
+```
+3. Install Elastic
+```commandline
+kubectl create -f https://download.elastic.co/downloads/eck/2.3.0/crds.yaml
+kubectl apply -f https://download.elastic.co/downloads/eck/2.3.0/operator.yaml
+```
+4. Deploying frist time on cluster
+```commandline
+
+```
 
 Installation
 ============
