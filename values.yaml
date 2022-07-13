@@ -48,6 +48,6 @@ elastic:
     version: 8.2.2
 
 flink:
-  repository: apache/flink
-  tag: latest
+  repository: wombach/docker-flink
+  tag: 1.15.1.0
   taskmanager_numberOfTaskSlots: 10

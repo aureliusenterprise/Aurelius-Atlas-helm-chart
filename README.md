@@ -7,6 +7,9 @@ kubectl create namespace anwo
 helm install --generate-name -n anwo  -f helm-governance/values.yaml helm-governance
 ```
 
+https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/#:~:text=The%20Flink%20Docker%20repository%20is,aliases%20are%20provided%20for%20convenience.
+
+
 Additions May 10th:
 ===================
 - moved reverse-proxy and keycloak as sub charts

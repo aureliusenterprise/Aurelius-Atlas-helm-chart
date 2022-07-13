@@ -1,3 +1,3 @@
-repository: apache/flink
-tag: latest
+repository: wombach/docker-flink
+tag: 1.15.1.0
 taskmanager_numberOfTaskSlots: 10
