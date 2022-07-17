@@ -4,7 +4,7 @@ config = {
     "kafka.bootstrap.server.hostname": "http://atlas.anw.svc.cluster.local",
     "kafka.bootstrap.server.port": 9027,
     "kafka.consumer.group.id": "",
-    "atlas.audit.events.topic.name": "YOUR_TOPIC_NAME",
+    "atlas.audit.events.topic.name": "ATLAS_ENTITIES",
 
     "elastic_cloud_username" : "YOUR_ELASTIC_USER_NAME",
     "elastic_cloud_id" : "YOUR_ELASTIC_CLOUD_ID",

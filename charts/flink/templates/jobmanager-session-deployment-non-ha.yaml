@@ -35,7 +35,7 @@ spec:
         - name: flink-config-volume
           mountPath: /opt/flink/conf
         - name: flink-tasks-config-volume
-          mountPath: /opt/flink-tasks/conf
+          mountPath: /opt/flink/task-conf
         securityContext:
           runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
       volumes:
@@ -49,7 +49,7 @@ spec:
             path: log4j-console.properties
       - name: flink-tasks-config-volume
         configMap:
-          name: flink-config
+          name: flink-tasks-config
           items:
           - key: config.py
             path: config.py
