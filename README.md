@@ -28,7 +28,8 @@ Installation
 
 ```bash
 kubectl create namespace anwo
-helm install --generate-name -n anwo  -f helm-governance/values.yaml helm-governance
+cd helm-governance
+helm install --generate-name -n anwo  -f values.yaml .
 ```
 
 https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/#:~:text=The%20Flink%20Docker%20repository%20is,aliases%20are%20provided%20for%20convenience.
