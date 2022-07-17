@@ -1,6 +1,6 @@
 credentials = {
-    "atlas.credentials.username": "YOUR_USERNAME",
-    "atlas.credentials.password": "YOUR_PASSWORD",
+    "atlas.credentials.username": "atlas",
+    "atlas.credentials.password": "aurelius",
 
     "elastic_user": "elastic",
     "elastic_passwd": "password",

@@ -9,11 +9,8 @@ config = {
     "elastic_cloud_username" : "YOUR_ELASTIC_USER_NAME",
     "elastic_cloud_id" : "YOUR_ELASTIC_CLOUD_ID",
 
-
     "elastic_user": "elastic",
     "elastic_passwd": "password",
     "elastic_cloud_id": "cloud-id",
     "elastic_search_passwd": "search-password",
-
-
 }

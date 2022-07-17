@@ -5,10 +5,8 @@ metadata:
   labels:
     app: flink
 data:
-data:
-  credentials.py: |
+  credentials.py: |+
 {{ tpl ( .Files.Get "conf/credentials.py" ) . | indent 4}}
-
-  config.py: |
+  config.py: |+
 {{ tpl ( .Files.Get "conf/config.py" ) . | indent 4}}
 
