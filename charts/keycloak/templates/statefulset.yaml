@@ -54,6 +54,11 @@ spec:
               value:  {{ .Release.Namespace }}
             - name: RELEASE_NAME
               value: {{ .Release.Name }}
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: password
           {{- end }}
           volumeMounts:
             {{- if .Values.persistence.enabled }}
