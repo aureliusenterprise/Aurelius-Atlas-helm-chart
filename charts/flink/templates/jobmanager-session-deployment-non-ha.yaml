@@ -14,6 +14,10 @@ spec:
         app: flink
         component: jobmanager
     spec:
+      securityContext:
+          runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
+          runAsGroup: 9999
+          fsGroup: 9999
       containers:
       - name: jobmanager
         image: "{{ .Values.repository }}:{{ .Values.tag }}"
@@ -51,9 +55,7 @@ spec:
         - name: flink-config-volume
           mountPath: /opt/flink/conf
         - name: flink-tasks-config-volume
-          mountPath: /opt/flink/py_libs/m4i-flink-tasks/scripts
-        securityContext:
-          runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
+          mountPath: /opt/flink/tasks-conf
       volumes:
       - name: flink-config-volume
         configMap:
