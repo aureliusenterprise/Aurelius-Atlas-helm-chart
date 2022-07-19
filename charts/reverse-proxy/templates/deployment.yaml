@@ -42,9 +42,11 @@ spec:
           env:
             - name: NAMESPACE
               value: "{{ .Release.Namespace }}"
-            - name: enterpirse_search_internal_url
+            - name: ENTERPRISE_SEARCH_INTERNAL_URL
               value: {{ tpl .Values.enterpirse_search_internal_url . }}
-            - name: elastic_password
+            - name: ELASTIC_USERNAME
+              value: "elastic"
+            - name: ELASTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: elastic-search-es-elastic-user

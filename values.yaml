@@ -17,7 +17,7 @@ keycloak:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 atlas:
-  tag: "2.2.0.3"
+  tag: "2.2.0.4"
   persistence:
     enabled: true
     # storageClass: "-"
