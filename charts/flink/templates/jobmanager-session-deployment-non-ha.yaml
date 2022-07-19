@@ -31,11 +31,27 @@ spec:
             port: 6123
           initialDelaySeconds: 30
           periodSeconds: 60
+        env:
+          - name: NAMESPACE
+            value: "{{ .Release.Namespace }}"
+          - name: ENTERPRISE_SEARCH_INTERNAL_URL
+            value: {{ tpl .Values.enterpirse_search_internal_url . }}
+          - name: ELASTIC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: elastic-search-es-elastic-user
+                key: elastic
+          {{- if .Values.env }}
+          {{- range $key, $value := .Values.env }}
+          - name: {{ $key }}
+            value: {{  $value  | quote }}
+          {{- end }}
+          {{- end }}
         volumeMounts:
         - name: flink-config-volume
           mountPath: /opt/flink/conf
         - name: flink-tasks-config-volume
-          mountPath: /opt/flink/task-conf
+          mountPath: /opt/flink/py_libs/m4i-flink-tasks/scripts
         securityContext:
           runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
       volumes:

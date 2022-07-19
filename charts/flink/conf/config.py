@@ -1,7 +1,7 @@
 config = {
         "atlas.server.url": "http://atlas.anwo.svc.cluster.local",
     "atlas.server.port": 21000,
-    "kafka.bootstrap.server.hostname": "http://atlas.anw.svc.cluster.local",
+    "kafka.bootstrap.server.hostname": "http://atlas.anwo.svc.cluster.local",
     "kafka.bootstrap.server.port": 9027,
     "kafka.consumer.group.id": "",
     "atlas.audit.events.topic.name": "ATLAS_ENTITIES",

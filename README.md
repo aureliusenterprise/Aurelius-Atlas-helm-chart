@@ -112,3 +112,12 @@ Configure keycloak to use gmail as a Idendity provider
 https://keycloakthemes.com/blog/how-to-setup-sign-in-with-google-using-keycloak
 
 redirect URL https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/broker/google/endpoint
+
+#### to get the password to keycloak admin user:
+```commandline
+kubectl get secret keycloak-secret -o=jsonpath='{.data.password}' -n anwo | base64 --decode; echo
+```
+#### to get the password to elastic user:
+```commandline
+kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n namespace | base64 --decode; echo
+```

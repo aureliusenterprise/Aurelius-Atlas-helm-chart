@@ -15,4 +15,4 @@ service:
 external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 enterpirse_search_internal_url: https://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002/
 env:
-  elastic_username: elastic
+  ELASTIC_USERNAME: elastic

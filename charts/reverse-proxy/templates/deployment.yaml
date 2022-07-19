@@ -44,8 +44,6 @@ spec:
               value: "{{ .Release.Namespace }}"
             - name: ENTERPRISE_SEARCH_INTERNAL_URL
               value: {{ tpl .Values.enterpirse_search_internal_url . }}
-            - name: ELASTIC_USERNAME
-              value: "elastic"
             - name: ELASTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
