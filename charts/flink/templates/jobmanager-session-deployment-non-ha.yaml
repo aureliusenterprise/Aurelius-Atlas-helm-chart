@@ -40,8 +40,6 @@ spec:
             value: "{{ .Release.Namespace }}"
           - name: ENTERPRISE_SEARCH_INTERNAL_URL
             value: {{ tpl .Values.enterpirse_search_internal_url . }}
-          - name: DEPENDENCY_POD_JSON
-            value: '[{"labels":{"app.kubernetes.io/name":"elastic-search"}}]'
           - name: ELASTIC_PASSWORD
             valueFrom:
               secretKeyRef:
