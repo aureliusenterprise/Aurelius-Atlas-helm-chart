@@ -45,6 +45,26 @@ spec:
               secretKeyRef:
                 name: elastic-search-es-elastic-user
                 key: elastic
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret
+                key: password
+          - name: KEYCLOAK_ATLAS_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-admin
+                key: password
+          - name: KEYCLOAK_ATLAS_STEWARD_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-steward
+                key: password
+          - name: KEYCLOAK_ATLAS_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-data
+                key: password
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
           - name: {{ $key }}

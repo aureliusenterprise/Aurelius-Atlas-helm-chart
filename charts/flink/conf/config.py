@@ -1,6 +1,6 @@
 config = {
-    "atlas.server.url": "http://atlas.anwo.svc.cluster.local:21000/api/atlas",
-   "kafka.bootstrap.server.hostname": "atlas.anwo.svc.cluster.local",
+    "atlas.server.url": "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas",
+    "kafka.bootstrap.server.hostname": "atlas.{{ .Release.Namespace }}.svc.cluster.local",
     "kafka.bootstrap.server.port": "9027",
     "kafka.consumer.group.id": None,
     "atlas.audit.events.topic.name": "ATLAS_ENTITIES",
@@ -14,7 +14,7 @@ config = {
     "elastic_cloud_id" : "YOUR_ELASTIC_CLOUD_ID",
     "elastic_base_endpoint" : "APP-SEACRH-HOSTNAME/api/as/v1",
 
-    "keycloak.server.url" : "reliusdev.westeurope.cloudapp.azure.com/anwo/auth/",
+    "keycloak.server.url" : "http://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/",
     "keycloak.client.id" : "m4i_public",
     "keycloak.realm.name": "m4i",    
 }

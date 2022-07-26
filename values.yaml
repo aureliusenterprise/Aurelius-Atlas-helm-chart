@@ -45,7 +45,8 @@ elastic:
   enterprise_search:
     replicaCount: 1
     version: 8.2.2
-#flink:
-#  repository: wombach/docker-flink
-#  tag: 1.15.1.0
-#  taskmanager_numberOfTaskSlots: 10
+flink:
+  repository: wombach/docker-flink
+  tag: 1.15.1.0
+  taskmanager_numberOfTaskSlots: 10
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
