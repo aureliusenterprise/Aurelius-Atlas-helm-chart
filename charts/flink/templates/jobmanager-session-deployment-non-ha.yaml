@@ -65,6 +65,8 @@ spec:
               secretKeyRef:
                 name: keycloak-secret-user-data
                 key: password
+          - name: KEYCLOAK_SERVER_URL
+            value: "http://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
           - name: {{ $key }}

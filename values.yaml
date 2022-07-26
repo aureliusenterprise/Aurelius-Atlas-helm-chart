@@ -30,6 +30,7 @@ reverse-proxy:
 
 host_ip: 51.105.169.241
 external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
 elastic:
   elastic_search:
     replicaCount: 1
@@ -45,6 +46,7 @@ elastic:
   enterprise_search:
     replicaCount: 1
     version: 8.2.2
+
 flink:
   repository: wombach/docker-flink
   tag: 1.15.1.0
