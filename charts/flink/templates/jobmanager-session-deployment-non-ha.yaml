@@ -18,6 +18,20 @@ spec:
           runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
           runAsGroup: 9999
           fsGroup: 9999
+      initContainers: # sidecar container to wait for a service to be completed.
+        - name: wait-for-reverse-proxy-service
+          image: darthcabs/tiny-tools:1
+          args:
+          - /bin/bash
+          - -c
+          - >
+            set -x;
+            while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
+                          -X GET "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "200" ]]; do 
+              echo '.'
+              sleep 15;
+            done
       containers:
       - name: jobmanager
         image: "{{ .Values.repository }}:{{ .Values.tag }}"
@@ -30,6 +44,10 @@ spec:
           name: blob-server
         - containerPort: 8081
           name: webui
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/opt/flink/init/init.sh" ]
         livenessProbe:
           tcpSocket:
             port: 6123
@@ -66,7 +84,7 @@ spec:
                 name: keycloak-secret-user-data
                 key: password
           - name: KEYCLOAK_SERVER_URL
-            value: "http://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
+            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
           - name: {{ $key }}
