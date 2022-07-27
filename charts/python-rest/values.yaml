@@ -1,0 +1,15 @@
+replicaCount: 1
+repository: wombach/docker-python-rest
+pullPolicy: Always
+tag: "1.0.2"
+service:
+  name: reverse-proxy
+  type: ClusterIP
+  externalPort: 5000
+  internalPort: 5000
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+env:
+  elastic_username: elastic
+  elastic_host: https://elastic-search-es-http:9200
+  elastic_ca_certs_path: "/secret_certs/ca.crt"
+elastic_secret_crt_name: elastic-search-es-http-certs-public

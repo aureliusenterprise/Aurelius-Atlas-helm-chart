@@ -5,7 +5,7 @@
 # https://github.com/keycloak/keycloak-containers/blob/16.1.1/server/README.md
 replicaCount: 1
 repository: quay.io/keycloak/keycloak
-pullPolicy: IfNotPresent
+pullPolicy: Always
 tag: "16.1.0"
 service:
   name: keycloak
@@ -15,21 +15,20 @@ service:
 cmd: "echo test successfull"
 env:
   KEYCLOAK_USER: "admin"
-  KEYCLOAK_PASSWORD: "admin"
-#KEYCLOAK_FRONTEND_URL: "https://atlas.models4insight.com/idp"
-#  PROXY_ADDRESS_FORWARDING: "true"
+  PROXY_ADDRESS_FORWARDING: "true"
   KEYCLOAK_IMPORT: "/tmp/realm.json"
 # KEYCLOAK_DEFAULT_THEME
 # KEYCLOAK_WELCOME_THEME
 #  ES_URL: "https://nxtgen-dev.es.westeurope.azure.elastic-cloud.com:9243/"
 #  ES_INDEX: "eis--public--equipment--flattened"
 
+keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
+
 # ingress object
 #host: equipment2.nxtgen-dev.vanoord.com
 
 ## Realm
-realm_file_name: "realm.json"
-
+realm_file_name: "realm_m4i.json"
 
 # Persistent Volume
 persistence:

@@ -9,3 +9,7 @@ spec:
     name: {{ .Values.elastic_search.name }}
   enterpriseSearchRef:
     name: {{ .Values.enterprise_search.name }}
+  config:
+     server.publicBaseUrl: https://aureliusdev.westeurope.cloudapp.azure.com/{{ .Release.Namespace }}/kibana
+     server.basePath: /{{ .Release.Namespace }}/kibana
+     

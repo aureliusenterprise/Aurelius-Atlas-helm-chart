@@ -2,14 +2,16 @@
 replicaCount: 1
 repository: wombach/docker-apache-atlas
 pullPolicy: IfNotPresent
-tag: "2.2.0.1"
+tag: "2.2.0.4"
 service:
   name: atlas
   type: ClusterIP
   externalPort: 21000
   internalPort: 21000
+  internalPort_kafka: 9027
 persistence:
   enabled: true
   # storageClass: "-"
   accessMode: ReadWriteOnce
   size: 1Gi
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"

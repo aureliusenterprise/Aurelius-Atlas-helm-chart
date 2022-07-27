@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flink-jobmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flink
+      component: jobmanager
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: jobmanager
+    spec:
+      securityContext:
+          runAsUser: 9999  # refers to user _flink_ from official flink image, change if necessary
+          runAsGroup: 9999
+          fsGroup: 9999
+      containers:
+      - name: jobmanager
+        image: "{{ .Values.repository }}:{{ .Values.tag }}"
+        imagePullPolicy: {{ .Values.pullPolicy }}
+        args: ["jobmanager"]
+        ports:
+        - containerPort: 6123
+          name: rpc
+        - containerPort: 6124
+          name: blob-server
+        - containerPort: 8081
+          name: webui
+        livenessProbe:
+          tcpSocket:
+            port: 6123
+          initialDelaySeconds: 30
+          periodSeconds: 60
+        env:
+          - name: NAMESPACE
+            value: "{{ .Release.Namespace }}"
+          - name: ENTERPRISE_SEARCH_INTERNAL_URL
+            value: {{ tpl .Values.enterpirse_search_internal_url . }}
+          - name: ELASTIC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: elastic-search-es-elastic-user
+                key: elastic
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret
+                key: password
+          - name: KEYCLOAK_ATLAS_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-admin
+                key: password
+          - name: KEYCLOAK_ATLAS_STEWARD_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-steward
+                key: password
+          - name: KEYCLOAK_ATLAS_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-data
+                key: password
+          - name: KEYCLOAK_SERVER_URL
+            value: "http://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
+          {{- if .Values.env }}
+          {{- range $key, $value := .Values.env }}
+          - name: {{ $key }}
+            value: {{  $value  | quote }}
+          {{- end }}
+          {{- end }}
+        volumeMounts:
+        - name: flink-config-volume
+          mountPath: /opt/flink/conf
+        - name: flink-tasks-config-volume
+          mountPath: /opt/flink/tasks-conf
+      volumes:
+      - name: flink-config-volume
+        configMap:
+          name: flink-config
+          items:
+          - key: flink-conf.yaml
+            path: flink-conf.yaml
+          - key: log4j-console.properties
+            path: log4j-console.properties
+      - name: flink-tasks-config-volume
+        configMap:
+          name: flink-tasks-config
+          items:
+          - key: config.py
+            path: config.py
+          - key: credentials.py
+            path: credentials.py
