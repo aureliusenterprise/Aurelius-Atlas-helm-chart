@@ -21,5 +21,5 @@ echo "=========="
 # to get the password to elastic user:
 echo "elasticsearch elastic user pwd: "
 echo "username: elastic"
-kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n ${1} | base64 --decode; 
+kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n ${1} | base64 --decode; echo
 echo "----"
