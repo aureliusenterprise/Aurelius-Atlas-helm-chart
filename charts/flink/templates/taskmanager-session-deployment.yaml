@@ -17,6 +17,7 @@ spec:
       containers:
       - name: taskmanager
         image: "{{ .Values.repository }}:{{ .Values.tag }}"
+        imagePullPolicy: {{ .Values.pullPolicy }}
         args: ["taskmanager"]
         ports:
         - containerPort: 6122

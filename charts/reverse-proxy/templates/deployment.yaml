@@ -24,6 +24,20 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      initContainers: # sidecar container to wait for a service to be completed.
+        - name: wait-for-app-search-service
+          image: darthcabs/tiny-tools:1
+          args:
+          - /bin/bash
+          - -c
+          - >
+            set -x;
+            while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
+                          -X GET "https://${ENTERPRISE_SEARCH_ENT_HTTP_PORT_3002_TCP_ADDR}:${ENTERPRISE_SEARCH_ENT_HTTP_SERVICE_PORT_HTTPS}/api/as/v1/credentials/search-key" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "401" ]]; do 
+              echo '.'
+              sleep 15;
+            done
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.repository }}:{{ .Values.tag }}"
@@ -42,9 +56,9 @@ spec:
           env:
             - name: NAMESPACE
               value: "{{ .Release.Namespace }}"
-            - name: enterpirse_search_internal_url
+            - name: ENTERPRISE_SEARCH_INTERNAL_URL
               value: {{ tpl .Values.enterpirse_search_internal_url . }}
-            - name: elastic_password
+            - name: ELASTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: elastic-search-es-elastic-user
