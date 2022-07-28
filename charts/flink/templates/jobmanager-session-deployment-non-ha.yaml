@@ -78,6 +78,8 @@ spec:
               secretKeyRef:
                 name: keycloak-secret-user-steward
                 key: password
+          - name: KEYCLOAK_ATLAS_USER_USERNAME
+            value: atlas
           - name: KEYCLOAK_ATLAS_USER_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -85,6 +87,11 @@ spec:
                 key: password
           - name: KEYCLOAK_SERVER_URL
             value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
+          - name: ENTERPRISE_SEARCH_EXTERNAL_URL
+            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/app-search/"
+          - name: ATLAS_EXTERNAL_URL
+            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/"
+          
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
           - name: {{ $key }}
