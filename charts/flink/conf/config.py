@@ -2,7 +2,7 @@ config = {
     "atlas.server.url": "atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas",
     "kafka.bootstrap.server.hostname": "atlas.{{ .Release.Namespace }}.svc.cluster.local",
     "kafka.bootstrap.server.port": "9027",
-    "kafka.consumer.group.id": None,
+    "kafka.consumer.group.id": "{{ .Release.Namespace }}",
     "atlas.audit.events.topic.name": "ATLAS_ENTITIES",
     "enriched.events.topic.name": "ENRICHED_ENTITIES",
     "determined.events.topic.name": "DETERMINED_CHANGE",
