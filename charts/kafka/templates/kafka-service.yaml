@@ -11,8 +11,9 @@ spec:
     - name: internal
       port: 29092
       targetPort: 29092
+      protocol: TCP
     - name: external
       port: 30092
       targetPort: 9092
-      nodePort: 30092
-  type: CLusterIP
+      protocol: TCP
+  type: ClusterIP
