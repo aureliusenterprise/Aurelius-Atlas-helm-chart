@@ -1,0 +1,11 @@
+confluent:
+  version: 7.0.1
+  kafka: confluentinc/cp-kafka
+  schemaRegistry: confluentinc/cp-schema-registry
+  zookeeper: confluentinc/cp-zookeeper
+
+persistence:
+  enabled: true
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 1Gi
