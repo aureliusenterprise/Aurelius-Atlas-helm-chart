@@ -1,0 +1,12 @@
+Congratulations ! You installed {{ .Chart.Name }} chart successfully.
+Release name is {{ .Release.Name }}
+
+Aurelius Atlas powered by Apache Atlas is now running.
+
+You can access the overview page at
+https://{{ .Values.external_hostname }}/{{ .Release.Name }}/
+
+To get a list of all automatically generated passwords run script
+./get_passwords.sh
+
+Have fun!
