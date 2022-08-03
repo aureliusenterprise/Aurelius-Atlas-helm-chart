@@ -22,6 +22,8 @@ metadata:
   {{- end }}
 spec:
   type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  ipFamilies: ["IPv4"]
   clusterIP: None
   ports:
     - name: tcp-client

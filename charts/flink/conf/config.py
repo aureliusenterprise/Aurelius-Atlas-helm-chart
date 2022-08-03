@@ -1,7 +1,7 @@
 config = {
     "atlas.server.url": "atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas",
-    "kafka.bootstrap.server.hostname": "atlas.{{ .Release.Namespace }}.svc.cluster.local",
-    "kafka.bootstrap.server.port": "9027",
+    "kafka.bootstrap.server.hostname": "kafka.{{ .Release.Namespace }}.svc.cluster.local",
+    "kafka.bootstrap.server.port": "9092",
     "kafka.consumer.group.id": "{{ .Release.Namespace }}",
     "atlas.audit.events.topic.name": "ATLAS_ENTITIES",
     "enriched.events.topic.name": "ENRICHED_ENTITIES",
@@ -13,7 +13,7 @@ config = {
 
     "elastic_cloud_username" : "elastic",
     "elastic_cloud_id" : None,
-    "elastic.base.endpoint" : "elastic-search.{{ .Release.Namespace }}.svc.cluster.local/api/as/v1",
+    "elastic.base.endpoint" : "elastic.{{ .Release.Namespace }}.svc.cluster.local/api/as/v1",
     "elastic.search.endpoint" : "https://elastic-search.{{ .Release.Namespace }}.svc.cluster.local:443",
     "elastic.enterprise.search.endpoint" : "https://enterprise-search.{{ .Release.Namespace }}.svc.cluster.local:443",
 

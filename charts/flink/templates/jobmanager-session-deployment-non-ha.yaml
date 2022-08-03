@@ -47,7 +47,7 @@ spec:
         lifecycle:
             postStart:
               exec:
-                command: ["/opt/flink/init/init.sh" ]
+                command: ["/opt/flink/init/init_jobmanager.sh" ]
         livenessProbe:
           tcpSocket:
             port: 6123

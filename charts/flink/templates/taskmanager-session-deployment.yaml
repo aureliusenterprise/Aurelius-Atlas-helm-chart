@@ -38,6 +38,10 @@ spec:
           name: rpc
         - containerPort: 6125
           name: query-state
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/opt/flink/init/init_taskmanager.sh" ]
         livenessProbe:
           tcpSocket:
             port: 6122

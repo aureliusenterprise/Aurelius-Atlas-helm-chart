@@ -5,16 +5,15 @@ atlas.graph.storage.hbase.regions-per-server=1
 
 atlas.EntityAuditRepository.impl=org.apache.atlas.repository.audit.HBaseBasedAuditRepository
 
-# atlas.graph.index.search.backend=solr
-# atlas.graph.index.search.solr.mode=cloud
-# atlas.graph.index.search.solr.zookeeper-url=localhost:2181
-# atlas.graph.index.search.solr.zookeeper-connect-timeout=60000
-# atlas.graph.index.search.solr.zookeeper-session-timeout=60000
-# atlas.graph.index.search.solr.wait-searcher=true
-atlas.graph.index.search.backend=elasticsearch
-# elastic-search-es-default-0.elastic-search-es-default.anwo.svc.cluster.local
-atlas.graph.index.search.hostname=elastic-search-es-default-0.elastic-search-es-default.{{ .Release.Namespace }}.svc.cluster.local:9200
-atlas.graph.index.search.elasticsearch.client-only=true/lo
+atlas.graph.index.search.backend=solr
+atlas.graph.index.search.solr.mode=cloud
+atlas.graph.index.search.solr.zookeeper-url=localhost:2181
+atlas.graph.index.search.solr.zookeeper-connect-timeout=60000
+atlas.graph.index.search.solr.zookeeper-session-timeout=60000
+atlas.graph.index.search.solr.wait-searcher=true
+# atlas.graph.index.search.backend=elasticsearch
+# atlas.graph.index.search.hostname=elastic-search-es-http.{{ .Release.Namespace }}.svc.cluster.local:9200
+# atlas.graph.index.search.elasticsearch.client-only=true
 
 atlas.graph.index.search.max-result-set-size=150
 
@@ -56,7 +55,7 @@ atlas.rest.address=http//0.0.0.0:21000
 
 atlas.audit.hbase.tablename=apache_atlas_entity_audit
 atlas.audit.zookeeper.session.timeout.ms=1000
-atlas.audit.hbase.zookeeper.quorum=zookeeper-0.zookeeper.{{ .Release.Namespace }}.svc.cluster.local:2181
+atlas.audit.hbase.zookeeper.quorum=localhost:2181
 
 atlas.server.ha.enabled=false
 atlas.authorizer.impl=simple
