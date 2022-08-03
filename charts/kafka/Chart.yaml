@@ -1,24 +1,32 @@
-apiVersion: v2 #helm 3
+annotations:
+  category: Infrastructure
+apiVersion: v2
+appVersion: 3.2.1
+dependencies:
+  # - condition: zookeeper.enabled
+  #   name: zookeeper
+  #   repository: https://charts.bitnami.com/bitnami
+  #   version: 10.x.x
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    tags:
+      - bitnami-common
+    version: 1.x.x
+description: Apache Kafka is a distributed streaming platform designed to build real-time pipelines and can be used as a message broker or as a replacement for a log aggregation solution for big data applications.
+engine: gotpl
+home: https://github.com/bitnami/charts/tree/master/bitnami/kafka
+icon: https://bitnami.com/assets/stacks/kafka/img/kafka-stack-220x234.png
+keywords:
+  - kafka
+  - zookeeper
+  - streaming
+  - producer
+  - consumer
+maintainers:
+  - name: Bitnami
+    url: https://github.com/bitnami/charts
 name: kafka
-description: A Helm chart for a local, single node Confluent Kafka, Schema Registry and Zookeeper for development.
-
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.0
-
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
-# It is recommended to use it with quotes.
-appVersion: "7.0.1"
+sources:
+  - https://github.com/bitnami/containers/tree/main/bitnami/kafka
+  - https://kafka.apache.org/
+version: 18.0.4

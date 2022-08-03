@@ -7,6 +7,6 @@ You can access the overview page at
 https://{{ .Values.external_hostname }}/{{ .Release.Name }}/
 
 To get a list of all automatically generated passwords run script
-./get_passwords.sh
+./get_passwords.sh {{ .Release.Name }}
 
 Have fun!
