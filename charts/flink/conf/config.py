@@ -11,8 +11,8 @@ config = {
     "elastic.search.index" : "atlas-dev-test",
     "elastic.app.search.engine.name" : "atlas-dev-test",
 
-    "elastic_cloud_username" : "elastic",
-    "elastic_cloud_id" : None,
+    "elastic.cloud.username" : "elastic",
+    "elastic.cloud.id" : None,
     "elastic.base.endpoint" : "elastic.{{ .Release.Namespace }}.svc.cluster.local/api/as/v1",
     "elastic.search.endpoint" : "https://elastic-search.{{ .Release.Namespace }}.svc.cluster.local:443",
     "elastic.enterprise.search.endpoint" : "https://enterprise-search.{{ .Release.Namespace }}.svc.cluster.local:443",

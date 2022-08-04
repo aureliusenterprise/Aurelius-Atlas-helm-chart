@@ -2,12 +2,12 @@ credentials = {
     "atlas.credentials.username": "atlas",
     "atlas.credentials.password": None,
 
-    "elastic_user": "elastic",
-    "elastic_passwd": "ELASTIC_PASSWORD",  # ELASTIC_PASSWORD
-    "elastic_cloud_id": None,
+    "elastic.user": "elastic",
+    "elastic.passwd": "ELASTIC_PASSWORD",  # ELASTIC_PASSWORD
+    "elastic.cloud.id": None,
     "elastic_search_passwd": None,
 
-     "elastic_cloud_password": None,
+    "elastic.cloud.password": "ELASTIC_PASSWORD",
 
     "keycloak.client.secret.key": None,
 
