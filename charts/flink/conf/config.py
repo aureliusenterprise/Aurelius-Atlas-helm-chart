@@ -13,9 +13,9 @@ config = {
 
     "elastic.cloud.username" : "elastic",
     "elastic.cloud.id" : None,
-    "elastic.base.endpoint" : "elastic.{{ .Release.Namespace }}.svc.cluster.local/api/as/v1",
-    "elastic.search.endpoint" : "https://elastic-search.{{ .Release.Namespace }}.svc.cluster.local:443",
-    "elastic.enterprise.search.endpoint" : "https://enterprise-search.{{ .Release.Namespace }}.svc.cluster.local:443",
+    "elastic.base.endpoint" : "elastic.{{ .Release.Namespace }}.svc.cluster.local:9200/api/as/v1",
+    "elastic.search.endpoint" : "http://elastic-search-es-http.{{ .Release.Namespace }}.svc.cluster.local:9200",
+    "elastic.enterprise.search.endpoint" : "http://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002",
 
     "keycloak.server.url" : "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/",
     "keycloak.client.id" : "m4i_public",
