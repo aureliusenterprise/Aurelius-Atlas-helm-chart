@@ -1,7 +1,7 @@
 ---
 replicaCount: 1
 repository: wombach/docker-apache-atlas
-pullPolicy: IfNotPresent
+pullPolicy: Always
 tag: "2.2.0.4"
 service:
   name: atlas
