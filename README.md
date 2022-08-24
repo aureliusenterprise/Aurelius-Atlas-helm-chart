@@ -34,11 +34,20 @@ kubectl apply -f https://download.elastic.co/downloads/eck/2.3.0/operator.yaml
 Installation
 ============
 
+configure public hostname
+
 ```bash
 kubectl create namespace anwo
 cd helm-governance
-helm install --generate-name -n anwo  -f values.yaml .
+helm install --generate-name -n <namespace>  -f values.yaml .
+./get_passwords.sh <namespace>
+kubectl -n <namespace> get all # check that alll pods are running
+kubectl -n <namespace> exec -it <pod/flink-jobmanager-f795bd969-f4lpk> -- bash
+cd init
+./init_jobs.sh
+./load_sample_data.sh
 ```
+
 
 
 Elastic:
