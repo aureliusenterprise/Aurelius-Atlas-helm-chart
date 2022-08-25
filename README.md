@@ -39,6 +39,7 @@ configure public hostname
 ```bash
 kubectl create namespace anwo
 cd helm-governance
+helm dependency update
 helm install --generate-name -n <namespace>  -f values.yaml .
 ./get_passwords.sh <namespace>
 kubectl -n <namespace> get all # check that alll pods are running
