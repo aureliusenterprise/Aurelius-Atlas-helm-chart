@@ -13,7 +13,17 @@ data:
     taskmanager.rpc.port: 6122
     queryable-state.proxy.ports: 6125
     jobmanager.memory.process.size: 1600m
-    taskmanager.memory.process.size: 1920m
+
+    taskmanager.memory.process.size: 8000m   # increasing values here means also increasing values in taskmanager-session-deployment.yaml
+    # details are at https://nightlies.apache.org/flink/flink-docs-release-1.10/ops/memory/mem_detail.html
+    # JVM heap memory dedicated to Flink application to run operators and user code
+    # taskmanager.memory.task.heap.size: 
+    # Native memory managed by Flink, reserved for sorting, hash tables, caching of intermediate results and RocksDB state backend
+    taskmanager.memory.managed.size: 1600m
+    # Off-heap direct (or native) memory dedicated to Flink application to run operators
+    taskmanager.memory.task.off-heap.size: 4000m
+    # It will be added to the JVM Heap size and will be dedicated to Flink’s operators running the user code.
+    #taskmanager.memory.task.heap.size: 1000m 
     parallelism.default: 1
   log4j-console.properties: |+
     # This affects logging for both user code and Flink
