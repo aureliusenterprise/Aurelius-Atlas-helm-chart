@@ -43,7 +43,9 @@ yamlApplicationConfigConfigMap:
 existingSecret: ""
 envs:
   secret: {}
-  config: {}
+  config:
+    SERVER_SERVLET_CONTEXT_PATH: /anwo/kafka-ui
+    JAVA_OPTS: "-Djava.net.preferIPv4Stack=true"
 
 # networkPolicy:
 #   enabled: false
@@ -84,7 +86,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
   # if you want to force a specific nodePort. Must be use with service.type=NodePort
   # nodePort:
 
