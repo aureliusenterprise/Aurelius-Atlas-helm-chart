@@ -52,3 +52,8 @@ flink:
   tag: 1.15.1.0
   taskmanager_numberOfTaskSlots: 10
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
+ingress:
+  enable: false
+  email_address: gabriella.pascha@aureliusenterprise.com
+  dns_url: aureliusdev.westeurope.cloudapp.azure.com
