@@ -54,6 +54,5 @@ flink:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 ingress:
-  enable: false
   email_address: gabriella.pascha@aureliusenterprise.com
   dns_url: aureliusdev.westeurope.cloudapp.azure.com
