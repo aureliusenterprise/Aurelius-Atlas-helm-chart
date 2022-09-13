@@ -176,8 +176,13 @@ Atlas is now accessible via reverse proxy at ``<DNS-url>/<namespace>/atlas/``
 Flink:
 - For more details about this flink helm chart look at [flink readme](./charts/flink/README.md)
 
+
+Init Jobs:
+- Create the Atlas Users in Keycloak
+- Create the App Search Engines in Elastic
+
 ```bash ${1}
-kubectl -n <namespace> exec -it <pod/flink-jobmanager-f795bd969-f4lpk> -- bash
+kubectl -n <namespace> exec -it <pod/flink-jobmanager-pod-name> -- bash
 cd init
 ./init_jobs.sh
 ## To Load the Sample Demo Data 
