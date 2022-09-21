@@ -13,9 +13,9 @@ keycloak:
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
-  external_ip: 35.195.200.158
-  external_hostname: "google.aureliusenterprise.nl"
-  keycloakFrontendURL: "https://google.aureliusenterprise.nl/"
+  external_ip: 51.105.169.241
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+  keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com"
 
 atlas:
   tag: "2.2.0.4"
@@ -24,14 +24,14 @@ atlas:
     # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
-  external_hostname: "google.aureliusenterprise.nl"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 reverse-proxy:
   tag: "1.0.9.3"
-  external_hostname: "google.aureliusenterprise.nl"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
-host_ip: 35.195.200.158
-external_hostname: "google.aureliusenterprise.nl"
+host_ip: 51.105.169.241
+external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 elastic:
   elastic_search:
@@ -48,17 +48,17 @@ elastic:
   enterprise_search:
     replicaCount: 1
     version: 8.2.2
-  external_hostname: "google.aureliusenterprise.nl"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 flink:
   repository: wombach/docker-flink
   tag: 1.15.1.0
   taskmanager_numberOfTaskSlots: 10
-  external_hostname: "google.aureliusenterprise.nl"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 ingress:
   email_address: gabriella.pascha@aureliusenterprise.com
-  dns_url: "google.aureliusenterprise.nl"
+  dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
 
 python-rest:
-  external_hostname: "google.aureliusenterprise.nl"
+  external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
