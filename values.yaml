@@ -15,7 +15,7 @@ keycloak:
     size: 1Gi
   external_ip: 51.105.169.241
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
-  keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com"
+  keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
 
 atlas:
   tag: "2.2.0.4"
