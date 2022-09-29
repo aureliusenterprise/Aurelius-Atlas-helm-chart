@@ -6,10 +6,13 @@ config = {
     "atlas.audit.events.topic.name": "ATLAS_ENTITIES",
     "enriched.events.topic.name": "ENRICHED_ENTITIES",
     "determined.events.topic.name": "DETERMINED_CHANGE",
+    "sync_elastic.events.topic.name": "SYNC_ELASTIC",
     "exception.events.topic.name": "DEAD_LETTER_BOX",
 
-    "elastic.search.index" : "atlas-dev-test",
-    "elastic.app.search.engine.name" : "atlas-dev-test",
+    "elastic.search.index" : "atlas-dev-audit",
+    "elastic.app.search.engine.name" : "atlas-dev",
+
+    "operations.appsearch.engine.name": "atlas-dev",
 
     "elastic.cloud.username" : "elastic",
     "elastic.cloud.id" : None,
