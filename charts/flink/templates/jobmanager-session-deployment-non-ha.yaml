@@ -90,7 +90,7 @@ spec:
           - name: ENTERPRISE_SEARCH_EXTERNAL_URL
             value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/app-search/"
           - name: ATLAS_EXTERNAL_URL
-            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/"
+            value: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
           
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}

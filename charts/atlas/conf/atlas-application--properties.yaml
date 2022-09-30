@@ -3,6 +3,8 @@ atlas.graph.storage.hbase.table=apache_atlas_janus
 atlas.graph.storage.hostname=localhost
 atlas.graph.storage.hbase.regions-per-server=1
 
+atlas.DeleteHandlerV1.impl=org.apache.atlas.repository.store.graph.v1.HardDeleteHandlerV1
+
 atlas.EntityAuditRepository.impl=org.apache.atlas.repository.audit.HBaseBasedAuditRepository
 
 atlas.graph.index.search.backend=solr
@@ -41,6 +43,9 @@ atlas.notification.topics=ATLAS_HOOK,ATLAS_ENTITIES
 atlas.notification.log.failed.messages=true
 atlas.notification.consumer.retry.interval=500
 atlas.notification.hook.retry.interval=1000
+atlas.entity.change.notify.ignore.relationship.attributes=false
+atlas.notification.relationships.enabled=true
+
 
 atlas.enableTLS=false
 
@@ -48,7 +53,6 @@ atlas.authentication.method.kerberos=false
 atlas.authentication.method.file=false
 
 atlas.authentication.method.ldap.type=none
-
 atlas.authentication.method.file.filename=${sys:atlas.home}/conf/users-credentials.properties
 
 atlas.rest.address=http//0.0.0.0:21000

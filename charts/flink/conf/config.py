@@ -1,5 +1,5 @@
 config = {
-    "atlas.server.url": "atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas",
+    "atlas.server.url": "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas",
     "kafka.bootstrap.server.hostname": "kafka.{{ .Release.Namespace }}.svc.cluster.local",
     "kafka.bootstrap.server.port": "9092",
     "kafka.consumer.group.id": "{{ .Release.Namespace }}",
