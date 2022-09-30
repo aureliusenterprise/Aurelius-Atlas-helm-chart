@@ -1,26 +1,26 @@
+# How to Deploy Aurelius Atlas
+
 Getting started
-===============
+-------------------------
+
 Welcome to the Aurelius Atlas solution powered by Apache Atlas! Aurelius Atlas is an open-source Data Governance solution, based on a selection of open-source tools to facilitate business users to access governance information in an easy consumable way and meet the data governance demands of the distributed data world.
 
-Google Setup Instructions
-=========================
-Install Gcloud
-https://cloud.google.com/sdk/docs/install#deb
 
-Install kubectl and configure to work with gloud
-https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud
+Here you will find the instillation instructions and the required setup of the kubernetes instructions, followed by how to deploy the chart in different namespaces. 
 
-follow steps in Installation Instructions
-
-Installation Instructions
-=========================
+Installation Requirements
+-------------------------
 
 This installation assumes that you have:
 - a kubernetes cluster running
   - with 2 Node of CPU 4 and 16GB
-- kubectl installed
-- Chosen cloud Cli installed (gcloud or az)
-- A Domain Name Space 
+- Chosen cloud Cli installed 
+  - [gcloud](https://cloud.google.com/sdk/docs/install#deb)
+  - [az](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- kubectl installed and linked to chosen cloud Cli
+  - [gcloud linked](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
+  - [az linked](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli#connect-to-the-cluster)
+- A DomainName
   - Not necessary for Azure
 
 ## Required Packages
@@ -42,14 +42,17 @@ The deployment requires the following packages:
 ### The steps on how to install the required packages
 
 ##### 1. Install Certificate manager
-The certificate manager here is cert-manager.
-https://cert-manager.io/docs/installation/helm/
+Only install if you do not have a certificate manager. Please be aware if you use another manger, some commands later will need adjustments.
+The certificate manager here is [cert-manager](https://cert-manager.io/docs/installation/helm/).
+
 ```bash
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install  cert-manager jetstack/cert-manager   --namespace cert-manager   --create-namespace   --version v1.9.1 
 ```
 ##### 2. Install Ingress Nginx Controller
+Only install if you do not have an Ingress Controller. 
+
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -68,7 +71,7 @@ helm upgrade --install reflector emberstack/reflector
 ```
 
 ## Get Ingress Controller External IP to link to DNS 
-
+Only do this if your ingress controller does not already have a DNS applied. In the case of Azure this is not necessary, other possible instructions can be found below in Azure DNS Label
 ##### Get External IP to link to DNS
 ```bash
 kubectl get service/nginx-ingress-ingress-nginx-controller
@@ -92,9 +95,11 @@ Save and exit.
 Resulting DSN will be ``<label>.westeurope.cloudapp.azure.com``
 
 
-## Certify DNS to Secret
+## Put ssl certificate in a Secret
 
 ##### Define a cluster issuer
+This is needed if you installed letsencrypt from the required packages. 
+
 Here we define a CLusterIssuer using letsencrypt on the cert-manager namespace
 - move to the directory of the chart helm-governance
 * uncomment prod_issuer.yaml in templates
@@ -113,7 +118,9 @@ It is running when Ready is True.
 
 ![img.png](img.png)
 
-##### Create certificate for DSN
+##### Create ssl certificate 
+This is needed if you installed letsencrypt from the required packages. 
+
 - Assumes you have a DNS linked to the external IP of the ingress controller
 - move to the directory of the chart helm-governance
 * uncomment prod_issuer.yaml in templates
@@ -134,7 +141,7 @@ It is running when Ready is True
 
 
 Deploy Aurelius Atlas
-============
+-------------------------
 - Create the namespace
 - Update the Values file 
   - DNS name
@@ -159,10 +166,35 @@ The 5 base users are:
 5. Elastic User
 
 To get the randomized passwords out of kubernetes there is a bash script get_passwords. 
-Which scans the given ``<namespace>`` and prints the usernames and randomized passwords.
+
 ```bash
 ./get_passwords.sh <namespace>
 ```
+
+The above command scans the given ``<namespace>`` and prints the usernames and randomized passwords as follows:
+```
+keycloak admin user pwd:
+username: admin
+vntoLefBekn3L767
+----
+keycloak Atlas admin user pwd:
+username: atlas
+QUVTj1QDKQWZpy27
+----
+keycloak Atlas data steward user pwd:
+username: steward
+XFlsi25Nz9h1VwQj
+----
+keycloak Atlas data user pwd:
+username: scientist
+PPv57ZvKHwxCUZOG
+==========
+elasticsearch elastic user pwd:
+username: elastic
+446PL2F2UF55a19haZtihRm5
+----
+```
+
 
 #### Check that all pods are running
 ``` bash
@@ -188,12 +220,3 @@ cd init
 ## To Load the Sample Demo Data 
 ./load_sample_data.sh
 ```
-
-
-
-
-
-
-
-
-
