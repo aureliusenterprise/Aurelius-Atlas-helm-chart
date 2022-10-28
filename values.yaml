@@ -54,6 +54,7 @@ flink:
   repository: wombach/docker-flink
   tag: 1.15.1.0
   taskmanager_numberOfTaskSlots: 10
+  replicas: 1
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 ingress:
