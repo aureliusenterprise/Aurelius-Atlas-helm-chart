@@ -27,7 +27,7 @@ spec:
           - >
             set -x;
             while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/" \
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas2/" \
                           -H 'Content-Type: application/json' --insecure | tail -c 3)" != "302" ]]; do 
               echo '.'
               sleep 15;
@@ -86,9 +86,9 @@ spec:
                 name: keycloak-secret-user-data
                 key: password
           - name: KEYCLOAK_SERVER_URL
-            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth/"
+            value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/"
           - name: ENTERPRISE_SEARCH_EXTERNAL_URL
-            value: "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/app-search/"
+            value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/app-search/"
           - name: ATLAS_EXTERNAL_URL
             value: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
           

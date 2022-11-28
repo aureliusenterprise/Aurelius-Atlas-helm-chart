@@ -23,7 +23,7 @@ data:
     # Off-heap direct (or native) memory dedicated to Flink application to run operators
     taskmanager.memory.task.off-heap.size: 4000m
     # It will be added to the JVM Heap size and will be dedicated to Flink’s operators running the user code.
-    #taskmanager.memory.task.heap.size: 1000m 
+    taskmanager.memory.task.heap.size: 512m 
     parallelism.default: 1
   log4j-console.properties: |+
     # This affects logging for both user code and Flink

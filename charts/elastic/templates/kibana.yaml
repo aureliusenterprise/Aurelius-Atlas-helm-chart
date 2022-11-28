@@ -10,6 +10,6 @@ spec:
   enterpriseSearchRef:
     name: {{ .Values.enterprise_search.name }}
   config:
-     server.publicBaseUrl: https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/kibana
+     server.publicBaseUrl: https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kibana
      server.basePath: /{{ .Release.Namespace }}/kibana
      

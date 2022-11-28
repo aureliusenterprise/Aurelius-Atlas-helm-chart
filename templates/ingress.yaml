@@ -12,7 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: 'keepalive_timeout 3600s;client_body_timeout 3600s;client_header_timeout 3600s;'
 spec:
   rules:
-    - host: {{ .Values.external_hostname }}
+    - host: {{ .Values.global.external_hostname }}
       http:
         paths:
           - pathType: Prefix
@@ -25,5 +25,5 @@ spec:
   # This section is only required if TLS is to be enabled for the Ingress
   tls:
   - hosts:
-      - {{ .Values.external_hostname }}
+      - {{ .Values.global.external_hostname }}
     secretName: letsencrypt-secret-aureliusdev

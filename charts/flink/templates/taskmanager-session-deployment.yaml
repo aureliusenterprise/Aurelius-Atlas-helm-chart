@@ -23,7 +23,7 @@ spec:
           - >
             set -x;
             while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/" \
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/" \
                           -H 'Content-Type: application/json' --insecure | tail -c 3)" != "200" ]]; do 
               echo '.'
               sleep 15;
@@ -33,9 +33,9 @@ spec:
         image: "{{ .Values.repository }}:{{ .Values.tag }}"
         resources:
           requests:
-            memory: "3Gi"
+            memory: "4Gi"
           limits:
-            memory: "6Gi"
+            memory: "8Gi"
         imagePullPolicy: {{ .Values.pullPolicy }}
         args: ["taskmanager"]
         ports:

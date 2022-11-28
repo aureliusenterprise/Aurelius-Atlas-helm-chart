@@ -1052,15 +1052,15 @@
       "id": "c3e97388-9983-48e4-a44f-66e3f6b6d9ea",
       "clientId": "m4i_atlas",
       "name": "Models4Insight Data Management",
-      "rootUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/",
-      "adminUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/auth_admin/",
+      "rootUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas/",
+      "adminUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth_admin/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "http://127.0.0.1:9100/atlas/api/*",
-       "https://{{ .Values.external_hostname }}/*"
+        "https://{{ .Values.global.external_hostname }}/*"
       ],
       "webOrigins": [
         "*"
@@ -1672,15 +1672,15 @@
     {
       "id": "0587e7aa-a325-4873-87de-004ea70a88a3",
       "clientId": "m4i_public",
-      "rootUrl": "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/",
+      "rootUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/*",
-        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas/*",
-        "https://{{ .Values.external_hostname }}/{{ .Release.Namespace }}/atlas2/*",
+        "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/*",
+        "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas/*",
+        "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas2/*",
         "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/*"
       ],
       "webOrigins": [
