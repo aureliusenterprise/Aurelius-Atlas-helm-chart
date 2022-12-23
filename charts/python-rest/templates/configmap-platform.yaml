@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,3 +7,4 @@ data:
   m4i_platform_config.py: |
     M4I_BASE_URI = "http://localhost:8888/"
     REPOSITORY_BASE_URI = M4I_BASE_URI + "RestApi3/api/"
+{{- end }}

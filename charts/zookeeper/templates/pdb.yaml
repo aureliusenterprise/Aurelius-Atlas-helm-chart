@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- $replicaCount := int .Values.replicaCount }}
 {{- if and .Values.pdb.create (gt $replicaCount 1) }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
@@ -23,4 +24,5 @@ spec:
   selector:
     matchLabels: {{- include "common.labels.matchLabels" . | nindent 6 }}
       app.kubernetes.io/component: zookeeper
+{{- end }}
 {{- end }}

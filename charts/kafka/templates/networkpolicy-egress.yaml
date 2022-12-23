@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if and .Values.networkPolicy.enabled .Values.networkPolicy.egressRules.customRules }}
 kind: NetworkPolicy
 apiVersion: {{ include "common.capabilities.networkPolicy.apiVersion" . }}
@@ -19,4 +20,5 @@ spec:
     - Egress
   egress:
     {{- include "common.tplvalues.render" (dict "value" .Values.networkPolicy.egressRules.customRules "context" $) | nindent 4 }}
+{{- end }}
 {{- end }}

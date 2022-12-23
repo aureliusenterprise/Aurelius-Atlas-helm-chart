@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
@@ -27,3 +28,4 @@ spec:
         {{- end }}
         {{- end }}
     {{- end }}
+{{- end }}

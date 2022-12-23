@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.networkPolicy.enabled }}
 kind: NetworkPolicy
 apiVersion: {{ include "common.capabilities.networkPolicy.apiVersion" . }}
@@ -50,4 +51,5 @@ spec:
     - ports:
         - port: {{ .Values.metrics.kafka.containerPorts.metrics }}
     {{- end }}
+{{- end }}
 {{- end }}

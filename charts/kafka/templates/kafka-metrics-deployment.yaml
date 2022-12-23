@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.metrics.kafka.enabled }}
 {{- $replicaCount := int .Values.replicaCount -}}
 {{- $releaseNamespace := .Release.Namespace -}}
@@ -168,4 +169,5 @@ spec:
             defaultMode: 0440
         {{- end }}
         {{- end }}
+{{- end }}
 {{- end }}

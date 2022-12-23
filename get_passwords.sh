@@ -23,3 +23,7 @@ echo "elasticsearch elastic user pwd: "
 echo "username: elastic"
 kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n ${1} | base64 --decode; echo
 echo "----"
+# export ATLAS_APP_SEARCH_TOKEN=$( curl -X GET "${ENTERPRISE_SEARCH_INTERNAL_URL}api/as/v1/credentials/search-key" \
+#     -H 'Content-Type: application/json' --insecure \
+#     -u $ELASTIC_USERNAME:$ELASTIC_PASSWORD | jq '.key' | sed 's/^"\(.*\)"$/\1/' )
+echo "print app search public API token $ENTERPRISE_SEARCH_INTERNAL_URL should be public token!"

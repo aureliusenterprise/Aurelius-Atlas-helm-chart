@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if (include "kafka.createConfigmap" .) }}
 apiVersion: v1
 kind: ConfigMap
@@ -15,3 +16,4 @@ data:
   server.properties: |-
     {{ .Values.config | nindent 4 }}
 {{- end -}}
+{{- end }}

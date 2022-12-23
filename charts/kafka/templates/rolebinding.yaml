@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if and .Values.serviceAccount.create .Values.rbac.create }}
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: RoleBinding
@@ -20,4 +21,5 @@ subjects:
   - kind: ServiceAccount
     name: {{ template "kafka.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
+{{- end }}
 {{- end }}

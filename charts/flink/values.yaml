@@ -1,8 +1,11 @@
 repository: wombach/docker-flink
-tag: 1.15.1.0
+tag: 1.15.1.1
 pullPolicy: Always
 taskmanager_numberOfTaskSlots: 10
 replicas: 1
 enterprise_search_internal_url: https://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002/
 env:
   ELASTIC_USERNAME: elastic
+  M4I_FLINK_TASKS_BRANCH: main
+  M4I_FLINK_ATLAS_CORE_BRANCH: main
+  #M4I_FLINK_ATLAS_CORE_TAG: 1.0

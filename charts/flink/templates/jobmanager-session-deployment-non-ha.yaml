@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,8 +28,8 @@ spec:
           - >
             set -x;
             while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas2/" \
-                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "302" ]]; do 
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "200" ]]; do 
               echo '.'
               sleep 15;
             done
@@ -91,6 +92,12 @@ spec:
             value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/app-search/"
           - name: ATLAS_EXTERNAL_URL
             value: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+          # - name: M4I_FLINK_TASKS_BRANCH
+          #   value: "{{ .Values.M4I_FLINK_TASKS_BRANCH }}"
+          # - name: M4I_FLINK_ATLAS_CORE_BRANCH
+          #   value: "{{ .Values.M4I_FLINK_ATLAS_CORE_BRANCH }}"
+          # - name: M4I_FLINK_ATLAS_CORE_TAG
+          #   value: "{{ .Values.M4I_FLINK_ATLAS_CORE_TAG }}"
           
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
@@ -120,3 +127,4 @@ spec:
             path: config.py
           - key: credentials.py
             path: credentials.py
+{{- end }}

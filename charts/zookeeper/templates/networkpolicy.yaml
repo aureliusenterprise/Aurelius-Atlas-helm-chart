@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.networkPolicy.enabled }}
 kind: NetworkPolicy
 apiVersion: {{ include "common.capabilities.networkPolicy.apiVersion" . }}
@@ -38,4 +39,5 @@ spec:
       from:
         - podSelector:
             matchLabels: {{- include "common.labels.matchLabels" . | nindent 14 }}
+{{- end }}
 {{- end }}

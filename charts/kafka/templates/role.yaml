@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.rbac.create -}}
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: Role
@@ -22,3 +23,4 @@ rules:
       - list
       - watch
 {{- end -}}
+{{- end }}

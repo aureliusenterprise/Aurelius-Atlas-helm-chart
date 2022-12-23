@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.yamlApplicationConfig -}}
 apiVersion: v1
 kind: ConfigMap
@@ -9,3 +10,4 @@ data:
   config.yml: |-
     {{- toYaml .Values.yamlApplicationConfig | nindent 4}}
 {{ end }}
+{{- end }}

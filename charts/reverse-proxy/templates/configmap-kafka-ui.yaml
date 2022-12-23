@@ -1,3 +1,5 @@
+{{- if .Values.enabled }}
+{{- if .Values.proxy.kafka_ui_enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -5,3 +7,5 @@ metadata:
 data:
   kafka-ui.conf: |
 {{ tpl ( .Files.Get "conf.d/kafka-ui.yaml" ) . | indent 4}}
+{{- end }}
+{{- end }}

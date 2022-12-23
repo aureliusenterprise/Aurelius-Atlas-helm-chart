@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: enterprisesearch.k8s.elastic.co/v1
 kind: EnterpriseSearch
 metadata:
@@ -7,3 +8,4 @@ spec:
   count: {{ .Values.enterprise_search.replicaCount }}
   elasticsearchRef:
     name: {{ .Values.elastic_search.name }}
+{{- end }}

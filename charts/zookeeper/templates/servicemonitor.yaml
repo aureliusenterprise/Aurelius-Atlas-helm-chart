@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -50,4 +51,5 @@ spec:
   namespaceSelector:
     matchNames:
       - {{ template "zookeeper.namespace" . }}
+{{- end }}
 {{- end }}

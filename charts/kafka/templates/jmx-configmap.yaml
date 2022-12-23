@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if (include "kafka.metrics.jmx.createConfigmap" .) }}
 apiVersion: v1
 kind: ConfigMap
@@ -59,3 +60,4 @@ data:
           topic: $3
           partition: $4
 {{- end -}}
+{{- end }}

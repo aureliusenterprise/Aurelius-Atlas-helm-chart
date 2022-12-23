@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if (include "zookeeper.createConfigmap" .) }}
 apiVersion: v1
 kind: ConfigMap
@@ -14,4 +15,5 @@ metadata:
 data:
   zoo.cfg: |-
     {{- include "common.tplvalues.render" ( dict "value" .Values.configuration "context" $ ) | nindent 4 }}
+{{- end }}
 {{- end }}

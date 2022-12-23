@@ -6,6 +6,7 @@
 # container image
 # https://github.com/keycloak/keycloak-containers/blob/16.1.1/server/README.md
 keycloak:
+  enabled: true
   tag: "16.1.0"
   env:
     KEYCLOAK_USER: "admin"
@@ -20,6 +21,7 @@ keycloak:
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
 
 atlas:
+  enabled: true
   tag: "2.2.0.4"
   persistence:
     enabled: true
@@ -28,14 +30,34 @@ atlas:
     size: 1Gi
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
+# if atlas is enabled then kafka has to be enabled
+kafka:
+  enabled: true
+
+# if kafka is enabled then zookeeper also has to be enabled
+zookeeper:
+  enabled: true
+
+kafka-ui:
+  enabled: false
+
 reverse-proxy:
+  enabled: true
   tag: "1.0.9.4"
+  proxy:
+    atlas_enabled: true
+    atlas2_enabled: true
+    keycloak_enabled: true
+    elastic_enabled: true
+    flink_enabled: false
+    kafka_ui_enabled: true
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 host_ip: 51.105.169.241
 #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 elastic:
+  enabled: false
   elastic_search:
     replicaCount: 1
     version: 8.2.2
@@ -53,10 +75,16 @@ elastic:
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 flink:
+  enabled: false
   repository: wombach/docker-flink
-  tag: 1.15.1.0
+  tag: 1.15.1.1
   taskmanager_numberOfTaskSlots: 10
   replicas: 1
+  env:
+    M4I_FLINK_TASKS_BRANCH: dev
+    M4I_FLINK_ATLAS_CORE_BRANCH: main
+    #M4I_FLINK_ATLAS_CORE_TAG: 1.0
+
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 ingress:
@@ -64,6 +92,7 @@ ingress:
   dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
 
 python-rest:
+  enabled: false
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 global:

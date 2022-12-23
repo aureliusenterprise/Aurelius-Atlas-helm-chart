@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
@@ -12,4 +13,4 @@ spec:
   config:
      server.publicBaseUrl: https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kibana
      server.basePath: /{{ .Release.Namespace }}/kibana
-     
+{{- end }}
