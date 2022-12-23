@@ -50,10 +50,10 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          # lifecycle:
-          #   postStart:
-          #     exec:
-          #       command: ["/usr/local/apache2/init/init_index_html.sh" ]
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/usr/local/apache2/init/init_index_html.sh" ]
           env:
             - name: NAMESPACE
               value: "{{ .Release.Namespace }}"

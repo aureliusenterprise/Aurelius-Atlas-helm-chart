@@ -1,0 +1,10 @@
+{{- if .Values.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-single-file
+  namespace: {{ .Release.Namespace }}
+data:
+  create_user.sh: |-
+{{ .Files.Get "init/create_user.sh" | indent 4}}
+{{- end }}
