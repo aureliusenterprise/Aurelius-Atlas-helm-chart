@@ -21,7 +21,7 @@ keycloak:
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
 
 atlas:
-  enabled: true
+  enabled: false
   tag: "2.2.0.4"
   persistence:
     enabled: true
@@ -32,11 +32,11 @@ atlas:
 
 # if atlas is enabled then kafka has to be enabled
 kafka:
-  enabled: true
+  enabled: false
 
 # if kafka is enabled then zookeeper also has to be enabled
 zookeeper:
-  enabled: true
+  enabled: false
 
 kafka-ui:
   enabled: false
@@ -45,12 +45,11 @@ reverse-proxy:
   enabled: true
   tag: "1.0.9.4"
   proxy:
-    atlas_enabled: true
     atlas2_enabled: true
     keycloak_enabled: true
-    elastic_enabled: true
+    elastic_enabled: false
     flink_enabled: false
-    kafka_ui_enabled: true
+    kafka_ui_enabled: false
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 host_ip: 51.105.169.241
