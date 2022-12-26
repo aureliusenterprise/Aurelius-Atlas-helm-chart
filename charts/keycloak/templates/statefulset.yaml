@@ -45,18 +45,7 @@ spec:
                   - "/bin/bash"
                   - "-c"
                   - > 
-                    set -x;
-                    cp /init/create_user.sh ~; 
-                    chmod u+x ~/create_user.sh;
-                    while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "http://localhost:8080/" | tail -c 3)" != "200" ]]; do 
-                      echo '.'
-                      sleep 5;
-                    done;
-                    sleep 5;
-                    ~/create_user.sh atlas ${USER_ATLAS_PASSWORD} ROLE_ADMIN;
-                    ~/create_user.sh steward ${USER_STEWARD_PASSWORD} DATA_STEWARD;
-                    ~/create_user.sh scientist ${USER_DATA_PASSWORD} DATA_SCIENTIST;
+                    /tmp/init_standard_users.sh;
           env:
             {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
@@ -100,16 +89,16 @@ spec:
             - name: realm-single-file-volume
               mountPath: /tmp/realm.json
               subPath: realm.json
-            - name: init-single-file-volume
-              mountPath: /init/create_user.sh
-              subPath: create_user.sh
+            # - name: init-single-file-volume
+            #   mountPath: /init/create_user.sh
+            #   subPath: create_user.sh
       volumes:
         - name: realm-single-file-volume
           configMap:
             name: realm-single-file
-        - name: init-single-file-volume
-          configMap:
-            name: init-single-file
+        # - name: init-single-file-volume
+        #   configMap:
+        #     name: init-single-file
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:
