@@ -51,9 +51,16 @@ atlas.enableTLS=false
 
 atlas.authentication.method.kerberos=false
 atlas.authentication.method.file=false
-
+atlas.authentication.method.ldap=false
 atlas.authentication.method.ldap.type=none
 atlas.authentication.method.file.filename=${sys:atlas.home}/conf/users-credentials.properties
+
+atlas.authentication.method.keycloak=true
+atlas.authentication.method.keycloak.file=/opt/apache-atlas-2.3.0/conf/keycloak-conf.json
+atlas.authentication.method.keycloak.ugi-groups=false
+atlas.authentication.method.keycloak.groups_claim=claims
+
+atlas.http.authentication.type=simple
 
 atlas.rest.address=http//0.0.0.0:21000
 
@@ -73,7 +80,5 @@ atlas.metric.query.cache.ttlInSecs=900
 
 atlas.search.gremlin.enable=true
 
-atlas.authentication.method.keycloak=true
-atlas.authentication.method.keycloak.file=/opt/apache-atlas-2.2.0/conf/keycloak-conf.json
-atlas.authentication.method.keycloak.ugi-groups=false
-atlas.authentication.method.keycloak.groups_claim=claims
+atlas.ui.default.version=v1
+atlas.ui.editable.entity.types=m4i_data_domain,m4i_data_entity,m4i_data_attribute,m4i_field,m4i_dataset,m4i_system,m4i_collection,m4i_person,m4i_data_quality
