@@ -21,7 +21,7 @@ keycloak:
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
 
 atlas:
-  enabled: false
+  enabled: true
   tag: "2.2.0.4"
   persistence:
     enabled: true
@@ -32,11 +32,11 @@ atlas:
 
 # if atlas is enabled then kafka has to be enabled
 kafka:
-  enabled: false
+  enabled: true
 
 # if kafka is enabled then zookeeper also has to be enabled
 zookeeper:
-  enabled: false
+  enabled: true
 
 kafka-ui:
   enabled: false

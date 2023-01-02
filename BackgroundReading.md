@@ -69,3 +69,45 @@ kubectl get secret keycloak-secret -o=jsonpath='{.data.password}' -n anwo | base
 ```commandline
 kubectl get secret elastic-search-es-elastic-user -o=jsonpath='{.data.elastic}' -n namespace | base64 --decode; echo
 ```
+
+# Debugging rewrite rules
+enable logging in httpd.conf
+
+```
+ErrorLog logs/error_log
+#
+# LogLevel: Control the number of messages logged to the error_log.
+# Possible values include: debug, info, notice, warn, error, crit,
+# alert, emerg.
+#
+LogLevel debug rewrite:trace6
+
+<IfModule log_config_module>
+    #
+    # The following directives define some format nicknames for use with
+    # a CustomLog directive (see below).
+    #
+    LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+    <IfModule logio_module>
+      # You need to enable mod_logio.c to use %I and %O
+      LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+    </IfModule>
+
+    #
+    # The location and format of the access logfile (Common Logfile Format).
+    # If you do not define any access logfiles within a <VirtualHost>
+    # container, they will be logged here.  Contrariwise, if you *do*
+    # define per-<VirtualHost> access logfiles, transactions will be
+    # logged therein and *not* in this file.
+    #
+    #CustomLog /var/log/httpd/access common
+
+    #
+    # If you prefer a logfile with access, agent, and referer information
+    # (Combined Logfile Format) you can use the following directive.
+    #
+    CustomLog "logs/access_log" combined
+</IfModule>
+```

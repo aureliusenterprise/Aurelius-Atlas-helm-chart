@@ -43,9 +43,9 @@ spec:
             - name: atlas-application-properties--volume
               mountPath: /opt/apache-atlas-2.2.0/conf/atlas-application.properties
               subPath: atlas-application.properties
-            - name: users-credentials-properties--volume
-              mountPath: /opt/apache-atlas-2.2.0/conf/users-credentials.properties
-              subPath: users-credentials.properties
+            # - name: users-credentials-properties--volume
+            #   mountPath: /opt/apache-atlas-2.2.0/conf/users-credentials.properties
+            #   subPath: users-credentials.properties
             - name: atlas-simple-authz-policy--volume
               mountPath: /opt/apache-atlas-2.2.0/conf/atlas-simple-authz-policy.json
               subPath: atlas-simple-authz-policy.json
@@ -61,9 +61,9 @@ spec:
         - name: atlas-application-properties--volume
           configMap:
             name: atlas-application-properties-configmap
-        - name: users-credentials-properties--volume
-          configMap:
-            name: users-credentials-properties-configmap
+        # - name: users-credentials-properties--volume
+        #   configMap:
+        #     name: users-credentials-properties-configmap
         - name: atlas-simple-authz-policy--volume
           configMap:
             name: atlas-simple-authz-policy-configmap

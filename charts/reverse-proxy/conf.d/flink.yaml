@@ -11,7 +11,7 @@
 #OIDCScope "openid email"
 #OIDCXForwardedHeaders X-Forwarded-Host
 
-<Location /flink/>
+<Location /{{ .Release.Namespace }}/flink/>
 #AuthType openid-connect
 #Require valid-user
 ProxyPass "http://flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081/"

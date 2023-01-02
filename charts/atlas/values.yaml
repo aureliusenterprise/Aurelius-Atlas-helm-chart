@@ -14,4 +14,4 @@ persistence:
   # storageClass: "-"
   accessMode: ReadWriteOnce
   size: 1Gi
-external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+#external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
