@@ -22,20 +22,20 @@ serviceAccount:
 
 existingConfigMap: ""
 yamlApplicationConfig:
-  #{}
-  kafka:
-    clusters:
-      - name: atlas
-        bootstrapServers: kafka.anwo.svc.cluster.local:9092
-  spring:
-    security:
-      oauth2:
-  auth:
-    type: disabled
-  management:
-    health:
-      ldap:
-        enabled: false
+  {}
+  # kafka:
+  #   clusters:
+  #     - name: atlas
+  #       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
+  # spring:
+  #   security:
+  #     oauth2:
+  # auth:
+  #   type: disabled
+  # management:
+  #   health:
+  #     ldap:
+  #       enabled: false
 yamlApplicationConfigConfigMap:
   {}
   # keyName: config.yml
@@ -44,8 +44,13 @@ existingSecret: ""
 envs:
   secret: {}
   config:
-    SERVER_SERVLET_CONTEXT_PATH: /anwo/kafka-ui
+    SERVER_SERVLET_CONTEXT_PATH_PARTIAL: /kafka-ui
     JAVA_OPTS: "-Djava.net.preferIPv4Stack=true"
+    #AUTH_TYPE: OAUTH2
+    #SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_CLIENTID: m4i_kafka_ui
+    #SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_CLIENTSECRET: YXfRjmodifiedTujnkVr7zuW9ECCAK4TcnCio-i
+    #SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AUTH0_ISSUER_URI: "https://dev-a63ggcut.auth0.com/"
+    #SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_SCOPE: openid
 
 # networkPolicy:
 #   enabled: false

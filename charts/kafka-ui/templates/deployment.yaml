@@ -45,8 +45,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if or .Values.env  .Values.yamlApplicationConfig .Values.yamlApplicationConfigConfigMap}}
           env:
+            # {{- if or .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH }}
+            # {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | urlParse }}
+            # - name: "SERVER_SERVLET_CONTEXT_PATH"
+            #   value: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
+            # {{- end }}
+            #{{ tpl ( .Files.Get "conf/env.yaml" ) . | indent 12}}
             {{- with .Values.env }}
-              {{- toYaml . | nindent 12 }}
+              {{- toYaml . | indent 12 }}
             {{- end }}
             {{- if or .Values.yamlApplicationConfig .Values.yamlApplicationConfigConfigMap}}
             - name: SPRING_CONFIG_LOCATION
@@ -80,16 +86,16 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | printf "%s/actuator/health" | urlParse }}
-              path: {{ get $contextPath "path" }}
+              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL | default "" | printf "%s/actuator/health" | urlParse }}
+              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
               port: http
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | printf "%s/actuator/health" | urlParse }}
-              path: {{ get $contextPath "path" }}
+              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL  | default "" | printf "%s/actuator/health" | urlParse }}
+              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
               port: http
             initialDelaySeconds: 60
             periodSeconds: 30

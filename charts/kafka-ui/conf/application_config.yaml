@@ -1,0 +1,15 @@
+yamlApplicationConfig:
+  #{}
+  kafka:
+    clusters:
+      - name: atlas
+        bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
+  spring:
+    security:
+      oauth2:
+  auth:
+    type: disabled
+  management:
+    health:
+      ldap:
+        enabled: false
