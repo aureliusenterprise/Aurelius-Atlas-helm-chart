@@ -1,36 +1,41 @@
 ---
-yamlApplicationConfig:
-  kafka:
-    clusters:
-      - name: atlas
-        bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
-  spring:
-    logging:
-      level: DEBUG
-      file: ${java.io.tmpdir}/kafka-ui.log
-    security:
-      oauth2:
-        client:
-          registration:
-            keycloak:
-              clientId: m4i_kafka_ui
-              client-secret: hello-world
-              authorization-grant-type: authorization_code
-              scope:
-                - openid
-                - profile
-                - email
-              redirectUriTemplate: "{baseUrl}/login/oauth2/code/{registrationId}"
-              clientName: keycloak
-              provider: keycloak
-          provider:
-            keycloak:
-              authorization-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/auth
-              token-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/token
-              user-info-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/userinfo
-              user-info-authentication-method: header
-              jwk-set-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/certs
-              user-name-attribute: preferred_username
+kafka:
+  clusters:
+    - name: atlas
+      bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
+spring:
+  logging:
+    level: DEBUG
+    file: ${java.io.tmpdir}/kafka-ui.log
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            clientId: m4i_kafka_ui
+            client-secret: hello-world
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/kafka-ui/login/oauth2/code/{registrationId}
+            clientName: keycloak
+            provider: keycloak
+        provider:
+          keycloak:
+            authorization-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/auth
+            token-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/token
+            user-info-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/userinfo
+            user-info-authentication-method: header
+            jwk-set-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/certs
+            user-name-attribute: preferred_username
+management:
+  health:
+    ldap:
+      enabled: false
+auth:
+  type: OAUTH2
   # spring:
   #   security:
   #     oauth2:
@@ -55,7 +60,3 @@ yamlApplicationConfig:
   #           # -e SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_SCOPE=openid \
   # auth:
   # type: OAUTH2
-  management:
-    health:
-      ldap:
-        enabled: false
