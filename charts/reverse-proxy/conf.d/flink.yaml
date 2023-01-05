@@ -7,7 +7,7 @@ OIDCClientID m4i_flink
 OIDCClientSecret 144f9e52-1d14-498d-9f1f-8dae0e50e579
 ## See https://github.com/Reposoft/openidc-keycloak-test/issues/7
 OIDCProviderTokenEndpointAuth client_secret_basic
-OIDCRemoteUserClaim roles
+#OIDCRemoteUserClaim roles
 OIDCScope "openid email"
 #OIDCXForwardedHeaders X-Forwarded-Host
 

@@ -48,7 +48,7 @@ reverse-proxy:
     atlas2_enabled: true
     keycloak_enabled: true
     elastic_enabled: false
-    flink_enabled: false
+    flink_enabled: true
     kafka_ui_enabled: true
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
@@ -56,7 +56,7 @@ host_ip: 51.105.169.241
 #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 elastic:
-  enabled: false
+  enabled: true
   elastic_search:
     replicaCount: 1
     version: 8.2.2
@@ -74,7 +74,7 @@ elastic:
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 flink:
-  enabled: false
+  enabled: true
   repository: wombach/docker-flink
   tag: 1.15.1.1
   taskmanager_numberOfTaskSlots: 10
