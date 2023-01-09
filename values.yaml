@@ -21,8 +21,8 @@ keycloak:
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
 
 atlas:
-  enabled: false
-  tag: "2.2.0.4"
+  enabled: true
+  tag: "2.2.0.7"
   persistence:
     enabled: true
     # storageClass: "-"
@@ -32,11 +32,11 @@ atlas:
 
 # if atlas is enabled then kafka has to be enabled
 kafka:
-  enabled: false
+  enabled: true
 
 # if kafka is enabled then zookeeper also has to be enabled
 zookeeper:
-  enabled: false
+  enabled: true
 
 kafka-ui:
   enabled: true
@@ -47,13 +47,11 @@ reverse-proxy:
   proxy:
     atlas2_enabled: true
     keycloak_enabled: true
-    elastic_enabled: false
+    elastic_enabled: true
     flink_enabled: true
     kafka_ui_enabled: true
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
-host_ip: 51.105.169.241
-#external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+#host_ip: 51.105.169.241
 
 elastic:
   enabled: true
@@ -71,12 +69,11 @@ elastic:
   enterprise_search:
     replicaCount: 1
     version: 8.2.2
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 flink:
   enabled: true
   repository: wombach/docker-flink
-  tag: 1.15.1.1
+  tag: 1.15.1.2
   taskmanager_numberOfTaskSlots: 10
   replicas: 1
   env:
@@ -86,13 +83,13 @@ flink:
 
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
-ingress:
-  email_address: gabriella.pascha@aureliusenterprise.com
-  dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
-
 python-rest:
-  enabled: false
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+  enabled: true
+  repository: wombach/docker-python-rest
+  tag: "1.0.4"
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
+ingress:
+  email_address: gabriella.pascha@aureliusenterprise.com

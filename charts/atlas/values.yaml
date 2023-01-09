@@ -14,4 +14,8 @@ persistence:
   # storageClass: "-"
   accessMode: ReadWriteOnce
   size: 1Gi
+env:
+  KEYCLOAK_ATLAS_ADMIN_USERNAME: "atlas"
+  # ATLAS_EXTERNAL_URL: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+  # KEYCLOAK_SERVER_URL: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/"
 #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"

@@ -124,7 +124,7 @@ This is needed if you installed letsencrypt from the required packages.
 - Assumes you have a DNS linked to the external IP of the ingress controller
 - move to the directory of the chart helm-governance
 * uncomment prod_issuer.yaml in templates
-* update the Values file ``{{ .Values.ingress.dns_url}}`` to your DNS name 
+* update the Values file ``{{ .Values.global.external_hostname}}`` to your DNS name 
 * Create the certificate with the following command
 ```bash
 helm template -s templates/certificate.yaml . | kubectl apply -f -
@@ -220,3 +220,6 @@ cd init
 ## To Load the Sample Demo Data 
 ./load_sample_data.sh
 ```
+
+https://aureliusdev.westeurope.cloudapp.azure.com/anwo/atlas/lineage/heartbeat
+https://aureliusdev.westeurope.cloudapp.azure.com/anwo/atlas/lineage/lin_api/heartbeat

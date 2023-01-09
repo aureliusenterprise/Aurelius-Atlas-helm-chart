@@ -18,6 +18,5 @@ enterprise_search:
   name: enterprise-search
   replicaCount: 1
   version: 8.2.2
-
-external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+#external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 

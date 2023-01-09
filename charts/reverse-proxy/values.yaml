@@ -12,7 +12,7 @@ service:
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
-external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+# external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 enterprise_search_internal_url: https://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002/
 env:
   ELASTIC_USERNAME: elastic

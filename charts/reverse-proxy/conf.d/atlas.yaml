@@ -19,20 +19,27 @@ Alias "/{{ .Release.Namespace }}/atlas" "/usr/local/apache2/atlas"
 
 ## models4insight backend
 <Location /{{ .Release.Namespace }}/atlas/repository/api>
-        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/logging/"
-        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/logging/"
+        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/logging/"
+        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/logging/"
 </Location>
 
 # lineage graph backend
 <Location /{{ .Release.Namespace }}/atlas/lineage_model>
-        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/lineage_model/"
-        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/lineage_model/"
+        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/lineage_model/"
+        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/lineage_model/"
 </Location>
 
 # python script
 <Location /{{ .Release.Namespace }}/atlas/api/data_governance_dashboard>
-        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/data_governance/dashboard"
-        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/data_governance/dashboard"
+        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/lineage/data_governance/dashboard"
+        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/lineage/data_governance/dashboard"
+        Header add Access-Control-Allow-Origin "*"
+</Location>
+
+# python script
+<Location /{{ .Release.Namespace }}/atlas/lineage>
+        ProxyPass "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/lineage"
+        ProxyPassReverse "http://python-rest.{{ .Release.Namespace }}.svc.cluster.local:5000/{{ .Release.Namespace }}/atlas/lineage"
         Header add Access-Control-Allow-Origin "*"
 </Location>
 
