@@ -13,7 +13,6 @@ service:
   type: ClusterIP
   externalPort: 8080
   internalPort: 8080
-cmd: "echo test successfull"
 env:
   KEYCLOAK_USER: "admin"
   PROXY_ADDRESS_FORWARDING: "true"
