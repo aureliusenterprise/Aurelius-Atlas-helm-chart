@@ -216,7 +216,14 @@ Init Jobs:
 ```bash ${1}
 kubectl -n <namespace> exec -it <pod/flink-jobmanager-pod-name> -- bash
 cd init
-./init_jobs.sh
+#./init_jobs.sh
+pip3 install m4i-atlas-core@git+https://github.com/aureliusenterprise/m4i_atlas_core.git#egg=m4i-atlas-core --upgrade
+cd py_libs/m4i-flink-tasks/scripts
+/opt/flink/bin/flink run -d -py get_entity_job.py
+/opt/flink/bin/flink run -d -py publish_state_job.py
+/opt/flink/bin/flink run -d -py determine_change_job.py
+/opt/flink/bin/flink run -d -py synchronize_appsearch_job.py
+/opt/flink/bin/flink run -d -py local_operation_job.py
 ## To Load the Sample Demo Data 
 ./load_sample_data.sh
 ```
