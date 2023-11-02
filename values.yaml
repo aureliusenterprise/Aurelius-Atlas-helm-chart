@@ -63,7 +63,7 @@ ingress:
   email_address: gabriella.pascha@aureliusenterprise.com
   dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
 
-python-rest:
+#python-rest:
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 global:
