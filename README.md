@@ -39,6 +39,7 @@ The deployment requires the following packages:
 - Reflector
   - Used to reflect secrets across namespaces
   - Used in demo to share the DNS certificate to different namespace
+- Zookeeper 
 
 ### The steps on how to install the required packages
 
@@ -80,6 +81,12 @@ helm repo add emberstack https://emberstack.github.io/helm-charts
 helm repo update
 helm upgrade --install reflector emberstack/reflector
 ```
+##### 5. Update Zookeeper Dependencies
+- Move to the directory of Aurelius-Atlas-helm-chart
+```bash
+cd charts/zookeeper/
+helm dependency update
+```
 
 ## Get Ingress Controller External IP to link to DNS 
 Only do this if your ingress controller does not already have a DNS applied. In the case of Azure this is not necessary, other possible instructions can be found below in Azure DNS Label
@@ -112,7 +119,7 @@ Resulting DSN will be ``<label>.westeurope.cloudapp.azure.com``
 This is needed if you installed letsencrypt from the required packages. 
 
 Here we define a CLusterIssuer using letsencrypt on the cert-manager namespace:
-- Move to the directory of the chart helm-governance
+- Move to the directory of Aurelius-Atlas-helm-chart
 * Uncomment prod_issuer.yaml in templates
 * Update the ``{{ .Values.ingress.email_address }}`` in values.yaml file
 * Create the clusterIssuer with the following command
@@ -134,7 +141,7 @@ It is running when Ready is True.
 This is needed if you installed letsencrypt from the required packages. 
 
 - Assumes you have a DNS linked to the external IP of the ingress controller
-- Move to the directory of the chart helm-governance
+- Move to the directory of Aurelius-Atlas-helm-chart
 * Uncomment certificate.yaml in templates
 * Update the values.yaml file ``{{ .Values.ingress.dns_url}}`` to your DNS name 
 * Create the certificate with the following command
@@ -163,7 +170,7 @@ deploy the services
 
 ```bash
 kubectl create namespace <namespace>
-cd helm-governance
+cd Aurelius-Atlas-helm-chart
 helm dependency update
 helm install --generate-name -n <namespace>  -f values.yaml .
 ```
