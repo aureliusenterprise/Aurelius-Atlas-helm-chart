@@ -162,18 +162,24 @@ It is running when Ready is True.
 
 Deploy Aurelius Atlas
 -------------------------
-- Create the namespace
-- Update the Values file 
-  - DNS name
-  - external IP
-deploy the services
 
-```bash
-kubectl create namespace <namespace>
-cd Aurelius-Atlas-helm-chart
-helm dependency update
-helm install --generate-name -n <namespace>  -f values.yaml .
-```
+1. Update the values.yaml file
+   - ``{{ .Values.keycloak.keycloakFrontendURL }}`` replace it to your DNS name 
+   - ``{{ .Values.kafka-ui. ... .bootstrapServers }}`` edit it with your `<namespace>`
+   - ``{{ .Values.kafka-ui. ... .SERVER_SERVLET_CONTEXT_PATH }}`` edit it with your `<namespace>`
+2. Create the namespace
+
+    ```bash
+    kubectl create namespace <namespace>
+    ```
+
+3. Deploy the services
+
+    ```bash
+    cd Aurelius-Atlas-helm-chart
+    helm dependency update
+    helm install --generate-name -n <namespace>  -f values.yaml .
+    ```
 
 Please note that it can take 5-10 minutes to deploy all services.
 
@@ -241,12 +247,14 @@ kubectl -n <namespace> exec -it <pod/flink-jobmanager-pod-name> -- bash
 cd init
 #./init_jobs.sh
 pip3 install m4i-atlas-core@git+https://github.com/aureliusenterprise/m4i_atlas_core.git#egg=m4i-atlas-core --upgrade
-cd py_libs/m4i-flink-tasks/scripts
+cd ../py_libs/m4i-flink-tasks/scripts
 /opt/flink/bin/flink run -d -py get_entity_job.py
 /opt/flink/bin/flink run -d -py publish_state_job.py
 /opt/flink/bin/flink run -d -py determine_change_job.py
 /opt/flink/bin/flink run -d -py synchronize_appsearch_job.py
 /opt/flink/bin/flink run -d -py local_operation_job.py
 ## To Load the Sample Demo Data 
+cd
+cd init
 ./load_sample_data.sh
 ```
