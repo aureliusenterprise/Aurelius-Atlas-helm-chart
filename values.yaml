@@ -17,7 +17,7 @@ keycloak:
     size: 1Gi
   external_ip: 51.105.169.241
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
-  keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/"
+  keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/" # Replace with your URL here
 
 atlas:
   tag: "2.2.0.4"
@@ -58,6 +58,19 @@ flink:
   taskmanager_numberOfTaskSlots: 10
   replicas: 1
   #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
+kafka-ui:
+  yamlApplicationConfig:
+    #{}
+    kafka:
+      clusters:
+        - name: atlas
+          bootstrapServers: kafka.demo.svc.cluster.local:9092 # Replace with your namespace here
+
+  envs:
+    secret: {}
+    config:
+      SERVER_SERVLET_CONTEXT_PATH: /demo/kafka-ui # Replace with your namespace here
 
 ingress:
   email_address: gabriella.pascha@aureliusenterprise.com
