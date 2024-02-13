@@ -12,28 +12,22 @@ keycloak:
   realm_file_name: "realm_m4i.json"
   persistence:
     enabled: true
-    # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
-  external_ip: 51.105.169.241
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+  external_ip: 51.138.48.239
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/" # Replace with your URL here
 
 atlas:
   tag: "2.2.0.4"
   persistence:
     enabled: true
-    # storageClass: "-"
     accessMode: ReadWriteOnce
     size: 1Gi
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 reverse-proxy:
   tag: "1.0.9.4"
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
-host_ip: 51.105.169.241
-#external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+host_ip: 51.138.48.239
 
 elastic:
   elastic_search:
@@ -50,14 +44,12 @@ elastic:
   enterprise_search:
     replicaCount: 1
     version: 8.2.2
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 flink:
   repository: wombach/docker-flink
   tag: 1.15.1.0
   taskmanager_numberOfTaskSlots: 10
   replicas: 1
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 
 kafka-ui:
   yamlApplicationConfig:
@@ -65,19 +57,16 @@ kafka-ui:
     kafka:
       clusters:
         - name: atlas
-          bootstrapServers: kafka.demo.svc.cluster.local:9092 # Replace with your namespace here
+          bootstrapServers: kafka.<namespace>.svc.cluster.local:9092 # Edit <namespace> with your namespace here
 
   envs:
     secret: {}
     config:
-      SERVER_SERVLET_CONTEXT_PATH: /demo/kafka-ui # Replace with your namespace here
+      SERVER_SERVLET_CONTEXT_PATH: /<namespace>/kafka-ui # Edit <namespace> with your namespace here
 
 ingress:
-  email_address: gabriella.pascha@aureliusenterprise.com
-  dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
-
-#python-rest:
-  #external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+  email_address: <your email>
+  dns_url: <your DNS URL>
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
