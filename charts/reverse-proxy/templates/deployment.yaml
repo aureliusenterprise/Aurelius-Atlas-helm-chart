@@ -27,13 +27,16 @@ spec:
       initContainers: # sidecar container to wait for a service to be completed.
         - name: wait-for-app-search-service
           image: darthcabs/tiny-tools:1
+          env:
+            - name: ENTERPRISE_SEARCH_INTERNAL_URL
+              value: {{ tpl .Values.enterprise_search_internal_url . }}
           args:
           - /bin/bash
           - -c
           - >
             set -x;
             while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "https://${ENTERPRISE_SEARCH_ENT_HTTP_PORT_3002_TCP_ADDR}:${ENTERPRISE_SEARCH_ENT_HTTP_SERVICE_PORT_HTTPS}/api/as/v1/credentials/search-key" \
+                          -X GET "${ENTERPRISE_SEARCH_INTERNAL_URL}api/as/v1/credentials/search-key" \
                           -H 'Content-Type: application/json' --insecure | tail -c 3)" != "401" ]]; do 
               echo '.'
               sleep 15;

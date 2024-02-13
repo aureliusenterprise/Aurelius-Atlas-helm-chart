@@ -5,13 +5,13 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     cert-manager.io/cluster-issuer: letsencrypt-clusterissuer-aureliusdev
-    kubernetes.io/ingress.class: "nginx"
     cert-manager-io/http01-edit-in-place: "true"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: '3600'
     nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
     nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
     #nginx.ingress.kubernetes.io/server-snippet: 'keepalive_timeout 3600s;client_body_timeout 3600s;client_header_timeout 3600s;'
 spec:
+  ingressClassName: nginx
   rules:
     - host: {{ .Values.global.external_hostname }}
       http:
