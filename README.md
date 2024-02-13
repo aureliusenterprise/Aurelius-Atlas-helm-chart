@@ -27,7 +27,7 @@ This installation assumes that you have:
 ## Required Packages
 The deployment requires the following packages:
 - Certificate Manager
-  - To handel and manage the creation of certificates
+  - To handle and manage the creation of certificates
   - Used in demo: cert-manager
 - Ingress Controller
   - Used to create an entry point to the cluster through an external IP.
@@ -38,8 +38,7 @@ The deployment requires the following packages:
   - For more details about this elastic helm chart look at [elastic readme](./charts/elastic/README.md)
 - Reflector
   - Used to reflect secrets across namespaces
-  - Used in demo to share the DNS certificate to different namespace
-- Zookeeper 
+  - Used in demo to share the DNS certificate to a different namespace
 
 ### The steps on how to install the required packages
 
@@ -70,6 +69,10 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm install nginx-ingress ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
 ```
+
+- On AKS add ``--set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz``
+- It is also possible to set a DNS label to the ingress controller if you do not have a DNS by adding ``--set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"=<label>``
+
 ##### 3. Install Elastic
 ```bash
 kubectl create -f https://download.elastic.co/downloads/eck/2.3.0/crds.yaml
@@ -99,62 +102,55 @@ Link your DNS to this external IP.
 
 In Azure, it is possible to apply a dns label to the ingress controller, if you do not have a DNS.
 #### Azure DNS Label
-https://hovermind.com/azure-kubernetes-service/applying-dns-label-to-the-service.html
-Edit the ingress controller deployment 
+https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli#set-the-dns-label-using-helm-chart-settings
+Edit the ingress controller deployment (if not set upon installation)
 ```bash
-kubectl edit deployment.apps/nginx-ingress-ingress-nginx-controller
+helm upgrade nginx-ingress ingress-nginx/ingress-nginx --reuse-values --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"=<label>
 ```
-Under Annotations add the following providing your desire label <label>:
-
-```
-service.beta.kubernetes.io/azure-dns-label-name: <label>
-```
-Save and exit.
-Resulting DSN will be ``<label>.westeurope.cloudapp.azure.com``
+Resulting DNS will be ``<label>.westeurope.cloudapp.azure.com``
 
 
-## Put ssl certificate in a Secret
+## Put SSL certificate in a Secret
 
 ##### Define a cluster issuer
-This is needed if you installed letsencrypt from the required packages. 
+This is needed if you installed cert-manager from the required packages. 
 
-Here we define a CLusterIssuer using letsencrypt on the cert-manager namespace:
-- Move to the directory of Aurelius-Atlas-helm-chart
-* Uncomment prod_issuer.yaml in templates
-* Update the ``{{ .Values.ingress.email_address }}`` in values.yaml file
-* Create the clusterIssuer with the following command
+Here we define a ClusterIssuer using cert-manager on the cert-manager namespace:
+1. Move to the directory of Aurelius-Atlas-helm-chart
+2. Uncomment templates/prod_issuer.yaml
+3. Update the ``{{ .Values.ingress.email_address }}`` in values.yaml file
+4. Create the ClusterIssuer with the following command
   ```bash
   helm template -s templates/prod_issuer.yaml . | kubectl apply -f -
   ```
-* Comment out prod_issuer.yaml in templates
+5. Comment out templates/prod_issuer.yaml
 
-Check that it is running:
-```bash
-kubectl get clusterissuer -n cert-manager 
-```
-It is running when Ready is True.
-
+6. Check that it is running:
+  ```bash
+  kubectl get clusterissuer -n cert-manager 
+  ```
+  It is running when Ready is True.
 
 ![img.png](img.png)
 
-##### Create ssl certificate 
-This is needed if you installed letsencrypt from the required packages. 
+##### Create SSL certificate 
+This is needed if you installed cert-manager from the required packages. 
 
-- Assumes you have a DNS linked to the external IP of the ingress controller
-- Move to the directory of Aurelius-Atlas-helm-chart
-* Uncomment certificate.yaml in templates
-* Update the values.yaml file ``{{ .Values.ingress.dns_url}}`` to your DNS name 
-* Create the certificate with the following command
+0. Assumes you have a DNS linked to the external IP of the ingress controller
+1. Move to the directory of Aurelius-Atlas-helm-chart
+2. Uncomment templates/certificate.yaml
+3. Update the values.yaml file ``{{ .Values.ingress.dns_url}}`` to your DNS name 
+4. Create the certificate with the following command
   ```bash
   helm template -s templates/certificate.yaml . | kubectl apply -f -
   ```
-* Comment out certificate.yaml in templates
+5. Comment out templates/certificate.yaml
 
-Check that it is approved:
-```bash
-kubectl get certificate -n cert-manager 
-```
-It is running when Ready is True.
+6. Check that it is approved:
+  ```bash
+  kubectl get certificate -n cert-manager 
+  ```
+  It is running when Ready is True.
 
 
 ![img_1.png](img_1.png)
@@ -182,6 +178,15 @@ Deploy Aurelius Atlas
     ```
 
 Please note that it can take 5-10 minutes to deploy all services.
+
+#### Check that all pods are running
+
+You can observe if all pods are ready with
+```bash
+watch -n 0.5 kubectl get pods -n <namespace>
+```
+
+Once all pods are ready, Atlas is accessible via reverse proxy at ``<DNS-url>/<namespace>/atlas/``
 
 ### Users with Randomized Passwords
 In the helm chart 5 base users are created with randomized passwords stored as secrets on kubernetes.
@@ -223,15 +228,6 @@ username: elastic
 446PL2F2UF55a19haZtihRm5
 ----
 ```
-
-
-#### Check that all pods are running
-``` bash
-kubectl -n <namespace> get all # check that all pods are running
-```
-Atlas is now accessible via reverse proxy at ``<DNS-url>/<namespace>/atlas/``
-
-
 ## Initialize the Atlas flink tasks and optionally load sample data
 
 Flink:
