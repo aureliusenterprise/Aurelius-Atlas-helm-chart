@@ -44,10 +44,10 @@ spec:
           name: blob-server
         - containerPort: 8081
           name: webui
-        lifecycle:
-            postStart:
-              exec:
-                command: ["/opt/flink/init/init_jobmanager.sh" ]
+        # lifecycle:
+        #     postStart:
+        #       exec:
+        #         command: ["/opt/flink/init/init_jobmanager.sh" ]
         livenessProbe:
           tcpSocket:
             port: 6123
@@ -85,6 +85,12 @@ spec:
               secretKeyRef:
                 name: keycloak-secret-user-data
                 key: password
+          - name: ATLAS_SERVER_URL
+            value: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+          - name: ELASTICSEARCH_ENDPOINT
+            value:  "https://{{ .Values.global.external_hostname }}:443/{{ .Release.Namespace }}/elastic"
+          - name: KAFKA_BOOTSTRAP_SERVER_HOSTNAME
+            value: "kafka.{{ .Release.Namespace }}.svc.cluster.local"
           - name: KEYCLOAK_SERVER_URL
             value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/"
           - name: ENTERPRISE_SEARCH_EXTERNAL_URL
@@ -95,7 +101,7 @@ spec:
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
           - name: {{ $key }}
-            value: {{  $value  | quote }}
+            value: {{ $value | quote }}
           {{- end }}
           {{- end }}
         volumeMounts:

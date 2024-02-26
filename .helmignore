@@ -4,3 +4,4 @@ realm_m4i_aw.json
 realm.json
 .gitignore
 .git
+kafka-rest

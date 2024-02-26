@@ -18,7 +18,7 @@ keycloak:
   keycloakFrontendURL: "https://aureliusdev.westeurope.cloudapp.azure.com/" # Replace with your URL here
 
 atlas:
-  tag: "2.2.0.4"
+  tag: "2.2.1"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
@@ -46,9 +46,9 @@ elastic:
     version: 8.2.2
 
 flink:
-  repository: wombach/docker-flink
-  tag: 1.15.1.0
-  taskmanager_numberOfTaskSlots: 10
+  repository: aureliusatlas/docker_flink
+  tag: 2.0.0
+  taskmanager_numberOfTaskSlots: 2
   replicas: 1
 
 kafka-ui:
@@ -57,16 +57,24 @@ kafka-ui:
     kafka:
       clusters:
         - name: atlas
-          bootstrapServers: kafka.<namespace>.svc.cluster.local:9092 # Edit <namespace> with your namespace here
+          bootstrapServers: kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
 
   envs:
     secret: {}
     config:
-      SERVER_SERVLET_CONTEXT_PATH: /<namespace>/kafka-ui # Edit <namespace> with your namespace here
+      SERVER_SERVLET_CONTEXT_PATH: /anwo/kafka-ui # Edit <namespace> with your namespace here
+
+kafka-connect:
+  kafka:
+    bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092
+
+kafka-rest:
+  kafka:
+    bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092
 
 ingress:
-  email_address: <your email>
-  dns_url: <your DNS URL>
+  email_address: andreas.wombacher@aureliusenterprise.com
+  dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
