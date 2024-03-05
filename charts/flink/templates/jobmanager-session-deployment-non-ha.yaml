@@ -78,6 +78,11 @@ spec:
               secretKeyRef:
                 name: keycloak-secret-user-admin
                 key: password
+          - name: KEYCLOAK_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-admin
+                key: password
           - name: KEYCLOAK_ATLAS_STEWARD_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -86,11 +91,6 @@ spec:
           - name: KEYCLOAK_ATLAS_USER_USERNAME
             value: atlas
           - name: KEYCLOAK_ATLAS_USER_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: keycloak-secret-user-data
-                key: password
-          - name: KEYCLOAK_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: keycloak-secret-user-data
