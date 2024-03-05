@@ -63,6 +63,11 @@ spec:
               secretKeyRef:
                 name: elastic-search-es-elastic-user
                 key: elastic
+          - name: ELASTICSEARCH_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: elastic-search-es-elastic-user
+                key: elastic
           - name: KEYCLOAK_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -81,6 +86,11 @@ spec:
           - name: KEYCLOAK_ATLAS_USER_USERNAME
             value: atlas
           - name: KEYCLOAK_ATLAS_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret-user-data
+                key: password
+          - name: KEYCLOAK_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: keycloak-secret-user-data
