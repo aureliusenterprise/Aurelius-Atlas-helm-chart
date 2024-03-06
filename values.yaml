@@ -47,7 +47,7 @@ elastic:
 
 flink:
   repository: aureliusatlas/docker_flink
-  tag: 2.0.1
+  tag: 2.0.2
   taskmanager_numberOfTaskSlots: 2
   replicas: 1
 

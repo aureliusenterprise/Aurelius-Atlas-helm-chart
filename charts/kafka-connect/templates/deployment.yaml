@@ -37,6 +37,10 @@ spec:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
           image: "{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["curl -X PUT -H \"Content-Type: application/json\" --data @/etc/conf/conf_app_search_documents.json http://localhost:8083/connectors/app-search-documents-sink/config && curl -X PUT -H \"Content-Type: application/json\" --data @/etc/conf/conf_publish_state.json http://localhost:8083/connectors/publish-state-sink/config"]
           imagePullPolicy: "{{ .Values.prometheus.jmx.imagePullPolicy }}"
           command:
           - java
@@ -55,6 +59,8 @@ spec:
           volumeMounts:
           - name: jmx-config
             mountPath: /etc/jmx-kafka-connect
+          - name: kafka-connect-config-volume
+            mountPath: /etc/conf
         {{- end }}
         - name: {{ template "kafka-connect.name" . }}-server
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
@@ -144,3 +150,11 @@ spec:
       affinity:
 {{ toYaml .Values.affinity | indent 8 }}
       {{- end }}
+      - name: kafka-connect-config-volume
+        configMap:
+          name: kafka-connect-tasks-config
+          items:
+            - key: conf_app_search_documents.json
+              path: conf_app_search_documents.json
+            - key: conf_publish_state.json
+              path: conf_publish_state.json

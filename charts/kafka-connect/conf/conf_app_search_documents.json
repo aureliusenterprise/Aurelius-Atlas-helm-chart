@@ -1,0 +1,18 @@
+{
+  "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+  "tasks.max": "1",
+  "topics": "app_search_documents",
+  "connection.url": "kafka.demo.svc.cluster.local:9092",
+  "type.name": "_doc",
+  "transforms": "ExtractDocId, ExtractValue",
+  "transforms.ExtractDocId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+  "transforms.ExtractDocId.field": "id",
+  "transforms.ExtractValue.type": "org.apache.kafka.connect.transforms.ExtractField$Value",
+  "transforms.ExtractValue.field": "value",
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "false",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "false",
+  "schema.ignore": "true",
+  "behavior.on.null.values": "DELETE"
+}
