@@ -6,6 +6,6 @@ metadata:
   labels:
     {{- include "kafka-ui.labels" . | nindent 4 }}
 data:
-  config.yml: |-
-    {{ tpl ( .Files.Get "conf/application-config.yaml" ) . | indent 4}}
+  config.yml: |
+{{ tpl ( .Files.Get "conf/application-config.yaml" ) . | indent 4}}
 {{ end }}

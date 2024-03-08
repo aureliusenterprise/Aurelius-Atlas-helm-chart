@@ -77,22 +77,22 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL | default "" | printf "%s/actuator/health" | urlParse }}
-              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
-              port: http
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 10
-          readinessProbe:
-            httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL  | default "" | printf "%s/actuator/health" | urlParse }}
-              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
-              port: http
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL | default "" | printf "%s/actuator/health" | urlParse }}
+          #     path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
+          #     port: http
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL  | default "" | printf "%s/actuator/health" | urlParse }}
+          #     path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
+          #     port: http
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if or .Values.yamlApplicationConfig .Values.volumeMounts .Values.yamlApplicationConfigConfigMap}}
