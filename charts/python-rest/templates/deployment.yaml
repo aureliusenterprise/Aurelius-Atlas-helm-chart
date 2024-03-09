@@ -33,6 +33,12 @@ spec:
               containerPort: 5000
               protocol: TCP
           env:
+            - name: NAMESPACE
+              value: "{{ .Release.Namespace }}"
+            - name: RESTAPI_ADDITIONAL_CONTEXT
+              value: "atlas"
+            - name: atlas_server_url
+              value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas/atlas"
             - name: elastic_password
               valueFrom:
                 secretKeyRef:
