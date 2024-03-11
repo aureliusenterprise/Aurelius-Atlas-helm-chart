@@ -5,3 +5,4 @@ realm.json
 .gitignore
 .git
 kafka-rest
+kafka-ui_bak

@@ -1,5 +1,4 @@
 replicaCount: 1
-enabled: true
 
 image:
   registry: docker.io
