@@ -3,6 +3,9 @@ kafka:
   clusters:
     - name: atlas
       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
+      kafkaconnect:
+        name: connect
+        address: "kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
 spring:
   logging:
     level: DEBUG
@@ -19,16 +22,16 @@ spring:
               - openid
               - profile
               - email
-            redirect-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/kafka-ui/login/oauth2/code/{registrationId}
+            redirect-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kafka-ui/login/oauth2/code/{registrationId}"
             clientName: keycloak
             provider: keycloak
         provider:
           keycloak:
-            authorization-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/auth
-            token-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/token
-            user-info-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/userinfo
+            authorization-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/auth"
+            token-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/token"
+            user-info-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/userinfo"
             user-info-authentication-method: header
-            jwk-set-uri: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/protocol/openid-connect/certs
+            jwk-set-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/certs"
             user-name-attribute: preferred_username
 management:
   health:
