@@ -20,13 +20,13 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# existingConfigMap: ""
-# yamlApplicationConfig:
-  #{}
+existingConfigMap: ""
+yamlApplicationConfig:
+  {}
   # kafka:
   #   clusters:
   #     - name: atlas
-  #       bootstrapServers: kafka.{{ .Release.Namespace }}.svc.cluster.local:9092
+  #       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
   # spring:
   #   security:
   #     oauth2:
@@ -36,17 +36,23 @@ serviceAccount:
   #   health:
   #     ldap:
   #       enabled: false
-# yamlApplicationConfigConfigMap:
-#   {}
+yamlApplicationConfigConfigMap:
+  {}
   # keyName: config.yml
   # name: configMapName
 existingSecret: ""
 envs:
   secret: {}
   config:
-    # SERVER_SERVLET_CONTEXT_PATH: /{{ .Release.Namespace }}/kafka-ui
     SERVER_SERVLET_CONTEXT_PATH_PARTIAL: /kafka-ui
     JAVA_OPTS: "-Djava.net.preferIPv4Stack=true"
+    SECURITY_BASIC_ENABLED: "true"
+    AUTH_TYPE: OAUTH2
+    # SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENTID: m4i_kafka_ui
+    # SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENTSECRET: YXfRjmodifiedTujnkVr7zuW9ECCAK4TcnCio-i
+    # SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: https://aureliusdev.westeurope.cloudapp.azure.com/anwo/auth/realms/m4i/.well-known/openid-configuration
+    # # SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AUTH0_ISSUER_URI: https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/
+    # SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_SCOPE: openid
 
 # networkPolicy:
 #   enabled: false

@@ -51,13 +51,13 @@ flink:
   taskmanager_numberOfTaskSlots: 2
   replicas: 1
 
-kafka-ui:
-  yamlApplicationConfig:
-    #{}
-    kafka:
-      clusters:
-        - name: atlas
-          bootstrapServers: kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
+# kafka-ui:
+#   yamlApplicationConfig:
+#     #{}
+#     kafka:
+#       clusters:
+#         - name: atlas
+#           bootstrapServers: kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
 
   envs:
     secret: {}
