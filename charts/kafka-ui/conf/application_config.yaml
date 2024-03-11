@@ -1,7 +1,4 @@
 ---
-dynamic:
-  config:
-    enabled: true
 kafka:
   clusters:
     - name: atlas
