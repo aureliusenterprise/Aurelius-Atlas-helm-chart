@@ -54,9 +54,9 @@ flink:
 kafka-ui:
   enabled: true
 
-# kafka-connect:
-#   kafka:
-#     bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
+kafka-connect:
+  kafka:
+    bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
 
 # kafka-rest:
 #   kafka:
