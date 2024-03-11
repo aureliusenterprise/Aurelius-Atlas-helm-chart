@@ -27,7 +27,7 @@ atlas:
 reverse-proxy:
   tag: "1.0.9.4"
 
-host_ip: 51.138.48.239
+host_ip: 51.138.48.239   # Replace with your IP address
 
 elastic:
   elastic_search:
@@ -52,25 +52,15 @@ flink:
   replicas: 1
 
 kafka-ui:
-  yamlApplicationConfig:
-    #{}
-    kafka:
-      clusters:
-        - name: atlas
-          bootstrapServers: kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
+  enabled: true
 
-  envs:
-    secret: {}
-    config:
-      SERVER_SERVLET_CONTEXT_PATH: /anwo/kafka-ui # Edit <namespace> with your namespace here
+    #kafka-connect:
+    #kafka:
+    #bootstrapServers: "PLAINTEXT://kafka..{{ .Release.Namespace }}.svc.cluster.local:9092" # Edit <namespace> with your namespace here
 
-kafka-connect:
-  kafka:
-    bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092
-
-kafka-rest:
-  kafka:
-    bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092
+# kafka-rest:
+#   kafka:
+#     bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
 
 ingress:
   email_address: andreas.wombacher@aureliusenterprise.com

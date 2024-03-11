@@ -79,6 +79,9 @@ spec:
           - name: v-reverse-proxy-configs-atlas-conf
             mountPath: /usr/local/apache2/conf.d/atlas.conf
             subPath: atlas.conf
+          - name: v-reverse-proxy-configs-namespace-conf
+            mountPath: /usr/local/apache2/conf.d/namespace.conf
+            subPath: namespace.conf
           - name: v-reverse-proxy-configs-atlas2-conf
             mountPath: /usr/local/apache2/conf.d/atlas2.conf
             subPath: atlas2.conf
@@ -98,6 +101,9 @@ spec:
         - name: v-reverse-proxy-configs-atlas-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas-conf
+        - name: v-reverse-proxy-configs-namespace-conf
+          configMap:
+            name: cm-reverse-proxy-configs-namespace-conf
         - name: v-reverse-proxy-configs-atlas2-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas2-conf

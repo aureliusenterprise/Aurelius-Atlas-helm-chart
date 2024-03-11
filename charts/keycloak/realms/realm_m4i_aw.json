@@ -1062,8 +1062,6 @@
       "id": "c3e97388-9983-48e4-a44f-66e3f6b6d9ea",
       "clientId": "m4i_atlas",
       "name": "Models4Insight Data Management",
-      "rootUrl": "https://51.105.169.241/anwo/atlas/",
-      "adminUrl": "https://51.105.169.241/anwo/auth_admin/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
