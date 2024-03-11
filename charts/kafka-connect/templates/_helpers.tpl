@@ -48,7 +48,8 @@ else use user-provided URL
 {{- if .Values.kafka.bootstrapServers -}}
 {{-  .Values.kafka.bootstrapServers -}}
 {{- else -}}
-{{- printf "PLAINTEXT://%s:9092" (include "kafka-connect.cp-kafka-headless.fullname" .) -}}
+{{- printf "PLAINTEXT://kafka.%s.svc.cluster.local:9092" .Release.Namespace  -}}
+{{/*- printf "PLAINTEXT://%s:9092" (include "kafka-connect.cp-kafka-headless.fullname" .) -*/}}
 {{- end -}}
 {{- end -}}
 
