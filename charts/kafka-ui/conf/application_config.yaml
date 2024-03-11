@@ -3,7 +3,7 @@ kafka:
   clusters:
     - name: atlas
       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
-      kafkaconnect:
+      kafkaConnect:
         name: connect
         address: "kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
 spring:
