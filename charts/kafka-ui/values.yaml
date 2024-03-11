@@ -20,8 +20,8 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-existingConfigMap: ""
-yamlApplicationConfig:
+# existingConfigMap: ""
+# yamlApplicationConfig:
   #{}
   # kafka:
   #   clusters:
@@ -36,8 +36,8 @@ yamlApplicationConfig:
   #   health:
   #     ldap:
   #       enabled: false
-yamlApplicationConfigConfigMap:
-  {}
+# yamlApplicationConfigConfigMap:
+#   {}
   # keyName: config.yml
   # name: configMapName
 existingSecret: ""

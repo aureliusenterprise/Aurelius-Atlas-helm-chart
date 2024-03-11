@@ -1,4 +1,4 @@
-{{- if .Values.yamlApplicationConfig -}}
+#{{- if .Values.yamlApplicationConfig -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,4 +8,4 @@ metadata:
 data:
   config.yml: |
 {{ tpl ( .Files.Get "conf/application-config.yaml" ) . | indent 4}}
-{{ end }}
+#{{ end }}
