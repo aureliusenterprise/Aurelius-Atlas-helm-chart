@@ -8,7 +8,7 @@ kafka:
         address: "kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
 spring:
   logging:
-    level: INFO
+    level: DEBUG
     file: ${java.io.tmpdir}/kafka-ui.log
   security:
     oauth2:
