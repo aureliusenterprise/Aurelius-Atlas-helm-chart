@@ -4,7 +4,7 @@
 # container image
 # https://github.com/keycloak/keycloak-containers/blob/16.1.1/server/README.md
 replicaCount: 1
-repository: wombach/docker-keycloak
+repository: aureliusatlas/docker-keycloak
 pullPolicy: Always
 tag: "16.1.0.1"
 service:

@@ -37,14 +37,14 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          lifecycle:
-            postStart:
-              exec:
-                command: 
-                  - "/bin/bash"
-                  - "-c"
-                  - > 
-                    /tmp/init_standard_users.sh;
+                #          lifecycle:
+                #postStart:
+                #exec:
+                #command: 
+                #  - "/bin/bash"
+                #  - "-c"
+                #  - > 
+                #    /tmp/init_standard_users.sh;
           env:
             {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
@@ -53,7 +53,7 @@ spec:
             {{- end }}
             {{- end }}
             - name: KEYCLOAK_FRONTEND_URL
-            #  value:  /{{ .Release.Namespace }}/auth 
+             #  value:  /{{ .Release.Namespace }}/auth 
               value:  {{ .Values.keycloakFrontendURL }}{{ .Release.Namespace }}/auth
             - name: RELEASE_NAMESPACE
               value:  {{ .Release.Namespace }}
