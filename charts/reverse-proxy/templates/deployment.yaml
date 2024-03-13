@@ -88,6 +88,9 @@ spec:
           - name: v-reverse-proxy-configs-flink-conf
             mountPath: /usr/local/apache2/conf.d/flink.conf
             subPath: flink.conf
+          - name: v-reverse-proxy-configs-kafka-connect-conf
+            mountPath: /usr/local/apache2/conf.d/kafka-connect.conf
+            subPath: kafka-connect.conf
           - name: v-reverse-proxy-configs-kafka-ui-conf
             mountPath: /usr/local/apache2/conf.d/kafka-ui.conf
             subPath: kafka-ui.conf
@@ -110,6 +113,9 @@ spec:
         - name: v-reverse-proxy-configs-flink-conf
           configMap:
             name: cm-reverse-proxy-configs-flink-conf
+        - name: v-reverse-proxy-configs-kafka-connect-conf
+          configMap:
+            name: cm-reverse-proxy-configs-kafka-connect-conf
         - name: v-reverse-proxy-configs-kafka-ui-conf
           configMap:
             name: cm-reverse-proxy-configs-kafka-ui-conf
