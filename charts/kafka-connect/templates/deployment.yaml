@@ -121,14 +121,14 @@ spec:
               value: {{ template "kafka-connect.cp-schema-registry.service-name" .}}
             - name: KAFKA_HEAP_OPTS
               value: "{{ .Values.heapOptions }}"
-            {{- range $key, $value := .Values.configurationOverrides }}
-            - name: {{ printf "CONNECT_%s" $key | replace "." "_" | upper | quote }}
-              value: {{ $value | quote }}
             - name: kafka_connect_elastic_password
               valueFrom:
                 secretKeyRef:
                   name: elastic-search-es-elastic-user
                   key: elastic
+            {{- range $key, $value := .Values.configurationOverrides }}
+            - name: {{ printf "CONNECT_%s" $key | replace "." "_" | upper | quote }}
+              value: {{ $value | quote }}
             {{- end }}
             {{- range $key, $value := .Values.customEnv }}
             - name: {{ $key | quote }}
