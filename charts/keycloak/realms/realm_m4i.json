@@ -1610,8 +1610,8 @@
     {
       "id": "37634648-7e36-48b1-ba9a-b4ce06418386",
       "clientId": "m4i_flink",
-      "rootUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/flink/",
-      "adminUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/flink/",
+      "rootUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/flink/index.html",
+      "adminUrl": "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/flink/index.html",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
