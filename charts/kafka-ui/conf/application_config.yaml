@@ -4,8 +4,8 @@ kafka:
     - name: atlas
       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
       kafkaConnect:
-        name: connect
-        address: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kafka-connect"
+        - name: connect
+          address: "http://kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
 spring:
   logging:
     level: DEBUG
