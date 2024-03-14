@@ -45,8 +45,8 @@ spec:
           - >
             set -x;
             while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
-                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas2/" \
-                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "302" ]]; do 
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "200" ]]; do 
               echo '.'
               sleep 15;
             done
