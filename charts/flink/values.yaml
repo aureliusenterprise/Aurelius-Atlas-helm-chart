@@ -6,7 +6,7 @@ replicas: 1
 enterprise_search_internal_url: https://enterprise-search-ent-http.{{ .Release.Namespace }}.svc.cluster.local:3002/
 env:
   POETRY_VIRTUALENVS_IN_PROJECT: true
-  ELASTICSEARCH_APP_SEARCH_INDEX_NAME: app_search_documents
+  ELASTICSEARCH_APP_SEARCH_INDEX_NAME: .ent-search-engine-documents-atlas-dev
   ELASTICSEARCH_STATE_INDEX_NAME: publish_state
   ELASTICSEARCH_USERNAME: elastic
   KAFKA_APP_SEARCH_TOPIC_NAME: .ent-search-engine-documents-atlas-dev
