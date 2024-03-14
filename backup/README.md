@@ -2,7 +2,7 @@
 
 Here you will find how to back up Aurelius Atlas for moving instances.
 
-This process will result in zip files of the Aurelius Atlas instance that can be used for backup and in the case of disaster recover process. 
+This process will result in zip files of the Apache Atlas data and a Snapshot repository of Elasticsearch indices that can be used for backup and in the case of disaster recover process. 
 
 # Apache Atlas backup
 ## Apache Atlas Backup Process Overview
