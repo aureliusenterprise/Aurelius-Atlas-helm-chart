@@ -65,14 +65,6 @@ spec:
             - name: SPRING_CONFIG_LOCATION
               value: /kafka-ui/config.yml
           envFrom:
-            # {{- if .Values.existingConfigMap }}
-            # - configMapRef:
-            #     name: {{ .Values.existingConfigMap }}
-            # {{- end }}
-            # {{- if .Values.envs.config }}
-            # - configMapRef:
-            #     name: {{ include "kafka-ui.fullname" . }}
-            # {{- end }}
             {{- if .Values.existingSecret }}
             - secretRef:
                 name: {{ .Values.existingSecret }}
