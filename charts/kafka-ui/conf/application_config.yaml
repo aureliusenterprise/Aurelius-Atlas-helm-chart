@@ -5,7 +5,7 @@ kafka:
       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
       kafkaConnect:
         name: connect
-        address: "kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
+        address: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kafka-connect"
 spring:
   logging:
     level: DEBUG
