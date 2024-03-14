@@ -1388,6 +1388,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
+      "secret": "hello-world",
       "redirectUris": [
         "http://127.0.0.1:9100/data2model/*"
       ],

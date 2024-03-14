@@ -4,62 +4,54 @@ kafka:
     - name: atlas
       bootstrapServers: "kafka.{{ .Release.Namespace }}.svc.cluster.local:9092"
       kafkaConnect:
-        name: connect
-        address: "kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
+        - name: connect
+          address: "http://kafka-connect.{{ .Release.Namespace }}.svc.cluster.local:8083"
 spring:
   logging:
     level: DEBUG
     file: ${java.io.tmpdir}/kafka-ui.log
-  security:
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            clientId: m4i_kafka_ui
-            client-secret: hello-world
-            authorization-grant-type: authorization_code
-            scope:
-              - openid
-              - profile
-              - email
-            redirect-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kafka-ui/login/oauth2/code/{registrationId}"
-            clientName: keycloak
-            provider: keycloak
-        provider:
-          keycloak:
-            authorization-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/auth"
-            token-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/token"
-            user-info-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/userinfo"
-            user-info-authentication-method: header
-            jwk-set-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/certs"
-            user-name-attribute: preferred_username
+  # security:
+  #   oauth2:
+  #     client:
+  #       registration:
+  #         keycloak:
+  #           clientId: m4i_kafka_ui
+  #           client-secret: hello-world
+  #           authorization-grant-type: authorization_code
+  #           scope:
+  #             - openid
+  #             - profile
+  #             - email
+  #           redirect-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/kafka-ui/login/oauth2/code/{registrationId}"
+  #           clientName: keycloak
+  #           provider: keycloak
+  #       provider:
+  #         keycloak:
+  #           authorization-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/auth"
+  #           token-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/token"
+  #           user-info-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/userinfo"
+  #           user-info-authentication-method: header
+  #           jwk-set-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i/protocol/openid-connect/certs"
+  #           user-name-attribute: preferred_username
 management:
   health:
     ldap:
       enabled: false
 auth:
   type: OAUTH2
-  # spring:
-  #   security:
-  #     oauth2:
-  #       client:
-  #         registration:
-  #           keycloak:
-  #             client-id: m4i_kafka_ui
-  #             authorization-grant-type: authorization_code
-  #             keycloak.scope: openid
-  #           # spring.security.oauth2.client.registration.keycloak.client-id=login-app
-  #           # spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
-  #           #spring.security.oauth2.client.registration.keycloak.scope=openid
-  #         provider:
-  #           keycloak:
-  #             issuer-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i"
-  #             user-name-attribute: preferred_username
-  #           # spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8180/auth/realms/SpringBootKeycloak
-  #           # spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_username
-  #           #SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_CLIENTID=uhvaPKIHU4ZF8Ne4B6PGvF0hWW6OcUSB \
-  #           # -e SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_CLIENTSECRET=YXfRjmodifiedTujnkVr7zuW9ECCAK4TcnCio-i \
-  #           # -e SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_AUTH0_ISSUER_URI=https://dev-a63ggcut.auth0.com/ \
-  #           # -e SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_AUTH0_SCOPE=openid \
-  # auth:
-  # type: OAUTH2
+  oauth2:
+    client:
+      keycloak:
+        clientId: m4i_kafka_ui
+        clientSecret: hello-world
+        #authorization-grant-type: authorization_code
+        scope:
+          - openid
+          - profile
+          - email
+        issuer-uri: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/realms/m4i"
+        user-name-attribute: preferred_username
+        client-name: keycloak
+        provider: keycloak
+        custom-params:
+          type: keycloak
