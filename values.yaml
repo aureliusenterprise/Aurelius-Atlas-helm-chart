@@ -54,17 +54,9 @@ flink:
 kafka-ui:
   enabled: true
 
-    #kafka-connect:
-    #kafka:
-    #bootstrapServers: "PLAINTEXT://kafka..{{ .Release.Namespace }}.svc.cluster.local:9092" # Edit <namespace> with your namespace here
-
-# kafka-rest:
-#   kafka:
-#     bootstrapServers: PLAINTEXT://kafka.anwo.svc.cluster.local:9092 # Edit <namespace> with your namespace here
-
 ingress:
   email_address: andreas.wombacher@aureliusenterprise.com
-  dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
+  #dns_url: "aureliusdev.westeurope.cloudapp.azure.com"
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
