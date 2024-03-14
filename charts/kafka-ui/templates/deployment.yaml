@@ -37,7 +37,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers: # sidecar container to wait for a service to be completed.
-        - name: wait-for-reverse-proxy-service
+        - name: wait-for-keycloak-service
           image: darthcabs/tiny-tools:1
           args:
           - /bin/bash
