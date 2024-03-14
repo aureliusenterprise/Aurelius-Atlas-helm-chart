@@ -36,6 +36,20 @@ spec:
       serviceAccountName: {{ include "kafka-ui.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers: # sidecar container to wait for a service to be completed.
+        - name: wait-for-reverse-proxy-service
+          image: darthcabs/tiny-tools:1
+          args:
+          - /bin/bash
+          - -c
+          - >
+            set -x;
+            while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/atlas2/" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "302" ]]; do 
+              echo '.'
+              sleep 15;
+            done
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
