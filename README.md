@@ -254,3 +254,6 @@ cd
 cd init
 ./load_sample_data.sh
 ```
+
+## Aurelius Atlas backup
+See [backup README](./backup/README.md).
