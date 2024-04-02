@@ -7,3 +7,5 @@ spec:
   count: {{ .Values.enterprise_search.replicaCount }}
   elasticsearchRef:
     name: {{ .Values.elastic_search.name }}
+  config:
+    app_search.engine.total_fields.limit: 96
