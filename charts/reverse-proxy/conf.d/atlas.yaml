@@ -10,7 +10,7 @@ Alias "/{{ .Release.Namespace }}/atlas" "/usr/local/apache2/atlas"
    RewriteRule ^index\.html$ - [L]
    RewriteCond %{REQUEST_FILENAME} !-f
    RewriteCond %{REQUEST_FILENAME} !-d
-   RewriteRule . /atlas/index.html [L]
+   RewriteRule . index.html [L]
     Order allow,deny
 		AllowOverride All
 		Allow from all
