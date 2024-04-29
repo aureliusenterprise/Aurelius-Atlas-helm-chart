@@ -77,3 +77,15 @@ atlas.authentication.method.keycloak=true
 atlas.authentication.method.keycloak.file=/opt/apache-atlas-2.2.0/conf/keycloak-conf.json
 atlas.authentication.method.keycloak.ugi-groups=false
 atlas.authentication.method.keycloak.groups_claim=claims
+
+# Performance configuration items
+
+# The number of times Atlas code tries to acquire a lock (to ensure consistency) while committing a transaction.
+atlas.graph.storage.lock.retries=10
+
+# Milliseconds to wait before evicting a cached entry. This should be > atlas.graph.storage.lock.wait-time x atlas.graph.storage.lock.retries
+# If this is set to a low value (default is 10000), warnings on transactions taking too long will occur in the Atlas application log.
+atlas.graph.storage.cache.db-cache-time=120000
+
+# The number of milliseconds the system waits for an ID block reservation to be acknowledged by the storage backend
+atlas.graph.storage.lock.wait-time=5000
