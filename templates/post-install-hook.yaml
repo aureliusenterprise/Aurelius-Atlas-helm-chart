@@ -25,7 +25,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: post-install-job
-        image: "aureliusatlas/atlas-post-install:latest"
+        image: "aureliusatlas/atlas-post-install:main"
         imagePullPolicy: Always
         env:
           - name: NAMESPACE
@@ -57,7 +57,7 @@ spec:
           - name: JOBMANAGER_URL
             value: "flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081"
           - name: UPLOAD_DATA
-            value: "true"
+            value: {{ .Values.post_install.upload_data }}
           - name: ELASTICSEARCH_ENDPOINT
             value:  "https://{{ .Values.global.external_hostname }}:443/{{ .Release.Namespace }}/elastic"
           - name: KEYCLOAK_ADMIN_PASSWORD

@@ -60,3 +60,6 @@ ingress:
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
+post_install:
+  upload_data: "true"
