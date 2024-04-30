@@ -22,7 +22,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
         helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     spec:
-      restartPolicy: Never
+      restartPolicy: OnFailure
       containers:
       - name: post-install-job
         image: "aureliusatlas/atlas-post-install:main"
@@ -57,7 +57,7 @@ spec:
           - name: JOBMANAGER_URL
             value: "flink-jobmanager.{{ .Release.Namespace }}.svc.cluster.local:8081"
           - name: UPLOAD_DATA
-            value: {{ .Values.post_install.upload_data }}
+            value: "{{ .Values.post_install.upload_data }}"
           - name: ELASTICSEARCH_ENDPOINT
             value:  "https://{{ .Values.global.external_hostname }}:443/{{ .Release.Namespace }}/elastic"
           - name: KEYCLOAK_ADMIN_PASSWORD
