@@ -47,7 +47,7 @@ elastic:
 
 flink:
   repository: aureliusatlas/docker-flink
-  tag: 2.0.4
+  tag: 2.1.45
   taskmanager_numberOfTaskSlots: 2
   replicas: 1
 
@@ -60,3 +60,6 @@ ingress:
 
 global:
   external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
+
+post_install:
+  upload_data: "true"

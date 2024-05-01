@@ -1,5 +1,3 @@
-repository: aureliusatlas/docker-flink
-tag: 2.0.0
 pullPolicy: Always
 taskmanager_numberOfTaskSlots: 10
 replicas: 1
@@ -21,4 +19,5 @@ env:
   #KEYCLOAK_SERVER_URL: http://keycloak.{{ .Release.Namespace }}.svc.cluster.local:8180/auth/
   KEYCLOAK_USERNAME: atlas
   ELASTIC_USERNAME: elastic
-  
+
+
