@@ -1,4 +1,13 @@
+# Aurelius Atlas Backup
+
+Here you will find how to back up Aurelius Atlas for moving instances.
+
+This process will result in zip files of the Apache Atlas data and a Snapshot repository of Elasticsearch indices that can be used for backup and in the case of disaster recover process.
+
 # Apache Atlas backup
+## Apache Atlas Backup Process Overview
+![img_2.png](backup-overview.png)
+
 
 ## Acquire access token for Apache Atlas's admin user
 You can use `oauth.sh` script from https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart. Example usage:
@@ -16,6 +25,15 @@ python export-atlas.py --token $ACCESS_TOKEN \
 --base-url https://aureliusdev.westeurope.cloudapp.azure.com/demo/atlas2/ \
 --output out.zip
 ```
+## Import Backup to Atlas Instance
+Apache Atlas exposes an Import API from where data is imported from a zip file.
+Admin user need rights are needed to use this api.
+This command will import a file response.zip in the current directory to a specified atlas instance.
+
+```bash
+curl -g -X POST -H 'Authorization: Bearer <Bearer-Token>' -H "Content-Type: multipart/form-data" -H "Cache-Control: no-cache" -F data=@response.zip <apache-atlas-url>/api/atlas/admin/import
+
+```
 
 # Elasticsearch backup
 
@@ -26,20 +44,33 @@ For Elasticsearch backup you can use [Snapshot and restore API](https://www.elas
 ### Create a storage account and a container in Azure
 1. Go to https://portal.azure.com/
 2. Go to storage accounts service
-   ![Zrzut ekranu 2024-03-13 143127.png](/.attachments/Zrzut%20ekranu%202024-03-13%20143127-09728c2f-d91b-4271-8329-7004a9235cb7.png)
+
+   <img width="560" alt="Zrzut ekranu 2024-03-13 143127" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/a576c8f2-28de-4264-9f7f-43a0cd39af1e">
+
 3. Create a new storage account
-   ![Zrzut ekranu 2024-03-13 143220.png](/.attachments/Zrzut%20ekranu%202024-03-13%20143220-dfb365e0-e6b2-4593-a132-d0628a986f31.png)
+
+   <img width="239" alt="Zrzut ekranu 2024-03-13 143220" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/0233f3d5-4bb5-4bb4-ad65-041634000e89">
+
 4. Set the account name. Optionally adjust the redundancy and access tier
-   ![Zrzut ekranu 2024-03-13 144404.png](/.attachments/Zrzut%20ekranu%202024-03-13%20144404-c3dfdbe5-f1cb-4529-aca2-5f57d4abf1a7.png)
-   ![Zrzut ekranu 2024-03-13 144711.png](/.attachments/Zrzut%20ekranu%202024-03-13%20144711-258aec7a-6c6c-4c22-9ff1-8b397d77ada8.png)
+
+   <img width="477" alt="Zrzut ekranu 2024-03-13 144404" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/660a0904-9471-474b-8022-50e538cb7fe2">
+
+   <img width="483" alt="Zrzut ekranu 2024-03-13 144711" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/a4b51c7a-c400-49ae-916f-8df809a3585d">
+
 5. Review and create
 6. Once the account is created, go to Containers tab
-   ![Zrzut ekranu 2024-03-13 154545.png](/.attachments/Zrzut%20ekranu%202024-03-13%20154545-4fe60ad4-6594-43ba-be3d-c050a21e8cfe.png)
+
+   <img width="140" alt="Zrzut ekranu 2024-03-13 154545" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/97412587-cd83-474a-9375-ea972f3bff93">
+
 7. Create a new container
-   ![image.png](/.attachments/image-54336a3d-aecc-492a-bc19-bb7d195bea70.png)
-   ![image.png](/.attachments/image-c14bcccb-bd6e-4a54-b95b-4ff7ed55bc80.png)
+
+   <img width="221" alt="Zrzut ekranu 2024-03-13 170441" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/039674a6-9b13-4ce0-bfcc-4548799fee54">
+
+   <img width="244" alt="Zrzut ekranu 2024-03-13 170607" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/bcf49c1d-b2ec-4471-880a-039da6e6abc5">
+
 8. Go to Access keys tab
-   ![image.png](/.attachments/image-f48a39fa-1c94-44a0-8cae-b8ae85372c5f.png)
+
+   <img width="136" alt="Zrzut ekranu 2024-03-13 171520" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/c1a0622f-8f69-45e1-9d0e-58bc93138f09">
 
 ### Register a repository
 1. Access Elastic's search pod/image, for example:
@@ -47,7 +78,9 @@ For Elasticsearch backup you can use [Snapshot and restore API](https://www.elas
    kubectl -n demo exec -it pod/elastic-search-es-default-0 -- bash
    ```
 2. Configure Elasticsearch's keystore with values from the Storage account's Access keys tab.
-   ![Zrzut ekranu 2024-03-13 172223.png](/.attachments/Zrzut%20ekranu%202024-03-13%20172223-bee8a00e-797f-4554-a25e-3f277e60e74b.png)
+
+   <img width="415" alt="Zrzut ekranu 2024-03-13 172223" src="https://github.com/aureliusenterprise/Aurelius-Atlas-helm-chart/assets/155443057/e6593057-0f38-4840-86f0-9ec9d54a7466">
+
    ```
    bin/elasticsearch-keystore add azure.client.default.account
    bin/elasticsearch-keystore add azure.client.default.key
@@ -70,8 +103,8 @@ For Elasticsearch backup you can use [Snapshot and restore API](https://www.elas
      \"type\": \"azure\",
      \"settings\": {
        \"container\": \"aurelius-atlas-elastic-backup\",
-       \"base_path\": \"backups\",
-       \"chunk_size\": \"32MB\",
+        \"base_path\": \"backups\",
+        \"chunk_size\": \"32MB\",
        \"compress\": true
      }
    }"
@@ -101,7 +134,7 @@ python export-atlas.py --token $ACCESS_TOKEN \
 1. Make sure that the search engines are created in Enterprise Search
 2. Go to Index Management page in Kibana
 3. Close indices related to the search engines (.ent-search-engine-documents-*)
-4. [Register the snapshot repository connection](https://dev.azure.com/AureliusEnterprise/Data%20Governance/_wiki/wikis/Data-Governance.wiki/141/Aurelius-Atlas-backup?_a=edit&anchor=register-a-repository)
+4. [Register the snapshot repository connection](#register-a-repository)
 5. Restore a snapshot
 ```
 curl -X POST -u "elastic:$ELASTIC_PASSWORD" "https://aureliusdev.westeurope.cloudapp.azure.com/<target-namespace>/elastic/_snapshot/demo_backup/snapshot_2/_restore" -H 'Content-Type: application/json' -d '
