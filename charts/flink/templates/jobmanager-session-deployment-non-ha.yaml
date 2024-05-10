@@ -44,10 +44,6 @@ spec:
           name: blob-server
         - containerPort: 8081
           name: webui
-        # lifecycle:
-        #     postStart:
-        #       exec:
-        #         command: ["/opt/flink/init/init_jobmanager.sh" ]
         livenessProbe:
           tcpSocket:
             port: 6123

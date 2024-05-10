@@ -6,7 +6,7 @@
 replicaCount: 1
 repository: aureliusatlas/docker-keycloak
 pullPolicy: Always
-tag: "16.1.0.1"
+tag: "16.1.0.2"
 service:
   name: keycloak
   type: ClusterIP

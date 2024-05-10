@@ -53,7 +53,6 @@ spec:
             {{- end }}
             {{- end }}
             - name: KEYCLOAK_FRONTEND_URL
-             #  value:  /{{ .Release.Namespace }}/auth 
               value:  {{ .Values.keycloakFrontendURL }}{{ .Release.Namespace }}/auth
             - name: RELEASE_NAMESPACE
               value:  {{ .Release.Namespace }}
@@ -88,16 +87,10 @@ spec:
             - name: realm-single-file-volume
               mountPath: /tmp/realm.json
               subPath: realm.json
-            # - name: init-single-file-volume
-            #   mountPath: /init/create_user.sh
-            #   subPath: create_user.sh
       volumes:
         - name: realm-single-file-volume
           configMap:
             name: realm-single-file
-        # - name: init-single-file-volume
-        #   configMap:
-        #     name: init-single-file
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:

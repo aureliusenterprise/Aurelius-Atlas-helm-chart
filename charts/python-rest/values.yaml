@@ -7,7 +7,6 @@ service:
   type: ClusterIP
   externalPort: 5000
   internalPort: 5000
-#external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"
 env:
   elastic_username: elastic
   elastic_host: https://elastic-search-es-http:9200
