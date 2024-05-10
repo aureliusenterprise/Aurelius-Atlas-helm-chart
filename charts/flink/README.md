@@ -1,7 +1,7 @@
 
-kubectl port-forward service/flink-jobmanager 8081:8081 -n gaby
+# Aurelius Atlas - Flink
 
-http://localhost:8081 
+This chart bootstraps a deployment of [Aurelius Atlas - Flink](https://github.com/aureliusenterprise/flink-ci)
 
 
 Flink resources

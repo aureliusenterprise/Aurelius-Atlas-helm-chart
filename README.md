@@ -248,32 +248,13 @@ If your deployment is already running, you can enable the identity provider thro
 - Click "Identity providers" in the menu, then choose the desired provider from the dropdown menu.
 - Set the Client ID and Client Secret. The rest of the settings can remain default.
 
-## Initialize the Atlas flink tasks and optionally load sample data
+## Loading Sample Demo Data (Optional)
 
-Flink:
-- For more details about this flink helm chart look at [flink readme](./charts/flink/README.md)
+A sample dataset can be automatically loaded. Ensure that the ``post_install.upload_data`` variable is set to true in the values file.
 
-
-Init Jobs:
-- Create the Atlas Users in Keycloak
-- Create the App Search Engines in Elastic
-
-```bash ${1}
-kubectl -n <namespace> exec -it <pod/flink-jobmanager-pod-name> -- bash
-cd init
-#./init_jobs.sh
-pip3 install m4i-atlas-core@git+https://github.com/aureliusenterprise/m4i_atlas_core.git#egg=m4i-atlas-core --upgrade
-cd ../py_libs/m4i-flink-tasks/scripts
-/opt/flink/bin/flink run -d -py get_entity_job.py
-/opt/flink/bin/flink run -d -py publish_state_job.py
-/opt/flink/bin/flink run -d -py determine_change_job.py
-/opt/flink/bin/flink run -d -py synchronize_appsearch_job.py
-/opt/flink/bin/flink run -d -py local_operation_job.py
-## To Load the Sample Demo Data
-cd
-cd init
-./load_sample_data.sh
-```
+For more details about this look at:
+- Atlas Post Install: [link](https://github.com/aureliusenterprise/atlas-post-install)
+- Aurelius Atlas - Flink: [link](https://github.com/aureliusenterprise/flink-ci)
 
 ## Aurelius Atlas backup
 See [backup README](./backup/README.md).
