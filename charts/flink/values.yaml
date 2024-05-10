@@ -16,7 +16,6 @@ env:
   KAFKA_SOURCE_TOPIC_NAME: ATLAS_ENTITIES
   KEYCLOAK_CLIENT_ID: m4i_atlas
   KEYCLOAK_REALM_NAME: m4i
-  #KEYCLOAK_SERVER_URL: http://keycloak.{{ .Release.Namespace }}.svc.cluster.local:8180/auth/
   KEYCLOAK_USERNAME: atlas
   ELASTIC_USERNAME: elastic
 
