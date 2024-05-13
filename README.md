@@ -6,7 +6,7 @@ Getting started
 Welcome to the Aurelius Atlas solution powered by Apache Atlas! Aurelius Atlas is an open-source Data Governance solution, based on a selection of open-source tools to facilitate business users to access governance information in an easy consumable way and meet the data governance demands of the distributed data world.
 
 
-Here you will find the instillation instructions and the required setup of the kubernetes instructions, followed by how to deploy the chart in different namespaces. 
+Here you will find the instillation instructions and the required setup of the kubernetes instructions, followed by how to deploy the chart in different namespaces.
 
 Installation Requirements
 -------------------------
@@ -14,13 +14,13 @@ Installation Requirements
 This installation assumes that you have:
 - A kubernetes cluster running
   - with 2 Node of CPU 4 and 16GB
-- Chosen cloud Cli installed 
+- Chosen cloud Cli installed
   - [gcloud](https://cloud.google.com/sdk/docs/install#deb)
   - [az](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - kubectl installed and linked to chosen cloud Cli
   - [gcloud linked](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
   - [az linked](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli#connect-to-the-cluster)
-- Helm installed locally 
+- Helm installed locally
 - A DomainName
   - Not necessary for Azure
 
@@ -49,7 +49,7 @@ The certificate manager here is [cert-manager](https://cert-manager.io/docs/inst
 ```bash
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
-helm install  cert-manager jetstack/cert-manager   --namespace cert-manager   --create-namespace   --version v1.9.1   --set   installCRDs=true   
+helm install  cert-manager jetstack/cert-manager   --namespace cert-manager   --create-namespace   --version v1.9.1   --set   installCRDs=true
 ```
 
 - On GKE environment also add ``--set global.leaderElection.namespace=cert-manager`` to the helm install command ([explanation](https://cert-manager.io/docs/installation/compatibility/#gke))
@@ -62,7 +62,7 @@ helm install  cert-manager jetstack/cert-manager   --namespace cert-manager   --
   ```
 
 ##### 2. Install Ingress Nginx Controller
-Only install if you do not have an Ingress Controller. 
+Only install if you do not have an Ingress Controller.
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -91,7 +91,7 @@ cd charts/zookeeper/
 helm dependency update
 ```
 
-## Get Ingress Controller External IP to link to DNS 
+## Get Ingress Controller External IP to link to DNS
 Only do this if your ingress controller does not already have a DNS applied. In the case of Azure this is not necessary, other possible instructions can be found below in Azure DNS Label
 ##### Get External IP to link to DNS
 ```bash
@@ -113,7 +113,7 @@ Resulting DNS will be ``<label>.westeurope.cloudapp.azure.com``
 ## Put SSL certificate in a Secret
 
 ##### Define a cluster issuer
-This is needed if you installed cert-manager from the required packages. 
+This is needed if you installed cert-manager from the required packages.
 
 Here we define a ClusterIssuer using cert-manager on the cert-manager namespace:
 1. Move to the directory of Aurelius-Atlas-helm-chart
@@ -127,19 +127,19 @@ Here we define a ClusterIssuer using cert-manager on the cert-manager namespace:
 
 6. Check that it is running:
   ```bash
-  kubectl get clusterissuer -n cert-manager 
+  kubectl get clusterissuer -n cert-manager
   ```
   It is running when Ready is True.
 
 ![img.png](img.png)
 
-##### Create SSL certificate 
-This is needed if you installed cert-manager from the required packages. 
+##### Create SSL certificate
+This is needed if you installed cert-manager from the required packages.
 
 0. Assumes you have a DNS linked to the external IP of the ingress controller
 1. Move to the directory of Aurelius-Atlas-helm-chart
 2. Uncomment templates/certificate.yaml
-3. Update the values.yaml file ``{{ .Values.ingress.dns_url}}`` to your DNS name 
+3. Update the values.yaml file ``{{ .Values.ingress.dns_url}}`` to your DNS name
 4. Create the certificate with the following command
   ```bash
   helm template -s templates/certificate.yaml . | kubectl apply -f -
@@ -148,7 +148,7 @@ This is needed if you installed cert-manager from the required packages.
 
 6. Check that it is approved:
   ```bash
-  kubectl get certificate -n cert-manager 
+  kubectl get certificate -n cert-manager
   ```
   It is running when Ready is True.
 
@@ -160,9 +160,10 @@ Deploy Aurelius Atlas
 -------------------------
 
 1. Update the values.yaml file
-   - ``{{ .Values.keycloak.keycloakFrontendURL }}`` replace it to your DNS name 
+   - ``{{ .Values.keycloak.keycloakFrontendURL }}`` replace it to your DNS name
    - ``{{ .Values.kafka-ui. ... .bootstrapServers }}`` edit it with your `<namespace>`
    - ``{{ .Values.kafka-ui. ... .SERVER_SERVLET_CONTEXT_PATH }}`` edit it with your `<namespace>`
+   - ``{{ .Values.post_install.upload_data }}`` set to `"true"` if you want to upload sample data after installation, otherwise set to `"false"`
 2. Create the namespace
 
     ```bash
@@ -174,7 +175,7 @@ Deploy Aurelius Atlas
     ```bash
     cd Aurelius-Atlas-helm-chart
     helm dependency update
-    helm install --generate-name -n <namespace>  -f values.yaml .
+    helm install --generate-name -n <namespace>  -f values.yaml --wait --timeout 15m0s .
     ```
 
 Please note that it can take 5-10 minutes to deploy all services.
@@ -199,7 +200,7 @@ The 5 base users are:
 4. Atlas Data User
 5. Elastic User
 
-To get the randomized passwords out of kubernetes there is a bash script get_passwords. 
+To get the randomized passwords out of kubernetes there is a bash script get_passwords.
 
 ```bash
 ./get_passwords.sh <namespace>
@@ -228,32 +229,32 @@ username: elastic
 446PL2F2UF55a19haZtihRm5
 ----
 ```
-## Initialize the Atlas flink tasks and optionally load sample data
 
-Flink:
-- For more details about this flink helm chart look at [flink readme](./charts/flink/README.md)
+### Enable social login
 
+To enable social login in Aurelius Atlas, please follow the steps below:
 
-Init Jobs:
-- Create the Atlas Users in Keycloak
-- Create the App Search Engines in Elastic
+1. Register an OAuth 2.0 client application with Google, GitHub or Facebook. (To see the full list please [keycloak website](https://www.keycloak.org/) ) This will be used as an identity provider in Keycloak.
+   - [google](https://keycloakthemes.com/blog/how-to-setup-sign-in-with-google-using-keycloak)
+   - [github](https://medium.com/keycloak/github-as-identity-provider-in-keyclaok-dca95a9d80ca)
+   - [facebook](https://medium.com/@didelotkev/facebook-as-identity-provider-in-keycloak-cf298b47cb84)
+2. Update values file ``{{ .Values.keycloak.realm_file_name }}`` to ``realm_m4i_with_provider.json``
+3. Within ``charts/keycloak/realms/realm_m4i_with_provider.json``, replace the client ID and secret with your own credentials:
+   - Place your Client ID into: ``identityProviders.config.clientSecret``
+   - Place your Client secret into : ``identityProviders.config.clientId``
 
-```bash ${1}
-kubectl -n <namespace> exec -it <pod/flink-jobmanager-pod-name> -- bash
-cd init
-#./init_jobs.sh
-pip3 install m4i-atlas-core@git+https://github.com/aureliusenterprise/m4i_atlas_core.git#egg=m4i-atlas-core --upgrade
-cd ../py_libs/m4i-flink-tasks/scripts
-/opt/flink/bin/flink run -d -py get_entity_job.py
-/opt/flink/bin/flink run -d -py publish_state_job.py
-/opt/flink/bin/flink run -d -py determine_change_job.py
-/opt/flink/bin/flink run -d -py synchronize_appsearch_job.py
-/opt/flink/bin/flink run -d -py local_operation_job.py
-## To Load the Sample Demo Data 
-cd
-cd init
-./load_sample_data.sh
-```
+If your deployment is already running, you can enable the identity provider through the Keycloak UI:
+- Navigate to the Keycloak administration console.
+- Click "Identity providers" in the menu, then choose the desired provider from the dropdown menu.
+- Set the Client ID and Client Secret. The rest of the settings can remain default.
+
+## Loading Sample Demo Data (Optional)
+
+A sample dataset can be automatically loaded. Ensure that the ``post_install.upload_data`` variable is set to true in the values file.
+
+For more details about this look at:
+- Atlas Post Install: [link](https://github.com/aureliusenterprise/atlas-post-install)
+- Aurelius Atlas - Flink: [link](https://github.com/aureliusenterprise/flink-ci)
 
 ## Aurelius Atlas backup
 See [backup README](./backup/README.md).

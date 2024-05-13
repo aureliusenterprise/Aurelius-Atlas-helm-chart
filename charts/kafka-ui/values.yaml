@@ -1,11 +1,12 @@
 replicaCount: 1
+enabled: true
 
 image:
   registry: docker.io
   repository: provectuslabs/kafka-ui
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -22,30 +23,18 @@ serviceAccount:
 
 existingConfigMap: ""
 yamlApplicationConfig:
-  #{}
-  kafka:
-    clusters:
-      - name: atlas
-        bootstrapServers: kafka.demo.svc.cluster.local:9092
-  spring:
-    security:
-      oauth2:
-  auth:
-    type: disabled
-  management:
-    health:
-      ldap:
-        enabled: false
+  {}
 yamlApplicationConfigConfigMap:
   {}
-  # keyName: config.yml
-  # name: configMapName
 existingSecret: ""
 envs:
   secret: {}
   config:
-    SERVER_SERVLET_CONTEXT_PATH: /demo/kafka-ui
+    SERVER_SERVLET_CONTEXT_PATH_PARTIAL: /kafka-ui
     JAVA_OPTS: "-Djava.net.preferIPv4Stack=true"
+    SECURITY_BASIC_ENABLED: "true"
+    AUTH_TYPE: OAUTH2
+
 
 # networkPolicy:
 #   enabled: false

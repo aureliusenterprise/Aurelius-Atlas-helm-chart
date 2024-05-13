@@ -33,6 +33,30 @@ spec:
               name: atlas
             - containerPort: {{ .Values.service.internalPort_kafka }}
               name: kafkatopic
+          env:
+            - name: ATLAS_EXTERNAL_URL
+              value: "http://atlas.{{ .Release.Namespace }}.svc.cluster.local:21000/api/atlas"
+            - name: KEYCLOAK_SERVER_URL
+              value: "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/"
+            {{- if .Values.env }}
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value }} 
+            {{- end }}
+            {{- end }}
+            - name: KEYCLOAK_ATLAS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret-user-admin
+                  key: password
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.internalPort }}
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            timeoutSeconds: 10
           command: [
               "/bin/bash",
               "-c",

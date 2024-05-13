@@ -37,18 +37,22 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          {{- if .Values.env }}
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/bash", "-c", {{.Values.cmd}}]
+                command: 
+                 - "/bin/bash"
+                 - "-c"
+                 - > 
+                   /tmp/init_standard_users.sh;
           env:
+            {{- if .Values.env }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- end }}
             - name: KEYCLOAK_FRONTEND_URL
-            #  value:  /{{ .Release.Namespace }}/auth 
               value:  {{ .Values.keycloakFrontendURL }}{{ .Release.Namespace }}/auth
             - name: RELEASE_NAMESPACE
               value:  {{ .Release.Namespace }}
@@ -59,7 +63,21 @@ spec:
                 secretKeyRef:
                   name: keycloak-secret
                   key: password
-          {{- end }}
+            - name: USER_ATLAS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret-user-admin
+                  key: password
+            - name: USER_STEWARD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret-user-steward
+                  key: password
+            - name: USER_DATA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret-user-data
+                  key: password
           volumeMounts:
             {{- if .Values.persistence.enabled }}
             - name: data

@@ -79,12 +79,18 @@ spec:
           - name: v-reverse-proxy-configs-atlas-conf
             mountPath: /usr/local/apache2/conf.d/atlas.conf
             subPath: atlas.conf
+          - name: v-reverse-proxy-configs-namespace-conf
+            mountPath: /usr/local/apache2/conf.d/namespace.conf
+            subPath: namespace.conf
           - name: v-reverse-proxy-configs-atlas2-conf
             mountPath: /usr/local/apache2/conf.d/atlas2.conf
             subPath: atlas2.conf
           - name: v-reverse-proxy-configs-flink-conf
             mountPath: /usr/local/apache2/conf.d/flink.conf
             subPath: flink.conf
+          - name: v-reverse-proxy-configs-kafka-connect-conf
+            mountPath: /usr/local/apache2/conf.d/kafka-connect.conf
+            subPath: kafka-connect.conf
           - name: v-reverse-proxy-configs-kafka-ui-conf
             mountPath: /usr/local/apache2/conf.d/kafka-ui.conf
             subPath: kafka-ui.conf
@@ -98,12 +104,18 @@ spec:
         - name: v-reverse-proxy-configs-atlas-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas-conf
+        - name: v-reverse-proxy-configs-namespace-conf
+          configMap:
+            name: cm-reverse-proxy-configs-namespace-conf
         - name: v-reverse-proxy-configs-atlas2-conf
           configMap:
             name: cm-reverse-proxy-configs-atlas2-conf
         - name: v-reverse-proxy-configs-flink-conf
           configMap:
             name: cm-reverse-proxy-configs-flink-conf
+        - name: v-reverse-proxy-configs-kafka-connect-conf
+          configMap:
+            name: cm-reverse-proxy-configs-kafka-connect-conf
         - name: v-reverse-proxy-configs-kafka-ui-conf
           configMap:
             name: cm-reverse-proxy-configs-kafka-ui-conf

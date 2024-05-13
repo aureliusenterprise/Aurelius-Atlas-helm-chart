@@ -11,7 +11,8 @@ service:
   internalPort_kafka: 9027
 persistence:
   enabled: true
-  # storageClass: "-"
   accessMode: ReadWriteOnce
   size: 1Gi
+env:
+  KEYCLOAK_ATLAS_ADMIN_USERNAME: "atlas"
 external_hostname: "aureliusdev.westeurope.cloudapp.azure.com"

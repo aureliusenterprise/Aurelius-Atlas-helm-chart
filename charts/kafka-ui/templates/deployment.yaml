@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +18,6 @@ spec:
       {{- with .Values.podAnnotations }}
           {{- toYaml . | nindent 8 }}
       {{- end }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "kafka-ui.selectorLabels" . | nindent 8 }}
@@ -36,35 +36,35 @@ spec:
       serviceAccountName: {{ include "kafka-ui.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers: # sidecar container to wait for a service to be completed.
+        - name: wait-for-keycloak-service
+          image: darthcabs/tiny-tools:1
+          args:
+          - /bin/bash
+          - -c
+          - >
+            set -x;
+            while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' curl \
+                          -X GET "https://{{ .Values.global.external_hostname }}/{{ .Release.Namespace }}/auth/" \
+                          -H 'Content-Type: application/json' --insecure | tail -c 3)" != "200" ]]; do 
+              echo '.'
+              sleep 15;
+            done
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "kafka-ui.imageName" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if or .Values.env  .Values.yamlApplicationConfig .Values.yamlApplicationConfigConfigMap}}
           env:
+            - name: "SERVER_SERVLET_CONTEXT_PATH"
+              value: /{{ .Release.Namespace }}{{ .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL}}
             {{- with .Values.env }}
-              {{- toYaml . | nindent 12 }}
+              {{- toYaml . | indent 12 }}
             {{- end }}
-            {{- if or .Values.yamlApplicationConfig .Values.yamlApplicationConfigConfigMap}}
             - name: SPRING_CONFIG_LOCATION
-              {{- if .Values.yamlApplicationConfig }}
               value: /kafka-ui/config.yml
-              {{- else if .Values.yamlApplicationConfigConfigMap }}
-              value: /kafka-ui/{{ .Values.yamlApplicationConfigConfigMap.keyName | default "config.yml" }}
-              {{- end }}
-            {{- end }}
-          {{- end }}
           envFrom:
-            {{- if .Values.existingConfigMap }}
-            - configMapRef:
-                name: {{ .Values.existingConfigMap }}
-            {{- end }}
-            {{- if .Values.envs.config }}
-            - configMapRef:
-                name: {{ include "kafka-ui.fullname" . }}
-            {{- end }}
             {{- if .Values.existingSecret }}
             - secretRef:
                 name: {{ .Values.existingSecret }}
@@ -79,52 +79,36 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | printf "%s/actuator/health" | urlParse }}
-              path: {{ get $contextPath "path" }}
+              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL | default "" | printf "%s/actuator/health" | urlParse }}
+              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
               port: http
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | printf "%s/actuator/health" | urlParse }}
-              path: {{ get $contextPath "path" }}
+              {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH_PARTIAL  | default "" | printf "%s/actuator/health" | urlParse }}
+              path: /{{ .Release.Namespace }}{{ get $contextPath "path" }}
               port: http
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if or .Values.yamlApplicationConfig .Values.volumeMounts .Values.yamlApplicationConfigConfigMap}}
           volumeMounts:
             {{- with .Values.volumeMounts }} 
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- if .Values.yamlApplicationConfig }}
-            - name: kafka-ui-yaml-conf
-              mountPath: /kafka-ui/
-            {{- end }}
-            {{- if .Values.yamlApplicationConfigConfigMap}}
-            - name: kafka-ui-yaml-conf-configmap
-              mountPath: /kafka-ui/
-            {{- end }}
-          {{- end }}
-      {{- if or .Values.yamlApplicationConfig .Values.volumes .Values.yamlApplicationConfigConfigMap}}
+            - name: v-kafka-ui-yaml-conf
+              mountPath: /kafka-ui/config.yml
+              subPath: config.yml
       volumes:
         {{- with .Values.volumes }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
-        {{- if .Values.yamlApplicationConfig }}
-        - name: kafka-ui-yaml-conf
+        - name: v-kafka-ui-yaml-conf
           configMap: 
-            name: {{ include "kafka-ui.fullname" . }}-fromvalues
-        {{- end }}
-        {{- if .Values.yamlApplicationConfigConfigMap}}
-        - name: kafka-ui-yaml-conf-configmap
-          configMap: 
-            name: {{ .Values.yamlApplicationConfigConfigMap.name }}
-        {{- end }}
-      {{- end }}
+            name: cm-{{ include "kafka-ui.fullname" . }}-fromvalues
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -137,3 +121,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}
