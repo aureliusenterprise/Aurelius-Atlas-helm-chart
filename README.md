@@ -161,8 +161,6 @@ Deploy Aurelius Atlas
 
 1. Update the values.yaml file
    - ``{{ .Values.keycloak.keycloakFrontendURL }}`` replace it to your DNS name
-   - ``{{ .Values.kafka-ui. ... .bootstrapServers }}`` edit it with your `<namespace>`
-   - ``{{ .Values.kafka-ui. ... .SERVER_SERVLET_CONTEXT_PATH }}`` edit it with your `<namespace>`
    - ``{{ .Values.post_install.upload_data }}`` set to `"true"` if you want to upload sample data after installation, otherwise set to `"false"`
 2. Create the namespace
 
