@@ -256,3 +256,9 @@ For more details about this look at:
 
 ## Aurelius Atlas backup
 See [backup README](./backup/README.md).
+
+## Data Quality
+There is a daily job `data-quality-propagation` which propagates the data quality results from Data Fields to the whole system. It can be run manually:
+```
+kubectl create job --from=cronjob/data-quality-propagation data-quality-propagation -n <namespace>
+```
