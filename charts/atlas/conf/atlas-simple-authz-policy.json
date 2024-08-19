@@ -182,6 +182,19 @@
             ".*"
           ]
         }
+      ],
+      "typePermissions": [
+        {
+          "privileges": [
+            ".*"
+          ],
+          "typeCategories": [
+            ".*"
+          ],
+          "typeNames": [
+            ".*"
+          ]
+        }
       ]
     },
     "DATA_STEWARD": {
@@ -194,7 +207,8 @@
             "entity-read-classification",
             "entity-add-classification",
             "entity-update-classification",
-            "entity-remove-classification"
+            "entity-remove-classification",
+            "entity-read-*"
           ],
           "entityTypes": [
             ".*"
@@ -245,6 +259,19 @@
             ".*"
           ],
           "end2EntityClassification": [
+            ".*"
+          ]
+        }
+      ],
+      "typePermissions": [
+        {
+          "privileges": [
+            ".*"
+          ],
+          "typeCategories": [
+            ".*"
+          ],
+          "typeNames": [
             ".*"
           ]
         }
