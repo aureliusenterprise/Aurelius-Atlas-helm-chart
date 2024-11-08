@@ -63,3 +63,7 @@ global:
 
 post_install:
   upload_data: "true"
+
+onboard_sources:
+  source: excel
+  excel_file: my_excel_file.xlsx
