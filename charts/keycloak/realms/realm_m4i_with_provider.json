@@ -1,8 +1,8 @@
 {
   "id": "m4i",
   "realm": "m4i",
-  "displayName": "Models4Insight",
-  "displayNameHtml": "Models4Insight Platform Realm2",
+  "displayName": "Aurelius Atlas",
+  "displayNameHtml": "Aurelius Atlas",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
