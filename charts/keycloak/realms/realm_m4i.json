@@ -153,7 +153,9 @@
         "composite": true,
         "composites": {
           "realm": [
-            "m4i_public"
+            "m4i_public",
+            "DATA_SCIENTIST",
+            "ATLAS_USER"
           ],
           "client": {
             "account": [
